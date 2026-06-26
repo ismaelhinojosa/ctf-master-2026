@@ -2,7 +2,6 @@
   "buildCommand": "",
   "devCommand": "",
   "installCommand": "",
-  "framework": "static",
   "outputDirectory": ".",
   "public": true,
   "env": {},
