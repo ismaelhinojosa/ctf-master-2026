@@ -255,13 +255,13 @@ class CTFGame {
     // FASE 3: Desencriptación Final
     handleFinalDecryption() {
         if (typeof CryptoJS === 'undefined') {
-            alert('Error: La librería criptográfica no se ha cargado. Verifica tu conexión a internet.');
+            this.showCyberAlert('Error: La librería criptográfica no se ha cargado. Verifica tu conexión a internet.');
             return;
         }
         const inputKey = this.finalKeyInput.value.trim();
 
         if (!inputKey) {
-            alert('Por favor introduce la clave final.');
+            this.showCyberAlert('Por favor introduce la clave final.');
             return;
         }
 
@@ -342,23 +342,23 @@ class CTFGame {
 
     // El usuario acepta el reto: se le dice que es broma y se restaura el mensaje final
     handlePrankAccept() {
-        alert('😜 ¡Es broma! \n\nReto de recuperación aceptado (y las rondas de cervezas/comidas quedan registradas en el sistema). Acceso de lectura restaurado.');
-        
-        this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
-        this.successTitle.style.color = 'var(--neon-green)';
-        this.successTitle.style.textShadow = '0 0 10px rgba(57, 255, 20, 0.4)';
+        this.showCyberAlert('😜 ¡Es broma!<br><br>Reto de recuperación aceptado (y las rondas de cervezas/comidas quedan registradas en el sistema). Acceso de lectura restaurado.', () => {
+            this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
+            this.successTitle.style.color = 'var(--neon-green)';
+            this.successTitle.style.textShadow = '0 0 10px rgba(57, 255, 20, 0.4)';
 
-        // Esconder broma
-        this.prankContainer.style.display = 'none';
-        this.prankAcceptBtn.style.display = 'none';
+            // Esconder broma
+            this.prankContainer.style.display = 'none';
+            this.prankAcceptBtn.style.display = 'none';
 
-        // Mostrar el mensaje original de forma legible
-        this.decryptedMessageDiv.style.display = 'block';
-        this.decryptedMessageDiv.style.filter = 'none';
-        this.decryptedMessageDiv.style.opacity = '1';
+            // Mostrar el mensaje original de forma legible
+            this.decryptedMessageDiv.style.display = 'block';
+            this.decryptedMessageDiv.style.filter = 'none';
+            this.decryptedMessageDiv.style.opacity = '1';
 
-        // Mostrar el botón de Cerrar Sesión real
-        this.resetBtn.style.display = 'block';
+            // Mostrar el botón de Cerrar Sesión real
+            this.resetBtn.style.display = 'block';
+        });
     }
 
     showFinalDecryptionError() {
@@ -379,6 +379,33 @@ class CTFGame {
         line.style.color = color;
         line.textContent = text;
         this.terminalOutput.appendChild(line);
+    }
+
+    // Modal de Alerta Cyberpunk Personalizado
+    showCyberAlert(message, callback) {
+        const alertEl = document.getElementById('cyber-alert');
+        const alertMsg = document.getElementById('cyber-alert-msg');
+        const alertBtn = document.getElementById('cyber-alert-btn');
+        
+        alertMsg.innerHTML = message;
+        alertEl.style.display = 'flex';
+        
+        // Efecto fade-in
+        setTimeout(() => {
+            alertEl.style.opacity = '1';
+        }, 10);
+        
+        // Clonar botón para eliminar listeners antiguos
+        const newBtn = alertBtn.cloneNode(true);
+        alertBtn.parentNode.replaceChild(newBtn, alertBtn);
+        
+        newBtn.addEventListener('click', () => {
+            alertEl.style.opacity = '0';
+            setTimeout(() => {
+                alertEl.style.display = 'none';
+                if (callback) callback();
+            }, 300);
+        });
     }
 }
 

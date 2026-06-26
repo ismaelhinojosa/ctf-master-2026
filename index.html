@@ -554,8 +554,19 @@
         </div>
     </div>
 
+    <!-- Modal de Alerta Cyberpunk Personalizado -->
+    <div id="cyber-alert" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 6, 15, 0.9); z-index: 200; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+        <div class="success-card" style="max-width: 450px; border-color: var(--neon-cyan); box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);">
+            <div class="success-title" style="color: var(--neon-cyan); font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);">⚡ SISTEMA INFORMA ⚡</div>
+            <div id="cyber-alert-msg" style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6; margin-bottom: 25px; text-align: center; color: var(--text-primary);">
+                ...
+            </div>
+            <button id="cyber-alert-btn" class="cyber-btn" style="width: 100%;">Confirmar</button>
+        </div>
+    </div>
+
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.0.2"></script>
+    <script src="script.js?v=1.0.3"></script>
 </body>
 </html>
