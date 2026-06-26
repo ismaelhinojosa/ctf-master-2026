@@ -5,8 +5,9 @@
 class CTFGame {
     constructor() {
         // Base de datos de juegos por usuario (Clave de acceso de Instagram -> Datos)
+        // Base de datos de juegos por usuario (Clave de acceso de Instagram + código por DM -> Datos)
         this.gameData = {
-            'JULIA-SECRET-2026': {
+            'JULIA-PART1-98241': {
                 username: 'julia',
                 role: 'Analista de Malware',
                 files: {
@@ -16,7 +17,7 @@ class CTFGame {
                 finalKey: 'Muchas_tardes_Buenas_gracias_hahaha',
                 secretMessage: '¡Hola Julia! Te acordaste del peor dolor de cabeza del máster. Espero que se diviertan descifrando esto. ¡Nos vemos a la vuelta!'
             },
-            'ALEJANDRO-MARIA-2026': {
+            'ALEJANDRO-MARIA-PART1-35791': {
                 username: 'alejandro_maria',
                 role: 'Especialistas en Criptografía',
                 files: {
@@ -26,7 +27,7 @@ class CTFGame {
                 finalKey: 'Supongo_que_la_vida_queria_que_nos_encontremos',
                 secretMessage: '¡Alejandro y María! Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba la operación. ¡Son unos cracks, gracias por todo!'
             },
-            'ARIANA-SECRET-2026': {
+            'ARIANA-PART1-24680': {
                 username: 'ariana',
                 role: 'Auditora de Base de Datos',
                 files: {
@@ -36,7 +37,7 @@ class CTFGame {
                 finalKey: 'No_tiene_tiempo_por_hacer_el_TFM',
                 secretMessage: '¡Ariana! Sé perfectamente que no tenías tiempo para mis juegos, pero admítelo, ¡fue divertido resolverlo! Disfruta las semanas sin mí.'
             },
-            'MARTA-SECRET-2026': {
+            'MARTA-PART1-13579': {
                 username: 'marta',
                 role: 'Ingeniera de DevSecOps',
                 files: {
@@ -71,6 +72,14 @@ class CTFGame {
         this.successOverlay = document.getElementById('success-overlay');
         this.decryptedMessageDiv = document.getElementById('decrypted-message');
         this.resetBtn = document.getElementById('reset-btn');
+
+        // Nuevos Elementos para la Broma del Contador
+        this.countdownHeader = document.getElementById('countdown-header');
+        this.timerSeconds = document.getElementById('timer-seconds');
+        this.prankContainer = document.getElementById('prank-container');
+        this.prankAcceptBtn = document.getElementById('prank-accept-btn');
+        this.successTitle = document.getElementById('success-title');
+        this.timerId = null;
 
         this.initializeEncryption();
         this.setupEventListeners();
@@ -108,6 +117,9 @@ class CTFGame {
         this.finalKeyInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') this.handleFinalDecryption();
         });
+
+        // Aceptar el reto de restauración (Broma)
+        this.prankAcceptBtn.addEventListener('click', () => this.handlePrankAccept());
 
         // Reset / Cerrar sesión
         this.resetBtn.addEventListener('click', () => {
@@ -262,9 +274,9 @@ class CTFGame {
             const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
 
             if (decryptedText) {
-                // ÉXITO
+                // ÉXITO - Iniciar simulación de autodestrucción (Broma)
                 this.decryptedMessageDiv.textContent = decryptedText;
-                this.successOverlay.classList.add('visible');
+                this.startPrankCountdown();
             } else {
                 // ERROR DE CLAVE
                 this.showFinalDecryptionError();
@@ -272,6 +284,81 @@ class CTFGame {
         } catch (e) {
             this.showFinalDecryptionError();
         }
+    }
+
+    // Iniciar el temporizador de la broma de autodestrucción
+    startPrankCountdown() {
+        this.successOverlay.classList.add('visible');
+        
+        // Resetear visibilidad por defecto
+        this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
+        this.successTitle.style.color = 'var(--neon-green)';
+        this.successTitle.style.textShadow = '0 0 10px rgba(57, 255, 20, 0.4)';
+        
+        this.countdownHeader.style.display = 'block';
+        this.decryptedMessageDiv.style.display = 'block';
+        this.decryptedMessageDiv.style.filter = 'none';
+        this.decryptedMessageDiv.style.opacity = '1';
+        
+        this.prankContainer.style.display = 'none';
+        this.prankAcceptBtn.style.display = 'none';
+        this.resetBtn.style.display = 'none';
+
+        let timeLeft = 7.0;
+        this.timerSeconds.textContent = timeLeft.toFixed(1);
+
+        if (this.timerId) clearInterval(this.timerId);
+
+        this.timerId = setInterval(() => {
+            timeLeft -= 0.1;
+            if (timeLeft <= 0) {
+                timeLeft = 0;
+                clearInterval(this.timerId);
+                this.triggerPrankMeltdown();
+            }
+            this.timerSeconds.textContent = timeLeft.toFixed(1);
+
+            // Efecto visual: ir difuminando y desvaneciendo el texto
+            const blurVal = Math.max(0, (7.0 - timeLeft) * 2.5); // De 0px a 17.5px de difuminado
+            const opacityVal = Math.max(0.05, timeLeft / 7.0);
+            this.decryptedMessageDiv.style.filter = `blur(${blurVal}px)`;
+            this.decryptedMessageDiv.style.opacity = opacityVal;
+        }, 100);
+    }
+
+    // El tiempo expira: se censura el mensaje y se muestran instrucciones difíciles
+    triggerPrankMeltdown() {
+        this.successTitle.textContent = '❌ SISTEMA BLOQUEADO ❌';
+        this.successTitle.style.color = 'var(--neon-pink)';
+        this.successTitle.style.textShadow = '0 0 10px rgba(255, 0, 127, 0.5)';
+
+        this.countdownHeader.style.display = 'none';
+        this.decryptedMessageDiv.style.display = 'none';
+
+        // Mostrar instrucciones graciosas y botón de aceptar reto
+        this.prankContainer.style.display = 'block';
+        this.prankAcceptBtn.style.display = 'block';
+    }
+
+    // El usuario acepta el reto: se le dice que es broma y se restaura el mensaje final
+    handlePrankAccept() {
+        alert('😜 ¡Es broma! \n\nReto de recuperación aceptado (y las rondas de cervezas/comidas quedan registradas en el sistema). Acceso de lectura restaurado.');
+        
+        this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
+        this.successTitle.style.color = 'var(--neon-green)';
+        this.successTitle.style.textShadow = '0 0 10px rgba(57, 255, 20, 0.4)';
+
+        // Esconder broma
+        this.prankContainer.style.display = 'none';
+        this.prankAcceptBtn.style.display = 'none';
+
+        // Mostrar el mensaje original de forma legible
+        this.decryptedMessageDiv.style.display = 'block';
+        this.decryptedMessageDiv.style.filter = 'none';
+        this.decryptedMessageDiv.style.opacity = '1';
+
+        // Mostrar el botón de Cerrar Sesión real
+        this.resetBtn.style.display = 'block';
     }
 
     showFinalDecryptionError() {

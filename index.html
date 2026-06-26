@@ -523,11 +523,34 @@
     <!-- FASE 3: ÉXITO / REVELACIÓN -->
     <div class="success-overlay" id="success-overlay">
         <div class="success-card">
-            <div class="success-title">🔐 SISTEMA DECODIFICADO 🔐</div>
-            <div class="message-content" id="decrypted-message">
+            <div class="success-title" id="success-title">🔐 SISTEMA DECODIFICADO 🔐</div>
+            
+            <!-- Contador de Autodestrucción -->
+            <div id="countdown-header" style="color: var(--neon-pink); font-family: var(--font-mono); margin-bottom: 20px; font-weight: bold; font-size: 1rem; letter-spacing: 1px;">
+                ⚠️ ALERTA: AUTODESTRUCCIÓN DE DATOS EN <span id="timer-seconds" style="color: #fff; text-shadow: 0 0 8px var(--neon-pink); font-size: 1.2rem;">7.0</span>s
+            </div>
+
+            <!-- Contenido del mensaje (se difuminará y ocultará) -->
+            <div class="message-content" id="decrypted-message" style="transition: filter 0.1s linear, opacity 0.1s linear;">
                 ...
             </div>
-            <button id="reset-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);">Cerrar Sesión</button>
+
+            <!-- Pantalla de Broma (Instrucciones imposibles) -->
+            <div id="prank-container" style="display: none; text-align: left; background: rgba(255, 0, 127, 0.05); border: 1px solid rgba(255, 0, 127, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6;">
+                <p style="color: var(--neon-pink); font-weight: bold; font-size: 1rem; margin-bottom: 15px; text-transform: uppercase; text-align: center; text-shadow: 0 0 5px var(--neon-pink);">❌ TIEMPO EXPIRADO: ACCESO CENSURADO ❌</p>
+                <p style="color: var(--text-primary); margin-bottom: 12px;">Para iniciar el protocolo de restauración de emergencia, debes comprometerte a:</p>
+                <ol style="margin-left: 20px; margin-bottom: 15px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+                    <li>Realizar un volcado forense completo de tu memoria RAM a mano.</li>
+                    <li>Calcular una colisión SHA-256 en papel en menos de 5 minutos.</li>
+                    <li>Prometer solemnemente invitar a Ismael a las próximas cervezas / comidas del grupo.</li>
+                </ol>
+                <p style="color: var(--neon-cyan); text-align: center; font-weight: bold;">¿Aceptas las condiciones de restauración?</p>
+            </div>
+
+            <!-- Botones de Acción -->
+            <button id="prank-accept-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); width: 100%; margin-bottom: 10px;">Aceptar el Reto de Restauración</button>
+            
+            <button id="reset-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%;">Cerrar Sesión</button>
         </div>
     </div>
 
