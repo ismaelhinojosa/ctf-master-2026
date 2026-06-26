@@ -1,0 +1,202 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                      CTF 2026 - CHEAT SHEET RÁPIDO                        ║
+║                    Una página de referencia rápida                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ARCHIVOS - CUÁLES NECESITAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OBLIGATORIOS (3):
+├─ ctf-index.html      → Renombrar a index.html
+├─ ctf-script.js       → Renombrar a script.js
+└─ ctf-robots.txt      → Renombrar a robots.txt
+
+RECOMENDADOS (3):
+├─ vercel.json         → Config Vercel
+├─ .gitignore          → Git ignore
+└─ README.md           → Para GitHub
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DESPLIEGUE - 5 PASOS (10 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. GitHub: https://github.com/new
+   → Nombre: ctf-master-2026
+   → Visibility: PUBLIC
+
+2. Subir: index.html, script.js, robots.txt
+
+3. Vercel: https://vercel.com/dashboard
+   → Add New → Import Git → Select repo → Deploy
+
+4. Esperar: 2-3 minutos
+
+5. ¡URL lista!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONALIZAR - ANTES DE DESPLEGAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Editar ctf-script.js, buscar: this.users = {
+
+Cambiar 4 mensajes:
+├─ 'alejandro_maria' → message: "TU TEXTO AQUÍ"
+├─ 'julia' → message: "TU TEXTO AQUÍ"
+├─ 'ariana' → message: "TU TEXTO AQUÍ"
+└─ 'marta' → message: "TU TEXTO AQUÍ"
+
+(Las claves ya están configuradas y funcionan)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CÓMO FUNCIONA PARA USUARIOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Abren URL → ven terminal
+2. Escriben: help → ven comandos
+3. Escriben: users → ven sus nombres
+4. Escriben: decrypt [nombre] [clave]
+5. Si aciertan: ven su mensaje personalizado ✓
+6. Si fallan: error (intenten de nuevo)
+7. +25 puntos por cada descifrado
+8. +50 bonus por explotar backdoor
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CLAVES DE REFERENCIA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+alejandro_maria: UnidosEnLaCiberSeguridad2026
+julia:           DescifraloJulia2026Master
+ariana:          ArianaSinTiempo2026Secret
+marta:           MartaRompioTodo2026Abrazo
+
+(Pueden cambiarlas si quieren en script.js)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TESTING POST-DEPLOY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ Terminal aparece (sin errores)
+□ help → muestra menú ✓
+□ users → lista 4 usuarios ✓
+□ decrypt con clave correcta → funciona ✓
+□ decrypt con clave incorrecta → error ✓
+□ F12 Console → sin errores ✓
+□ Móvil → funciona ✓
+□ Puntuación → se incrementa ✓
+
+SI TODO VERDE → ¡LISTO!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DOCUMENTACIÓN - RUTA RÁPIDA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+¿Qué es todo esto?          → INDICE_MAESTRO.md
+¿Cómo despliego?            → GUIA_DESPLIEGUE_VERCEL.md
+¿Soy Antigravity, qué hago? → INSTRUCCIONES_ANTIGRAVITY.md
+¿Especificaciones técnicas? → BRIEF_TECNICO_COMPLETO.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HONEYPO TS (Trampas Educativas)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Comentario HTML (F12 → Elements)
+   → Clave "maestra" falsa
+   → Si la usan → ERROR 403 🤡
+
+2. robots.txt falso
+   → Rutas que no existen
+   → Enseña enumeración de directorios
+
+3. Backdoor intencional
+   → Comando con || o ; + cat/bypass/flag
+   → Volcado completo de datos
+   → +50 puntos bonus
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+COSTOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GitHub:    GRATIS
+Vercel:    GRATIS (free tier)
+CryptoJS:  GRATIS (CDN)
+
+TOTAL:     $0/mes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TIMELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Personalizar mensajes:  5 minutos
+Desplegar en Vercel:    10 minutos
+Testear:                5 minutos
+─────────────────────────────────
+TOTAL:                  20 minutos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUICK REFERENCE - COMANDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+help                              → Ver comandos
+users                             → Listar usuarios
+decrypt [usuario] [clave]         → Desencriptar
+status                            → Info sistema
+clear                             → Limpiar pantalla
+score                             → Ver puntuación
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CARACTERÍSTICAS INCLUIDAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Terminal retro hacker
+✓ 4 usuarios personalizados
+✓ Mensajes encriptados AES-256
+✓ Sistema de puntuación
+✓ Historial de comandos (arrow keys)
+✓ Honeypots educativos
+✓ Backdoor intencional
+✓ Responsive design
+✓ Validación robusta
+✓ Interfaz profesional
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SI ALGO FALLA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Limpiar caché: Ctrl+Shift+Del
+2. Probar otro navegador
+3. F12 Console → ver errores
+4. Leer GUIA_DESPLIEGUE_VERCEL.md → sección Troubleshooting
+5. Re-desplegar desde Vercel dashboard
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+¿QUÉ HAGO AHORA?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SI ERES ISMAEL:
+1. Personalizar 4 mensajes en ctf-script.js
+2. Enviar TODO este paquete a Antigravity
+3. Esperar URL final
+
+SI ERES ANTIGRAVITY:
+1. Crear repo en GitHub
+2. Subir archivos
+3. Desplegar en Vercel
+4. Testear
+5. Enviar URL a Ismael
+
+SI ERES USUARIO FINAL:
+1. Recibir URL de Ismael
+2. Abrir en navegador
+3. Escribir "help"
+4. ¡Jugar!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TODO ESTÁ LISTO. PUEDES DESPLEGAR YA.
+
+NO NECESITAS NADA MÁS.
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                        ¡LISTO PARA PRODUCCIÓN!                            ║
+╚════════════════════════════════════════════════════════════════════════════╝

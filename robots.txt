@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /config/
+Disallow: /admin_backdoor_secret.html
+Disallow: /api/credentials/
+Disallow: /.env
+Disallow: /backup/
+
+# ⚠️ HONEYPOT: Rutas falsas para investigadores
+User-agent: *
+Disallow: /admin/
+Disallow: /database/
+Disallow: /private/
+Disallow: /secrets/
+
+# Nota oculta para los investigadores curiosos
+# Las pistas están más cerca de lo que piensas...
+# Revisa los comentarios del código fuente (F12)
