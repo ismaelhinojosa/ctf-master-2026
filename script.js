@@ -1,370 +1,293 @@
 // ============================================================================
-// CTF CIBERSEGURIDAD - LÓGICA DE DESENCRIPTACIÓN
-// Sistema interactivo con CryptoJS, honeypots y backdoors educativos
+// CTF CIBERSEGURIDAD - LÓGICA DE DESENCRIPTACIÓN Y SANDBOX DE HACKING
 // ============================================================================
 
-class CTFTerminal {
+class CTFGame {
     constructor() {
-        this.output = document.getElementById('output');
-        this.input = document.getElementById('command-input');
-        this.commandHistory = [];
-        this.historyIndex = -1;
-        this.score = 0;
-        this.decryptedUsers = new Set();
-        this.attemptedMasterKey = false;
-
-        // Base de datos de usuarios con claves (ESTO ES EDUCATIVO, NO SEGURO)
-        this.users = {
-            'alejandro_maria': {
-                key: 'Supongo_que_la_vida_queria_que_nos_encontremos',
-                message: '¡Alejandro y María! Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba la operación. ¡Son unos cracks, gracias por todo!',
-                encrypted: null
+        // Base de datos de juegos por usuario (Clave de acceso de Instagram -> Datos)
+        this.gameData = {
+            'JULIA-SECRET-2026': {
+                username: 'julia',
+                role: 'Analista de Malware',
+                files: {
+                    'readme.txt': 'Analiza el archivo log de conexiones para buscar fugas de credenciales de sesión.',
+                    'connections.log': `[INFO] Connection established from IP 192.168.1.45\n[INFO] User julia logged in successfully.\n[WARNING] Session hijacked. AuthToken: Q2xhdmUgZmluYWw6IE11Y2hhc190YXJkZXNfQnVlbmFzX2dyYWNpYXNfaGFoYWhh\n[INFO] Connection terminated. System logged.`
+                },
+                finalKey: 'Muchas_tardes_Buenas_gracias_hahaha',
+                secretMessage: '¡Hola Julia! Te acordaste del peor dolor de cabeza del máster. Espero que se diviertan descifrando esto. ¡Nos vemos a la vuelta!'
             },
-            'julia': {
-                key: 'Muchas_tardes_Buenas_gracias_hahaha',
-                message: '¡Hola Julia! Te acordaste del peor dolor de cabeza del máster. Espero que se diviertan descifrando esto. ¡Nos vemos a la vuelta!',
-                encrypted: null
+            'ALEJANDRO-MARIA-2026': {
+                username: 'alejandro_maria',
+                role: 'Especialistas en Criptografía',
+                files: {
+                    'readme.txt': 'Hemos interceptado una comunicación secreta en la red interna, pero está protegida por un cifrado clásico (ROT13). Descífralo para obtener la clave de acceso final.',
+                    'traffic.enc': 'Fhcbatb_dhr_yn_ivqn_dhrefvn_dhr_abf_rapbagerzbf'
+                },
+                finalKey: 'Supongo_que_la_vida_queria_que_nos_encontremos',
+                secretMessage: '¡Alejandro y María! Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba la operación. ¡Son unos cracks, gracias por todo!'
             },
-            'ariana': {
-                key: 'No_tiene_tiempo_por_hacer_el_TFM',
-                message: '¡Ariana! Sé perfectamente que no tenías tiempo para mis juegos, pero admítelo, ¡fue divertido resolverlo! Disfruta las semanas sin mí.',
-                encrypted: null
+            'ARIANA-SECRET-2026': {
+                username: 'ariana',
+                role: 'Auditora de Base de Datos',
+                files: {
+                    'task.list': '1. Terminar TFM.\n2. Revisar la base de datos de respaldo en backup.sql y ver si hay variables residuales.',
+                    'backup.sql': `CREATE TABLE secrets (\n    id INT PRIMARY KEY,\n    username VARCHAR(50),\n    final_key VARCHAR(100)\n);\n\nINSERT INTO secrets VALUES (1, 'ariana', 'No_tiene_tiempo_por_hacer_el_TFM');`
+                },
+                finalKey: 'No_tiene_tiempo_por_hacer_el_TFM',
+                secretMessage: '¡Ariana! Sé perfectamente que no tenías tiempo para mis juegos, pero admítelo, ¡fue divertido resolverlo! Disfruta las semanas sin mí.'
             },
-            'marta': {
-                key: 'La_que_te_lee_la_mente_con_sus_ojos_bonitos',
-                message: '¡Marta! Lograste romper el entorno. Te dejo un abrazo gigante, cuídate mucho durante estos meses y no extrañen mis dudas en clase.',
-                encrypted: null
+            'MARTA-SECRET-2026': {
+                username: 'marta',
+                role: 'Ingeniera de DevSecOps',
+                files: {
+                    'readme.txt': 'El administrador ha dejado la clave de desarrollo en las variables de entorno locales del servidor. ¡Búscalas usando comandos avanzados de listado!',
+                    '.env': 'FINAL_KEY=La_que_te_lee_la_mente_con_sus_ojos_bonitos'
+                },
+                finalKey: 'La_que_te_lee_la_mente_con_sus_ojos_bonitos',
+                secretMessage: '¡Marta! Lograste romper el entorno. Te dejo un abrazo gigante, cuídate mucho durante estos meses y no extrañen mis dudas en clase.'
             }
         };
 
-        // Clave maestra bloqueada (honeypot)
-        this.masterKey = 'MasterCiberSeguridad2026!';
+        // Estado del juego
+        this.currentUserData = null;
+        this.encryptedMessages = {};
 
-        // Inicializar cifrados
+        // Elementos del DOM
+        this.gateContainer = document.getElementById('gate-container');
+        this.dashboardContainer = document.getElementById('dashboard-container');
+        
+        this.accessInput = document.getElementById('access-key-input');
+        this.gateSubmitBtn = document.getElementById('gate-submit-btn');
+        this.gateErrorMsg = document.getElementById('gate-error-msg');
+
+        this.terminalOutput = document.getElementById('terminal-output');
+        this.terminalInput = document.getElementById('terminal-input-field');
+
+        this.profileUser = document.getElementById('profile-user');
+        this.profileRole = document.getElementById('profile-role');
+        this.finalKeyInput = document.getElementById('final-key-input');
+        this.decryptSubmitBtn = document.getElementById('decrypt-submit-btn');
+
+        this.successOverlay = document.getElementById('success-overlay');
+        this.decryptedMessageDiv = document.getElementById('decrypted-message');
+        this.resetBtn = document.getElementById('reset-btn');
+
         this.initializeEncryption();
         this.setupEventListeners();
-        this.printWelcomeMessage();
     }
 
-    // Inicializar todos los cifrados
+    // Cifrar los mensajes en memoria al arrancar usando la clave correspondiente (Seguridad real)
     initializeEncryption() {
-        for (const [username, userData] of Object.entries(this.users)) {
-            const ciphertext = CryptoJS.AES.encrypt(userData.message, userData.key).toString();
-            this.users[username].encrypted = ciphertext;
+        for (const [accessKey, data] of Object.entries(this.gameData)) {
+            const ciphertext = CryptoJS.AES.encrypt(data.secretMessage, data.finalKey).toString();
+            this.encryptedMessages[data.username] = ciphertext;
         }
     }
 
     // Configurar listeners de eventos
     setupEventListeners() {
-        this.input.addEventListener('keydown', (e) => {
+        // Submit de la clave de acceso de Instagram
+        this.gateSubmitBtn.addEventListener('click', () => this.handleAccessLogin());
+        this.accessInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') this.handleAccessLogin();
+        });
+
+        // Comandos de la terminal de exploración
+        this.terminalInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                this.processCommand();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                this.navigateHistory('up');
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                this.navigateHistory('down');
+                this.processTerminalCommand();
             }
         });
 
-        this.input.focus();
+        // Desencriptar mensaje final
+        this.decryptSubmitBtn.addEventListener('click', () => this.handleFinalDecryption());
+        this.finalKeyInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') this.handleFinalDecryption();
+        });
+
+        // Reset / Cerrar sesión
+        this.resetBtn.addEventListener('click', () => {
+            window.location.reload();
+        });
     }
 
-    // Navegación del historial de comandos
-    navigateHistory(direction) {
-        if (this.commandHistory.length === 0) return;
-
-        if (direction === 'up') {
-            this.historyIndex = Math.min(this.historyIndex + 1, this.commandHistory.length - 1);
+    // FASE 1: Login de acceso desde Instagram
+    handleAccessLogin() {
+        const inputKey = this.accessInput.value.trim();
+        
+        if (this.gameData[inputKey]) {
+            this.currentUserData = this.gameData[inputKey];
+            this.transitionToDashboard();
         } else {
-            this.historyIndex = Math.max(this.historyIndex - 1, -1);
-        }
-
-        if (this.historyIndex >= 0) {
-            this.input.value = this.commandHistory[this.historyIndex];
-        } else {
-            this.input.value = '';
+            this.gateErrorMsg.style.opacity = '1';
+            this.accessInput.style.borderColor = 'var(--neon-pink)';
+            setTimeout(() => {
+                this.gateErrorMsg.style.opacity = '0';
+                this.accessInput.style.borderColor = 'var(--border-color)';
+            }, 3000);
         }
     }
 
-    // Imprimir mensaje de bienvenida
-    printWelcomeMessage() {
-        this.print('═══════════════════════════════════════════════════════════', 'warning');
-        this.print('  SISTEMA DE DESENCRIPTACIÓN - CTF MASTER 2026', 'warning');
-        this.print('═══════════════════════════════════════════════════════════', 'warning');
-        this.print('');
-        this.print('📍 Ruta detectada: Madrid → Bolivia', 'response');
-        this.print('📊 Autonomía del enlace: 14 Horas', 'response');
-        this.print('🔐 Modo: OPERATIVO | Estado: LISTO', 'response');
-        this.print('');
-        this.print('Escribe "help" para ver los comandos disponibles.', 'response');
+    // Transición del Portal de Acceso al Dashboard
+    transitionToDashboard() {
+        this.gateContainer.classList.add('hidden');
+        
+        // Cargar datos de perfil
+        this.profileUser.textContent = this.currentUserData.username.toUpperCase();
+        this.profileRole.textContent = this.currentUserData.role;
+
+        setTimeout(() => {
+            this.dashboardContainer.classList.add('visible');
+            this.terminalInput.focus();
+            this.printTerminalWelcome();
+        }, 400);
     }
 
-    // Procesar comando
-    processCommand() {
-        const command = this.input.value.trim();
-        if (!command) return;
-
-        this.commandHistory.unshift(command);
-        this.historyIndex = -1;
-
-        this.print(`guest@ciberseguridad-ctf:~$ ${command}`, 'command');
-        this.input.value = '';
-
-        this.executeCommand(command);
-        this.scrollToBottom();
+    // FASE 2: Consola Sandbox de Archivos
+    printTerminalWelcome() {
+        this.printLine(`=== CONSOLA DE EXPLORACIÓN DE ARCHIVOS PARA EL ROL: ${this.currentUserData.role.toUpperCase()} ===`);
+        this.printLine('Estableciendo entorno local y montando volumen virtual...');
+        this.printLine('Introduce "help" para ver la lista de comandos disponibles.');
+        this.printLine('');
     }
 
-    // Ejecutar comando (lógica principal)
-    executeCommand(rawCommand) {
-        const command = rawCommand.toLowerCase().trim();
+    processTerminalCommand() {
+        const rawInput = this.terminalInput.value;
+        const input = rawInput.trim();
+        this.terminalInput.value = '';
 
-        // ========== DETECCIÓN DE BACKDOOR / INYECCIÓN INTENCIONAL ==========
-        // Si contiene caracteres de encadenamiento && palabras clave específicas
-        if ((command.includes('||') || command.includes(';')) &&
-            (command.includes('cat') || command.includes('bypass') || command.includes('flag'))) {
-            this.executeBACKDOOR(rawCommand);
-            return;
-        }
+        if (!input) return;
 
-        // ========== VALIDACIÓN DE HONEYPOT MAESTRO ==========
-        if (command.includes('decrypt') && command.includes('MasterCiberSeguridad2026!')) {
-            this.print('❌ ERROR 403: EXPLOIT BLOCKED', 'error');
-            this.print('Buen intento. ¿De verdad creíste que dejaría la clave maestra en un comentario HTML?', 'error');
-            this.print('Vuelve a clase. 🤡', 'error');
-            this.attemptedMasterKey = true;
-            return;
-        }
+        // Imprimir el prompt con el comando del usuario
+        this.printLine(`guest@ciberseguridad-sandbox:~$ ${rawInput}`, 'var(--neon-cyan)');
 
-        // ========== COMANDOS NORMALES ==========
-        if (command === 'help') {
+        const parts = input.split(' ');
+        const cmd = parts[0].toLowerCase();
+        const args = parts.slice(1);
+
+        if (cmd === 'help') {
             this.cmdHelp();
-        } else if (command === 'clear') {
+        } else if (cmd === 'clear') {
             this.cmdClear();
-        } else if (command === 'status') {
-            this.cmdStatus();
-        } else if (command.startsWith('decrypt ')) {
-            this.cmdDecrypt(command);
-        } else if (command === 'score') {
-            this.cmdScore();
-        } else if (command === 'users') {
-            this.cmdUsers();
+        } else if (cmd === 'ls' || cmd === 'dir') {
+            this.cmdLs(args);
+        } else if (cmd === 'cat') {
+            this.cmdCat(args);
         } else {
-            this.print(`bash: ${command.split(' ')[0]}: comando no encontrado`, 'error');
-            this.print('Escribe "help" para ver los comandos disponibles.', 'response');
+            this.printLine(`bash: ${cmd}: comando no encontrado. Escribe "help" para ver comandos disponibles.`, 'var(--neon-pink)');
         }
+
+        // Scroll automático
+        this.terminalOutput.scrollTop = this.terminalOutput.scrollHeight;
     }
 
-    // ========== COMANDO: help ==========
+    // Comandos de consola
     cmdHelp() {
-        this.print('');
-        this.print('┌─ COMANDOS DISPONIBLES ─────────────────────────────┐', 'warning');
-        this.print('│                                                      │', 'warning');
-        this.print('│  help              - Muestra este menú de ayuda      │', 'response');
-        this.print('│  clear             - Limpia la pantalla             │', 'response');
-        this.print('│  status            - Muestra información del sistema │', 'response');
-        this.print('│  users             - Lista usuarios disponibles     │', 'response');
-        this.print('│  score             - Muestra puntuación             │', 'response');
-        this.print('│  decrypt [usr] [key] - Desencripta mensaje de usr   │', 'response');
-        this.print('│                                                      │', 'warning');
-        this.print('└──────────────────────────────────────────────────────┘', 'warning');
-        this.print('');
-        this.print('💡 Pista: Los nombres de usuario son nombres reales...', 'warning');
-        this.print('');
+        this.printLine('Comandos disponibles en el sistema de exploración:');
+        this.printLine('  ls          - Listar archivos en el directorio actual');
+        this.printLine('  ls -a       - Listar todos los archivos (incluyendo archivos ocultos)');
+        this.printLine('  cat [file]  - Mostrar el contenido de un archivo específico');
+        this.printLine('  clear       - Limpiar la pantalla de la terminal');
+        this.printLine('  help        - Mostrar esta ayuda');
     }
 
-    // ========== COMANDO: clear ==========
     cmdClear() {
-        this.output.innerHTML = '';
-        this.score += 5; // Pequeño bonus por usar comandos
+        this.terminalOutput.innerHTML = '';
     }
 
-    // ========== COMANDO: status ==========
-    cmdStatus() {
-        this.print('');
-        this.print('┌─ INFORMACIÓN DEL SISTEMA ──────────────────────────┐', 'warning');
-        this.print('│                                                      │', 'warning');
-        this.print(`│  Ruta activa       : Madrid → Bolivia               │`, 'response');
-        this.print(`│  Autonomía enlace  : 14 Horas                       │`, 'response');
-        this.print(`│  Usuarios locales  : ${Object.keys(this.users).length}                                      │`, 'response');
-        this.print(`│  Mensajes decodif. : ${this.decryptedUsers.size}/4                                    │`, 'success');
-        this.print('│  Protección        : AES-256 | Validación activa   │', 'warning');
-        this.print('│                                                      │', 'warning');
-        this.print('└──────────────────────────────────────────────────────┘', 'warning');
-        this.print('');
-    }
+    cmdLs(args) {
+        const showAll = args.includes('-a');
+        const files = this.currentUserData.files;
+        let fileList = [];
 
-    // ========== COMANDO: users ==========
-    cmdUsers() {
-        this.print('');
-        this.print('Usuarios disponibles para desencriptación:', 'response');
-        this.print('');
-        Object.keys(this.users).forEach((user, idx) => {
-            const status = this.decryptedUsers.has(user) ? '✓ DECODIFICADO' : '⨂ Bloqueado';
-            this.print(`  ${idx + 1}. ${user.padEnd(18)} [${status}]`, 'response');
-        });
-        this.print('');
-    }
-
-    // ========== COMANDO: score ==========
-    cmdScore() {
-        this.print('');
-        this.print(`Puntuación actual: ${this.score} puntos`, 'success');
-        const percentage = (this.decryptedUsers.size / 4) * 100;
-        this.print(`Progreso: ${percentage.toFixed(0)}% (${this.decryptedUsers.size}/4 usuarios)`, 'warning');
-        this.print('');
-    }
-
-    // ========== COMANDO: decrypt ==========
-    cmdDecrypt(command) {
-        const parts = command.split(' ');
-        
-        if (parts.length < 3) {
-            this.print('❌ Uso incorrecto: decrypt [usuario] [clave]', 'error');
-            this.print('Ejemplo: decrypt julia MiClaveSecreta123', 'response');
-            return;
+        for (const filename of Object.keys(files)) {
+            // Filtrar archivos ocultos (los que empiezan con '.') a menos que se use -a
+            if (filename.startsWith('.') && !showAll) {
+                continue;
+            }
+            fileList.push(filename);
         }
 
-        const username = parts[1].toLowerCase();
-        const keyAttempt = parts.slice(2).join(' ');
-
-        // Validar usuario
-        if (!this.users[username]) {
-            this.print(`❌ Usuario "${username}" no encontrado en la base de datos.`, 'error');
-            return;
-        }
-
-        // Si ya fue decodificado
-        if (this.decryptedUsers.has(username)) {
-            this.print(`✓ Este usuario ya fue desencriptado anteriormente.`, 'warning');
-            this.print(`Mensaje: "${this.users[username].message}"`, 'success');
-            return;
-        }
-
-        // Validar clave
-        const userKey = this.users[username].key;
-        if (keyAttempt === userKey) {
-            this.decryptMessage(username);
+        if (fileList.length === 0) {
+            this.printLine('(Directorio vacío)');
         } else {
-            this.print(`❌ Clave incorrecta para el usuario "${username}".`, 'error');
-            this.print('💡 Intenta de nuevo o investiga más.', 'warning');
+            // Imprimir archivos con colores llamativos
+            fileList.forEach(file => {
+                const color = file.startsWith('.') ? 'var(--neon-pink)' : '#fff';
+                this.printLine(`  ${file}`, color);
+            });
         }
     }
 
-    // Desencriptar mensaje
-    decryptMessage(username) {
-        const userData = this.users[username];
-        
+    cmdCat(args) {
+        if (args.length === 0) {
+            this.printLine('Error: Especifica el nombre de un archivo. Uso: cat [nombre_archivo]', 'var(--neon-pink)');
+            return;
+        }
+
+        const filename = args[0];
+        const files = this.currentUserData.files;
+
+        if (files[filename] !== undefined) {
+            // Imprimir contenido del archivo
+            this.printLine(files[filename]);
+        } else {
+            this.printLine(`cat: ${filename}: No existe el archivo o directorio en este nodo.`, 'var(--neon-pink)');
+        }
+    }
+
+    // FASE 3: Desencriptación Final
+    handleFinalDecryption() {
+        const inputKey = this.finalKeyInput.value.trim();
+
+        if (!inputKey) {
+            alert('Por favor introduce la clave final.');
+            return;
+        }
+
+        const username = this.currentUserData.username;
+        const ciphertext = this.encryptedMessages[username];
+
         try {
-            // Desencriptar usando CryptoJS
-            const decrypted = CryptoJS.AES.decrypt(userData.encrypted, userData.key).toString(CryptoJS.enc.Utf8);
-            
-            if (!decrypted) {
-                this.print('❌ Error al desencriptar. Clave inválida.', 'error');
-                return;
+            // Intentar descifrar el mensaje secreto usando la clave introducida
+            const bytes = CryptoJS.AES.decrypt(ciphertext, inputKey);
+            const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+
+            if (decryptedText) {
+                // ÉXITO
+                this.decryptedMessageDiv.textContent = decryptedText;
+                this.successOverlay.classList.add('visible');
+            } else {
+                // ERROR DE CLAVE
+                this.showFinalDecryptionError();
             }
-
-            // Marcar como decodificado
-            this.decryptedUsers.add(username);
-            this.score += 25;
-
-            // Mostrar resultado
-            this.print('');
-            this.print('╔════════════════════════════════════════════════════╗', 'success');
-            this.print('║           ✓ DESENCRIPTACIÓN EXITOSA              ║', 'success');
-            this.print('╚════════════════════════════════════════════════════╝', 'success');
-            this.print('');
-            this.print(`Usuario: ${username}`, 'response');
-            this.print('');
-            this.print(`📨 ${decrypted}`, 'success');
-            this.print('');
-            this.print(`+25 puntos | Total: ${this.score}`, 'warning');
-            this.print('');
-
-            // Felicitar si todo está completo
-            if (this.decryptedUsers.size === 4) {
-                this.printVictory();
-            }
-        } catch (error) {
-            this.print('❌ Error crítico en desencriptación.', 'error');
-            console.error(error);
+        } catch (e) {
+            this.showFinalDecryptionError();
         }
     }
 
-    // ========== BACKDOOR INTENCIONAL (Inyección de Comandos) ==========
-    executeBACKDOOR(command) {
-        this.print('');
-        this.print('⚠️  ALERTA DE SEGURIDAD DETECTADA ⚠️', 'error');
-        this.print('');
-        this.print('Comando sospechoso con caracteres de encadenamiento detectado.', 'error');
-        this.print('Procesando...', 'warning');
-        this.print('');
+    showFinalDecryptionError() {
+        this.finalKeyInput.style.borderColor = 'var(--neon-pink)';
+        this.finalKeyInput.value = '';
+        this.finalKeyInput.setAttribute('placeholder', 'CLAVE INCORRECTA - INTENTA DE NUEVO');
         
         setTimeout(() => {
-            this.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
-            this.print('SYSTEM DUMP - VOLCADO COMPLETO DE DATOS', 'error');
-            this.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
-            this.print('');
-            
-            // Mostrar todos los mensajes sin necesidad de clave
-            Object.entries(this.users).forEach(([username, userData]) => {
-                this.print(`[${username.toUpperCase()}]`, 'warning');
-                this.print(userData.message, 'success');
-                this.print('');
-            });
-            
-            this.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
-            this.print('⚠️  VULNERABILIDAD EXPLOTADA: SQL INJECTION', 'error');
-            this.print('Este es un ejemplo educativo de lo que NO debes hacer.', 'warning');
-            this.print('');
-            
-            // Contar como si hubiera decodificado todos
-            Object.keys(this.users).forEach(username => {
-                if (!this.decryptedUsers.has(username)) {
-                    this.decryptedUsers.add(username);
-                }
-            });
-            this.score += 50;
-        }, 800);
+            this.finalKeyInput.style.borderColor = 'var(--border-color)';
+            this.finalKeyInput.setAttribute('placeholder', 'Introduce la Clave Final...');
+        }, 2500);
     }
 
-    // Mensaje de victoria
-    printVictory() {
-        setTimeout(() => {
-            this.print('');
-            this.print('╔════════════════════════════════════════════════════╗', 'success');
-            this.print('║       🎉 ¡FELICIDADES! 🎉                        ║', 'success');
-            this.print('║    Has decodificado TODOS los mensajes secretos   ║', 'success');
-            this.print('╚════════════════════════════════════════════════════╝', 'success');
-            this.print('');
-            this.print(`Puntuación final: ${this.score} puntos`, 'warning');
-            this.print('');
-            this.print('Ahora, ¡muéstrale esto a tus amigos y que lo hagan ellos!', 'response');
-            this.print('');
-        }, 500);
-    }
-
-    // Función auxiliar para imprimir
-    print(text = '', style = 'response') {
+    // Utilidad para imprimir líneas en la terminal
+    printLine(text, color = '#bbf7d0') {
         const line = document.createElement('div');
-        line.className = 'output-line';
-        
-        const span = document.createElement('span');
-        span.className = style;
-        span.textContent = text;
-        
-        line.appendChild(span);
-        this.output.appendChild(line);
-    }
-
-    // Scroll automático al bottom
-    scrollToBottom() {
-        this.output.scrollTop = this.output.scrollHeight;
+        line.className = 'terminal-line';
+        line.style.color = color;
+        line.textContent = text;
+        this.terminalOutput.appendChild(line);
     }
 }
 
-// Inicializar cuando carga el DOM
+// Iniciar aplicación
 document.addEventListener('DOMContentLoaded', () => {
-    new CTFTerminal();
+    new CTFGame();
 });

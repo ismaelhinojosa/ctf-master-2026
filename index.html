@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTF Ciberseguridad - Terminal</title>
-    <!-- 🔐 HONEYPOT 1: Clave maestra en comentario (¡que no se caiga!) 🔐 -->
-    <!-- ADMIN_BACKDOOR: MasterCiberSeguridad2026! | EXPLOIT_DETECTED -->
+    <title>CTF Ciberseguridad - Portal de Acceso</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-color: #05060f;
+            --card-bg: rgba(10, 12, 28, 0.6);
+            --border-color: rgba(0, 240, 255, 0.25);
+            --neon-cyan: #00f0ff;
+            --neon-pink: #ff007f;
+            --neon-green: #39ff14;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --font-title: 'Orbitron', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,208 +29,509 @@
         }
 
         body {
-            background-color: #0a0a0a;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            overflow: hidden;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
             min-height: 100vh;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 255, 0, 0.03) 0px,
-                    rgba(0, 255, 0, 0.03) 1px,
-                    transparent 1px,
-                    transparent 2px
-                );
-        }
-
-        .terminal-container {
-            width: 100%;
-            height: 100vh;
             display: flex;
-            flex-direction: column;
-            padding: 20px;
-            box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.1);
-            border: 2px solid #00ff00;
-            background-color: #0a0a0a;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
         }
 
-        .terminal-header {
-            border-bottom: 2px solid #00ff00;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
+        /* Efecto Scanline y Ruido de fondo */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Luces ambientales traseras */
+        .ambient-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .glow-cyan {
+            background: var(--neon-cyan);
+            top: 20%;
+            left: 15%;
+            animation: float 8s ease-in-out infinite alternate;
+        }
+        .glow-pink {
+            background: var(--neon-pink);
+            bottom: 20%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(30px) scale(1.1); }
+        }
+
+        /* Contenedores Principales */
+        .app-container {
+            width: 90%;
+            max-width: 1000px;
+            z-index: 5;
+            perspective: 1000px;
+        }
+
+        /* ==================== FASE 1: PORTAL DE ACCESO (GATE) ==================== */
+        .gate-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 40px;
             text-align: center;
-            font-weight: bold;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            transform: translateZ(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gate-card.hidden {
+            opacity: 0;
+            transform: scale(0.9) rotateX(15deg);
+            pointer-events: none;
+            display: none !important;
+        }
+
+        .cyber-logo {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--neon-cyan) 30%, var(--neon-pink) 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.3));
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.2)); }
+            100% { filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5)); }
+        }
+
+        .gate-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 35px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            animation: flicker 3s infinite;
         }
 
-        .terminal-header h1 {
-            font-size: 20px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px #00ff00;
+        .input-group {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 25px;
         }
 
-        .terminal-header p {
-            font-size: 11px;
-            color: #00aa00;
-            opacity: 0.8;
+        .cyber-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .output-container {
-            flex: 1;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: rgba(0, 10, 10, 0.8);
-            border: 1px solid #003300;
+        .cyber-input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .output-line {
-            margin-bottom: 8px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
+        .cyber-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), #00aaff);
+            color: #05060f;
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 40px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
 
-        .command {
-            color: #00ff00;
-            font-weight: bold;
-            margin-top: 5px;
+        .cyber-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--neon-cyan);
+            background: linear-gradient(135deg, #00f0ff, #00d8ff);
         }
 
-        .response {
-            color: #00ff00;
-            margin-left: 10px;
+        .cyber-btn:active {
+            transform: translateY(1px);
         }
 
-        .error {
-            color: #ff3333;
-            font-weight: bold;
+        .gate-error {
+            color: var(--neon-pink);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-top: 15px;
+            min-height: 20px;
+            text-shadow: 0 0 5px rgba(255, 0, 127, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .success {
-            color: #00ff00;
-            font-weight: bold;
-            text-shadow: 0 0 5px #00ff00;
+        /* ==================== FASE 2: DASHBOARD PRINCIPAL ==================== */
+        .dashboard-container {
+            display: none;
+            opacity: 0;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+            width: 100%;
+            transition: all 0.5s ease;
         }
 
-        .warning {
-            color: #ffaa00;
-            font-weight: bold;
+        .dashboard-container.visible {
+            display: grid !important;
+            opacity: 1;
         }
 
-        .input-line {
+        /* Paneles */
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel-header {
+            padding: 15px 20px;
+            background: rgba(10, 12, 28, 0.8);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            border-top: 1px solid #003300;
-            padding-top: 10px;
+            justify-content: space-between;
         }
 
-        .prompt {
-            color: #00ff00;
+        .panel-title {
+            font-family: var(--font-title);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cyber-badge {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
+            display: inline-block;
+        }
+
+        /* Terminal de Exploración (Sandbox) */
+        .terminal-panel {
+            height: 520px;
+        }
+
+        .terminal-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #bbf7d0; /* Color terminal verde claro agradable */
+            background: rgba(4, 5, 12, 0.9);
+            line-height: 1.6;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .terminal-line {
+            margin-bottom: 6px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(8, 10, 22, 0.9);
+            border-top: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        .terminal-prompt {
+            color: var(--neon-cyan);
+            font-family: var(--font-mono);
             font-weight: bold;
-            margin-right: 8px;
+            margin-right: 10px;
             white-space: nowrap;
         }
 
-        #command-input {
+        .terminal-input {
             flex: 1;
-            background-color: transparent;
+            background: transparent;
             border: none;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
             outline: none;
-            caret-color: #00ff00;
-            text-shadow: 0 0 5px #00ff00;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            caret-color: var(--neon-cyan);
         }
 
-        #command-input::placeholder {
-            color: #003300;
+        /* Panel de Control y Desencriptación */
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 520px;
         }
 
-        /* Scrollbar personalizada */
-        .output-container::-webkit-scrollbar {
-            width: 8px;
+        .control-body {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .output-container::-webkit-scrollbar-track {
-            background: #0a0a0a;
+        .user-profile {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
         }
 
-        .output-container::-webkit-scrollbar-thumb {
-            background: #00ff00;
-            border-radius: 4px;
+        .profile-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
         }
 
-        .output-container::-webkit-scrollbar-thumb:hover {
-            background: #00aa00;
+        .profile-value {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            color: #fff;
+            letter-spacing: 1px;
         }
 
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
-            }
-            20%, 24%, 55% {
-                text-shadow: none;
-            }
+        .decrypt-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: auto;
         }
 
-        @keyframes glow {
-            0%, 100% {
-                text-shadow: 0 0 5px #00ff00;
-            }
-            50% {
-                text-shadow: 0 0 20px #00ff00;
-            }
+        .decrypter-instructions {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            border-left: 2px solid var(--neon-pink);
+            padding-left: 12px;
         }
 
-        .glowing {
-            animation: glow 1.5s infinite;
+        /* ==================== FASE 3: ÉXITO / REVELACIÓN ==================== */
+        .success-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(4, 5, 12, 0.95);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .success-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .success-card {
+            background: rgba(12, 20, 41, 0.8);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 50px rgba(57, 255, 20, 0.25);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-overlay.visible .success-card {
+            transform: scale(1);
+        }
+
+        .success-title {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--neon-green);
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+        }
+
+        .message-content {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #fff;
+            text-align: left;
+            margin-bottom: 30px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+            font-family: var(--font-body);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .terminal-container {
-                padding: 10px;
-                font-size: 12px;
+        @media (max-width: 850px) {
+            body {
+                overflow-y: auto;
+                padding: 40px 10px;
             }
-            
-            .terminal-header h1 {
-                font-size: 16px;
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            .terminal-panel, .control-panel {
+                height: auto;
+                min-height: 400px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="terminal-container">
-        <div class="terminal-header">
-            <h1>⚡ CTF CIBERSEGURIDAD MASTER ⚡</h1>
-            <p>Sistema de Decodificación Encriptado | Terminal v2.1</p>
+
+    <!-- Capa de brillo ambiental de neón -->
+    <div class="ambient-glow glow-cyan"></div>
+    <div class="ambient-glow glow-pink"></div>
+
+    <div class="app-container">
+        
+        <!-- FASE 1: PORTAL DE ACCESO -->
+        <div class="gate-card" id="gate-container">
+            <div class="cyber-logo">Ciber-CTF 2026</div>
+            <div class="gate-subtitle">Security Gateway Authentication</div>
+            
+            <div class="input-group">
+                <input type="text" id="access-key-input" class="cyber-input" placeholder="INTRODUCE LA CLAVE DE ACCESO..." autocomplete="off">
+            </div>
+            
+            <button id="gate-submit-btn" class="cyber-btn">Acceder al Sistema</button>
+            <div class="gate-error" id="gate-error-msg">Clave incorrecta. Acceso denegado.</div>
         </div>
 
-        <div class="output-container" id="output">
-            <div class="output-line">
-                <span class="response">Bienvenido al sistema de desencriptación personalizada.</span>
+        <!-- FASE 2: DASHBOARD DE EXPLORACIÓN -->
+        <div class="dashboard-container" id="dashboard-container">
+            
+            <!-- Panel Izquierdo: Consola Sandbox de Archivos -->
+            <div class="panel terminal-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="cyber-badge"></span>
+                        Hacking Sandbox Terminal v1.4
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminal-output">
+                    <div class="terminal-line">Conexión establecida con éxito con el nodo de archivos.</div>
+                    <div class="terminal-line">Introduce <span style="color: var(--neon-cyan)">help</span> para ver los comandos disponibles.</div>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="terminal-prompt">></span>
+                    <input type="text" id="terminal-input-field" class="terminal-input" placeholder="ls, cat..." autocomplete="off">
+                </div>
             </div>
-            <div class="output-line">
-                <span class="response">Escribe <span class="command">help</span> para ver los comandos disponibles.</span>
+
+            <!-- Panel Derecho: Módulo de Desencriptación -->
+            <div class="panel control-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="cyber-badge" style="background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink);"></span>
+                        Decrypter Control Module
+                    </div>
+                </div>
+                <div class="control-body">
+                    <div class="user-profile">
+                        <div class="profile-label">Usuario Conectado</div>
+                        <div class="profile-value" id="profile-user">-</div>
+                    </div>
+                    <div class="user-profile">
+                        <div class="profile-label">Rol Asignado</div>
+                        <div class="profile-value" id="profile-role" style="color: var(--neon-cyan);">-</div>
+                    </div>
+                    
+                    <div class="decrypter-instructions">
+                        Explora la terminal de la izquierda para descubrir la clave secreta original oculta en este nodo. Una vez descifrada, introdúcela abajo.
+                    </div>
+
+                    <div class="decrypt-form">
+                        <div class="profile-label">Clave Enigma Final</div>
+                        <input type="text" id="final-key-input" class="cyber-input" placeholder="Introduce la Clave Final..." style="padding: 12px 15px; font-size: 0.9rem;" autocomplete="off">
+                        <button id="decrypt-submit-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); padding: 12px 25px;">Desencriptar Mensaje</button>
+                    </div>
+                </div>
             </div>
-            <div class="output-line">
-                <span class="response">⚠️ Solo usuarios autenticados pueden acceder a los mensajes secretos.</span>
-            </div>
+
         </div>
 
-        <div class="input-line">
-            <span class="prompt">guest@ciberseguridad-ctf:~$</span>
-            <input type="text" id="command-input" placeholder="Introduce un comando..." autocomplete="off">
+    </div>
+
+    <!-- FASE 3: ÉXITO / REVELACIÓN -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-card">
+            <div class="success-title">🔐 SISTEMA DECODIFICADO 🔐</div>
+            <div class="message-content" id="decrypted-message">
+                ...
+            </div>
+            <button id="reset-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);">Cerrar Sesión</button>
         </div>
     </div>
 
-    <!-- CryptoJS desde CDN (versión estable) -->
+    <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="script.js"></script>
 </body>
