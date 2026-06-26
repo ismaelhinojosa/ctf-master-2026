@@ -78,6 +78,10 @@ class CTFGame {
 
     // Cifrar los mensajes en memoria al arrancar usando la clave correspondiente (Seguridad real)
     initializeEncryption() {
+        if (typeof CryptoJS === 'undefined') {
+            console.error("CryptoJS is not loaded! Please check internet connection.");
+            return;
+        }
         for (const [accessKey, data] of Object.entries(this.gameData)) {
             const ciphertext = CryptoJS.AES.encrypt(data.secretMessage, data.finalKey).toString();
             this.encryptedMessages[data.username] = ciphertext;
@@ -238,6 +242,10 @@ class CTFGame {
 
     // FASE 3: Desencriptación Final
     handleFinalDecryption() {
+        if (typeof CryptoJS === 'undefined') {
+            alert('Error: La librería criptográfica no se ha cargado. Verifica tu conexión a internet.');
+            return;
+        }
         const inputKey = this.finalKeyInput.value.trim();
 
         if (!inputKey) {
