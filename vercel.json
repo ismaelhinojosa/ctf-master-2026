@@ -5,7 +5,7 @@
   "framework": "static",
   "outputDirectory": ".",
   "public": true,
-  "env": [],
+  "env": {},
   "git": {
     "deploymentEnabled": {
       "main": true
