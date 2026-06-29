@@ -113,8 +113,29 @@ class ISMAELSLastMission {
         this.adminEmail = 'ismaelhinojosa@hotmail.com';
         this.timerId = null;
 
+        // Elementos del temporizador superior e overlays
+        this.timerIntroOverlay = document.getElementById('timer-intro-overlay');
+        this.introUsernameSpan = document.getElementById('intro-username-span');
+        this.timerStartBtn = document.getElementById('timer-start-btn');
+        this.timerExpiredOverlay = document.getElementById('timer-expired-overlay');
+        this.expiredCardText = document.getElementById('expired-card-text');
+        this.askMoreTimeBtn = document.getElementById('ask-more-time-btn');
+        this.moreTimeInputContainer = document.getElementById('more-time-input-container');
+        this.moreTimeInput = document.getElementById('more-time-input');
+        this.moreTimeSubmitBtn = document.getElementById('more-time-submit-btn');
+        this.moreTimeError = document.getElementById('more-time-error');
+        this.globalCountdownBar = document.getElementById('global-countdown-bar');
+        this.topTimerClock = document.getElementById('top-timer-clock');
+
+        // Estado del temporizador
+        this.identifiedUser = null;
+        this.timerIntervalId = null;
+        this.countdownDuration = 14 * 60 * 60 * 1000; // 14 horas
+        this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas
+
         this.initializeEncryption();
         this.setupEventListeners();
+        this.detectIdentifiedUser();
     }
 
     // Inicializar encriptación
@@ -354,6 +375,9 @@ class ISMAELSLastMission {
                 // ÉXITO
                 this.decryptedMessageDiv.textContent = decryptedText;
 
+                // Marcar como resuelto para detener el temporizador de Bolivia
+                localStorage.setItem('game_solved_' + this.currentUserData.username, 'true');
+
                 // Detener música de fondo
                 const bgMusic = document.getElementById('background-music');
                 if (bgMusic) {
@@ -551,6 +575,165 @@ class ISMAELSLastMission {
             if (!response.ok) throw new Error('Network response error');
             return response.json();
         });
+    }
+
+    // --- MÉTODOS DEL TEMPORIZADOR DE BOLIVIA ---
+
+    detectIdentifiedUser() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let u = urlParams.get('u') || urlParams.get('user');
+        
+        if (u) {
+            u = u.toLowerCase().trim();
+            const match = Object.values(this.gameData).find(data => data.username === u);
+            if (match) {
+                this.identifiedUser = match.username;
+                this.initializeTimer();
+            }
+        }
+    }
+
+    initializeTimer() {
+        const username = this.identifiedUser;
+        const timerStart = localStorage.getItem('timer_start_' + username);
+        
+        if (!timerStart) {
+            // Mostrar modal de bienvenida si no ha iniciado el contador
+            this.introUsernameSpan.textContent = username.toUpperCase();
+            this.timerIntroOverlay.classList.add('visible');
+            this.timerStartBtn.addEventListener('click', () => this.startCountdown());
+        } else {
+            // Iniciar cuenta atrás directamente si ya se había activado
+            this.startCountdownLoop();
+        }
+    }
+
+    startCountdown() {
+        const username = this.identifiedUser;
+        localStorage.setItem('timer_start_' + username, Date.now().toString());
+        this.timerIntroOverlay.classList.remove('visible');
+        this.startCountdownLoop();
+    }
+
+    startCountdownLoop() {
+        this.globalCountdownBar.style.display = 'block';
+        document.body.classList.add('has-top-bar');
+
+        if (this.timerIntervalId) clearInterval(this.timerIntervalId);
+        
+        this.timerIntervalId = setInterval(() => {
+            this.updateCountdown();
+        }, 1000);
+        
+        this.updateCountdown();
+    }
+
+    updateCountdown() {
+        const username = this.identifiedUser;
+        
+        if (localStorage.getItem('game_solved_' + username) === 'true') {
+            clearInterval(this.timerIntervalId);
+            this.topTimerClock.textContent = 'DECODIFICADO CON ÉXITO 🎉';
+            this.topTimerClock.style.color = 'var(--neon-green)';
+            this.topTimerClock.style.textShadow = '0 0 8px rgba(34, 197, 94, 0.5)';
+            return;
+        }
+
+        const timerStart = parseInt(localStorage.getItem('timer_start_' + username), 10);
+        if (!timerStart) return;
+
+        const isExtended = localStorage.getItem('timer_extended_' + username) === 'true';
+        const totalDuration = this.countdownDuration + (isExtended ? this.extensionDuration : 0);
+        const expirationTime = timerStart + totalDuration;
+        const timeLeft = expirationTime - Date.now();
+
+        if (timeLeft <= 0) {
+            clearInterval(this.timerIntervalId);
+            this.topTimerClock.textContent = '00:00:00 - SISTEMA BLOQUEADO';
+            this.triggerTimeExpired();
+        } else {
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            const format = (num) => String(num).padStart(2, '0');
+            this.topTimerClock.textContent = `${format(hours)}:${format(minutes)}:${format(seconds)}`;
+        }
+    }
+
+    triggerTimeExpired() {
+        const username = this.identifiedUser;
+        const isExtended = localStorage.getItem('timer_extended_' + username) === 'true';
+
+        this.timerExpiredOverlay.classList.add('visible');
+
+        if (isExtended) {
+            this.expiredCardText.innerHTML = `Ismael ya está establecido en Bolivia 🇧🇴.<br><br><span style="color: var(--neon-pink); font-weight: bold; font-size: 1.1rem; text-shadow: 0 0 5px var(--neon-pink);">🔒 SISTEMA BLOQUEADO PERMANENTEMENTE</span>`;
+            this.askMoreTimeBtn.style.display = 'none';
+            this.moreTimeInputContainer.style.display = 'none';
+        } else {
+            this.expiredCardText.innerHTML = `Ismael ha aterrizado en Bolivia 🇧🇴.<br>El sistema de seguridad ha bloqueado el acceso a tu mensaje final.`;
+            this.askMoreTimeBtn.style.display = 'block';
+            
+            const newAskBtn = this.askMoreTimeBtn.cloneNode(true);
+            this.askMoreTimeBtn.parentNode.replaceChild(newAskBtn, this.askMoreTimeBtn);
+            this.askMoreTimeBtn = newAskBtn;
+            
+            this.askMoreTimeBtn.addEventListener('click', () => {
+                this.askMoreTimeBtn.style.display = 'none';
+                this.moreTimeInputContainer.style.display = 'block';
+                this.moreTimeInput.focus();
+            });
+
+            const newSubmitBtn = this.moreTimeSubmitBtn.cloneNode(true);
+            this.moreTimeSubmitBtn.parentNode.replaceChild(newSubmitBtn, this.moreTimeSubmitBtn);
+            this.moreTimeSubmitBtn = newSubmitBtn;
+
+            this.moreTimeSubmitBtn.addEventListener('click', () => this.handleMoreTimeRequest());
+            this.moreTimeInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') this.handleMoreTimeRequest();
+            });
+        }
+    }
+
+    handleMoreTimeRequest() {
+        const text = this.moreTimeInput.value.trim().toLowerCase();
+        const cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        const validPhrases = [
+            'por favor',
+            'porfavor',
+            'si por favor',
+            'si porfavor',
+            'mas tiempo por favor',
+            'mas tiempo porfavor',
+            'mas tiempo, por favor',
+            'mas tiempo, porfavor',
+            'mas tiempo',
+            'un poco mas de tiempo',
+            'quiero mas tiempo'
+        ];
+
+        const isValid = validPhrases.some(phrase => cleanText.includes(phrase)) || cleanText.includes('por favor') || cleanText.includes('porfavor');
+
+        if (isValid) {
+            const username = this.identifiedUser;
+            localStorage.setItem('timer_extended_' + username, 'true');
+            this.timerExpiredOverlay.classList.remove('visible');
+            this.moreTimeInput.value = '';
+            this.moreTimeError.textContent = '';
+            this.moreTimeInputContainer.style.display = 'none';
+            
+            this.showCyberAlert('🍀 Prórroga concedida.<br><br>Se han añadido 7 horas de acceso adicional. Date prisa, Ismael sigue volando hacia Bolivia.', () => {
+                this.startCountdownLoop();
+            });
+        } else {
+            this.moreTimeError.textContent = '❌ Petición rechazada. Sé más educado o di "por favor".';
+            this.moreTimeInput.classList.add('glitch');
+            setTimeout(() => {
+                this.moreTimeInput.classList.remove('glitch');
+            }, 1000);
+        }
     }
 }
 

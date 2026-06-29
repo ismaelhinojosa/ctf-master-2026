@@ -488,6 +488,119 @@
             text-align: center;
         }
 
+        /* Barra de Temporizador Superior */
+        .global-countdown-bar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 5, 20, 0.95);
+            border-bottom: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+            z-index: 150;
+            padding: 10px 20px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+        }
+        .global-countdown-bar span {
+            font-weight: bold;
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+            font-size: 1.1rem;
+        }
+
+        /* Ajuste para el body con barra superior */
+        body.has-top-bar {
+            padding-top: 50px;
+        }
+
+        /* Overlay de Bienvenida / Expiración */
+        .timer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 4, 13, 0.96);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 250;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .timer-overlay.visible {
+            display: flex !important;
+            opacity: 1;
+        }
+        .timer-card {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-violet);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.25);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            font-family: var(--font-body);
+        }
+        .timer-card-title {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--neon-violet);
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+            text-transform: uppercase;
+        }
+        .timer-card-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+        .timer-clock {
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--neon-pink);
+            text-shadow: 0 0 12px rgba(236, 72, 153, 0.6);
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+        .timer-card-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            outline: none;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .timer-card-input:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+        }
+        .timer-card-error {
+            color: var(--neon-pink);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            min-height: 18px;
+        }
+
         /* Efecto Glitch */
         .glitch {
             animation: glitch-anim 0.3s linear infinite;
@@ -522,6 +635,42 @@
     </style>
 </head>
 <body>
+
+    <!-- Barra de Temporizador Superior -->
+    <div id="global-countdown-bar" class="global-countdown-bar">
+        ⏱️ TIEMPO HASTA QUE ISMAEL LLEGUE A BOLIVIA: <span id="top-timer-clock">14:00:00</span>
+    </div>
+
+    <!-- Overlay de Bienvenida y Activación de Temporizador -->
+    <div id="timer-intro-overlay" class="timer-overlay">
+        <div class="timer-card">
+            <div class="timer-card-title">🚨 MISIÓN DETECTADA 🚨</div>
+            <div class="timer-card-text">
+                ¡Hola <span id="intro-username-span" style="color: var(--neon-cyan); font-weight: bold;">Hacker</span>! 👋<br><br>
+                Ismael está en camino a Bolivia ✈️. Tienes exactamente <strong>14 horas</strong> para descifrar tu mensaje antes de que aterrice y el sistema se bloquee.
+            </div>
+            <div class="timer-clock">14:00:00</div>
+            <button id="timer-start-btn" class="cyber-btn">⚡ Aceptar y Comenzar Reto</button>
+        </div>
+    </div>
+
+    <!-- Overlay de Bloqueo por Expiración de Tiempo -->
+    <div id="timer-expired-overlay" class="timer-overlay">
+        <div class="timer-card" style="border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(236, 72, 153, 0.25);">
+            <div class="timer-card-title" style="color: var(--neon-pink); text-shadow: 0 0 10px rgba(236, 72, 153, 0.4);">⏰ TIEMPO EXPIRADO ⏰</div>
+            <div class="timer-card-text" id="expired-card-text">
+                Ismael ha aterrizado en Bolivia 🇧🇴.<br>
+                El sistema de seguridad ha bloqueado el acceso a tu mensaje final.
+            </div>
+            <button id="ask-more-time-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-pink), #b91c1c); box-shadow: 0 0 15px rgba(236, 72, 153, 0.3); width: 100%;">¿Quieres más tiempo?</button>
+            
+            <div id="more-time-input-container" style="display: none; margin-top: 20px;">
+                <input type="text" id="more-time-input" class="timer-card-input" placeholder="Escribe tu petición aquí..." autocomplete="off">
+                <button id="more-time-submit-btn" class="cyber-btn" style="width: 100%;">Enviar Petición</button>
+                <div id="more-time-error" class="timer-card-error"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Capa de brillo ambiental de neón -->
     <div class="ambient-glow glow-cyan"></div>
