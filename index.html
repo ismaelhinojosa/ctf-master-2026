@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- 
+        ======================================================================
+        🛠️ NOTAS DE DESARROLLO (ISMAEL):
+        - Recuerda borrar el archivo /.env del root antes de subir a Vercel!!
+        - TODO: Desactivar el endpoint backdoor temporal para pruebas:
+          /admin_backdoor_secret.html
+        - Las claves de encriptación finales están hardcodeadas en la sandbox, 
+          no busques en el código fuente de index.html porque las respuestas 
+          están cifradas con AES-256 en script.js, listilla/o ;)
+        - Nota: He dejado la base de datos Sqlite temporal en /database/backup.sql,
+          tengo que limpiarlo por si acaso auditan la web.
+        ======================================================================
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTF Ciberseguridad - Portal de Acceso</title>
@@ -826,6 +839,6 @@
 
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.0.8"></script>
+    <script src="script.js?v=1.0.9"></script>
 </body>
 </html>

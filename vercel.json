@@ -1,5 +1,22 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/.env", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/config", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/config/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/api/credentials", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/api/credentials/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/backup", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/backup/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/admin", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/admin/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/database", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/database/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/private", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/private/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/secrets", "destination": "/admin_backdoor_secret.html", "permanent": false },
+    { "source": "/secrets/(.*)", "destination": "/admin_backdoor_secret.html", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/robots.txt",
