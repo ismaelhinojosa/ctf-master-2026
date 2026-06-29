@@ -9,14 +9,15 @@
     
     <style>
         :root {
-            --bg-color: #05060f;
-            --card-bg: rgba(10, 12, 28, 0.6);
-            --border-color: rgba(0, 240, 255, 0.25);
-            --neon-cyan: #00f0ff;
-            --neon-pink: #ff007f;
-            --neon-green: #39ff14;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
+            --bg-color: #05040d;
+            --card-bg: rgba(15, 8, 28, 0.6);
+            --border-color: rgba(168, 85, 247, 0.25);
+            --neon-cyan: #06b6d4;
+            --neon-pink: #ec4899;
+            --neon-green: #22c55e;
+            --neon-violet: #a855f7;
+            --text-primary: #f3f4f6;
+            --text-secondary: #c084fc;
             --font-title: 'Orbitron', sans-serif;
             --font-body: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -48,7 +49,7 @@
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 10;
-            background-size: 100% 3px, 3px 100%;
+            background-size: 100% 4px, 4px 100%;
             pointer-events: none;
         }
 
@@ -64,7 +65,7 @@
             pointer-events: none;
         }
         .glow-cyan {
-            background: var(--neon-cyan);
+            background: var(--neon-violet);
             top: 20%;
             left: 15%;
             animation: float 8s ease-in-out infinite alternate;
@@ -98,7 +99,7 @@
             border-radius: 16px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
             transform: translateZ(0);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -115,18 +116,18 @@
             font-size: 2.2rem;
             font-weight: 900;
             letter-spacing: 4px;
-            background: linear-gradient(135deg, var(--neon-cyan) 30%, var(--neon-pink) 90%);
+            background: linear-gradient(135deg, var(--neon-violet) 30%, var(--neon-pink) 90%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
             text-transform: uppercase;
-            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.3));
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.35));
             animation: pulse-glow 2s infinite alternate;
         }
 
         @keyframes pulse-glow {
-            0% { filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.2)); }
-            100% { filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5)); }
+            0% { filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.2)); }
+            100% { filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.5)); }
         }
 
         .gate-subtitle {
@@ -159,13 +160,13 @@
         }
 
         .cyber-input:focus {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.5);
+            border-color: var(--neon-violet);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .cyber-btn {
-            background: linear-gradient(135deg, var(--neon-cyan), #00aaff);
-            color: #05060f;
+            background: linear-gradient(135deg, var(--neon-violet), #8b5cf6);
+            color: #ffffff;
             font-family: var(--font-title);
             font-weight: 700;
             font-size: 0.95rem;
@@ -176,13 +177,13 @@
             cursor: pointer;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
         }
 
         .cyber-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--neon-cyan);
-            background: linear-gradient(135deg, #00f0ff, #00d8ff);
+            box-shadow: 0 0 25px var(--neon-violet);
+            background: linear-gradient(135deg, #c084fc, #a855f7);
         }
 
         .cyber-btn:active {
@@ -242,7 +243,7 @@
             font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 2px;
-            color: var(--neon-cyan);
+            color: var(--neon-violet);
             text-transform: uppercase;
             display: flex;
             align-items: center;
@@ -253,8 +254,8 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 8px var(--neon-cyan);
+            background: var(--neon-violet);
+            box-shadow: 0 0 8px var(--neon-violet);
             display: inline-block;
         }
 
@@ -278,7 +279,7 @@
             width: 6px;
         }
         .terminal-body::-webkit-scrollbar-thumb {
-            background: rgba(0, 240, 255, 0.3);
+            background: rgba(168, 85, 247, 0.3);
             border-radius: 3px;
         }
 
@@ -293,7 +294,7 @@
             align-items: center;
             padding: 12px 20px;
             background: rgba(8, 10, 22, 0.9);
-            border-top: 1px solid rgba(0, 240, 255, 0.15);
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
         }
 
         .terminal-prompt {
@@ -486,6 +487,38 @@
             margin-top: 5px;
             text-align: center;
         }
+
+        /* Efecto Glitch */
+        .glitch {
+            animation: glitch-anim 0.3s linear infinite;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                transform: translate(0);
+                text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-cyan);
+            }
+            20% {
+                transform: translate(-2px, 2px);
+                text-shadow: -2px 2px var(--neon-pink), 2px -2px var(--neon-cyan);
+            }
+            40% {
+                transform: translate(2px, -2px);
+                text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-cyan);
+            }
+            60% {
+                transform: translate(-2px, -2px);
+                text-shadow: -2px -2px var(--neon-pink), 2px 2px var(--neon-cyan);
+            }
+            80% {
+                transform: translate(2px, 2px);
+                text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-cyan);
+            }
+            100% {
+                transform: translate(0);
+                text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-cyan);
+            }
+        }
     </style>
 </head>
 <body>
@@ -498,14 +531,14 @@
         
         <!-- FASE 1: PORTAL DE ACCESO -->
         <div class="gate-card" id="gate-container">
-            <div class="cyber-logo">EL ÚLTIMO RETO 🎓</div>
-            <div class="gate-subtitle">Introduce el código que te pasé por Instagram para ver tu mensaje de despedida.</div>
+            <div class="cyber-logo">🎮 ISMAEL'S LAST MISSION 🎮</div>
+            <div class="gate-subtitle">~ Antes de irme a Bolivia, un último reto ~</div>
             
             <div class="input-group">
-                <input type="text" id="access-key-input" class="cyber-input" placeholder="Escribe tu código de acceso aquí..." autocomplete="off">
+                <input type="text" id="access-key-input" class="cyber-input" placeholder="👤 Escribe tu código de acceso aquí..." autocomplete="off">
             </div>
             
-            <button id="gate-submit-btn" class="cyber-btn">Descifrar mi despedida</button>
+            <button id="gate-submit-btn" class="cyber-btn">⚡ Descifrar mi despedida</button>
             <div class="gate-error" id="gate-error-msg">Código incorrecto. Inténtalo de nuevo.</div>
         </div>
 
@@ -517,7 +550,7 @@
                 <div class="panel-header">
                     <div class="panel-title">
                         <span class="cyber-badge"></span>
-                        Hacking Sandbox Terminal v1.4
+                        🖥️ Sandbox de Hacking
                     </div>
                 </div>
                 <div class="terminal-body" id="terminal-output">
@@ -535,16 +568,16 @@
                 <div class="panel-header">
                     <div class="panel-title">
                         <span class="cyber-badge" style="background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink);"></span>
-                        Módulo de Desencriptación
+                        🔐 Módulo de Desencriptación
                     </div>
                 </div>
                 <div class="control-body">
                     <div class="user-profile">
-                        <div class="profile-label">Amigo detectado</div>
+                        <div class="profile-label">👤 Amigo detectado</div>
                         <div class="profile-value" id="profile-user">-</div>
                     </div>
                     <div class="user-profile">
-                        <div class="profile-label">Tu especialidad</div>
+                        <div class="profile-label">🧠 Tu especialidad</div>
                         <div class="profile-value" id="profile-role" style="color: var(--neon-cyan);">-</div>
                     </div>
                     
@@ -553,9 +586,9 @@
                     </div>
 
                     <div class="decrypt-form">
-                        <div class="profile-label">Tu clave final</div>
+                        <div class="profile-label">🔑 Tu clave final</div>
                         <input type="text" id="final-key-input" class="cyber-input" placeholder="Introduce la clave final encontrada..." style="padding: 12px 15px; font-size: 0.9rem;" autocomplete="off">
-                        <button id="decrypt-submit-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); padding: 12px 25px;">Desencriptar Mensaje</button>
+                        <button id="decrypt-submit-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); padding: 12px 25px;">🔓 Desencriptar Mensaje</button>
                         <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; text-align: center; font-style: italic;">
                             🔒 Nota: Al descifrar con éxito tu mensaje, se notificará automáticamente a Ismael.
                         </p>
@@ -587,21 +620,22 @@
                 <p style="color: var(--neon-pink); font-weight: bold; font-size: 1rem; margin-bottom: 15px; text-transform: uppercase; text-align: center; text-shadow: 0 0 5px var(--neon-pink);">❌ TIEMPO EXPIRADO: ACCESO CENSURADO ❌</p>
                 <p style="color: var(--text-primary); margin-bottom: 12px;">Para iniciar el protocolo de restauración de emergencia, debes comprometerte a:</p>
                 <ol style="margin-left: 20px; margin-bottom: 15px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
-                    <li>Realizar un volcado forense completo de tu memoria RAM a mano.</li>
-                    <li>Calcular una colisión SHA-256 en papel en menos de 5 minutos.</li>
-                    <li>Prometer solemnemente invitar a Ismael a las próximas cervezas / comidas del grupo.</li>
+                    <li>1️⃣ Realizar un volcado forense completo de tu memoria RAM a mano.</li>
+                    <li>2️⃣ Calcular una colisión SHA-256 en papel en menos de 5 minutos.</li>
+                    <li>3️⃣ Prometer solemnemente invitar a Ismael a las próximas cervezas / comidas del grupo.</li>
+                    <li>4️⃣ Mantener en secreto que esta alerta era una broma. 😉</li>
                 </ol>
                 <p style="color: var(--neon-cyan); text-align: center; font-weight: bold;">¿Aceptas las condiciones de restauración?</p>
             </div>
 
             <!-- Botones de Acción -->
-            <button id="prank-accept-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); width: 100%; margin-bottom: 10px;">Aceptar el Reto de Restauración</button>
+            <button id="prank-accept-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); width: 100%; margin-bottom: 10px;">👋 Aceptar el Reto de Restauración</button>
             
             <!-- Formulario de Respuesta a Ismael -->
             <div id="reply-container" class="reply-container">
-                <div class="reply-label">Dejar una respuesta para Ismael</div>
+                <div class="reply-label">💬 Dejar una respuesta para Ismael</div>
                 <textarea id="reply-text" class="reply-textarea" placeholder="Escribe aquí tu mensaje de respuesta..."></textarea>
-                <button id="reply-send-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%;">Enviar Respuesta</button>
+                <button id="reply-send-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%;">📤 Enviar Respuesta</button>
                 <div id="reply-status-msg" class="reply-status"></div>
             </div>
 
@@ -611,8 +645,8 @@
 
     <!-- Modal de Alerta Cyberpunk Personalizado -->
     <div id="cyber-alert" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 6, 15, 0.9); z-index: 200; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
-        <div class="success-card" style="max-width: 450px; border-color: var(--neon-cyan); box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);">
-            <div class="success-title" style="color: var(--neon-cyan); font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);">⚡ SISTEMA INFORMA ⚡</div>
+        <div class="success-card" style="max-width: 450px; border-color: var(--neon-violet); box-shadow: 0 0 35px rgba(168, 85, 247, 0.25);">
+            <div class="success-title" style="color: var(--neon-violet); font-size: 1.3rem; text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);">📢 SISTEMA INFORMA</div>
             <div id="cyber-alert-msg" style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6; margin-bottom: 25px; text-align: center; color: var(--text-primary);">
                 ...
             </div>
@@ -625,6 +659,6 @@
 
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.0.5"></script>
+    <script src="script.js?v=1.0.6"></script>
 </body>
 </html>

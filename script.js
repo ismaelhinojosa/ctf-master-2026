@@ -1,69 +1,96 @@
 // ============================================================================
-// CTF CIBERSEGURIDAD - LÓGICA DE DESENCRIPTACIÓN Y SANDBOX DE HACKING
+// ISMAEL'S LAST MISSION - LÓGICA MEJORADA CON EASTER EGGS Y EFECTOS
 // ============================================================================
 
-class CTFGame {
+class ISMAELSLastMission {
     constructor() {
-        // Base de datos de juegos por usuario (Clave de acceso de Instagram -> Datos)
-        // Base de datos de juegos por usuario (Clave de acceso de Instagram + código por DM -> Datos)
+        // Base de datos de juegos
         this.gameData = {
             'JULIA-PART1-98241': {
                 username: 'julia',
-                role: 'Analista de Malware',
+                role: '🧠 Analista de Malware',
                 files: {
-                    'readme.txt': 'Analiza el archivo log de conexiones para buscar fugas de credenciales de sesión.',
-                    'connections.log': `[INFO] Connection established from IP 192.168.1.45\n[INFO] User julia logged in successfully.\n[WARNING] Session hijacked. AuthToken: Q2xhdmUgZmluYWw6IE11Y2hhc190YXJkZXNfQnVlbmFzX2dyYWNpYXNfaGFoYWhh\n[INFO] Connection terminated. System logged.`
+                    'readme.txt': '🔍 Analiza el archivo log de conexiones para buscar fugas de credenciales de sesión.',
+                    'connections.log': `[INFO] Connection established from IP 192.168.1.45\n[INFO] User julia logged in successfully.\n[WARNING] Session hijacked. AuthToken: Q2xhdmUgZmluYWw6IE11Y2hhc190YXJkZXNfQnVlbmFzX2dyYWNpYXNfaGFoYWhh\n[ALERT] Connection terminated. System logged.\n[EASTER_EGG] Secret message: "Te extrañarás de mis preguntas en clase, ¿verdad?"`,
+                    '.hidden_file': '🙈 Este archivo está oculto. Solo se ve con "ls -a"'
                 },
                 finalKey: 'Muchas_tardes_Buenas_gracias_hahaha',
-                secretMessage: '¡Hola Julia! Te acordaste del peor dolor de cabeza del máster. Espero que se diviertan descifrando esto. ¡Nos vemos a la vuelta!'
+                secretMessage: '¡Hola Julia! 👋 Te acordaste del peor dolor de cabeza del máster (¡esos bugs sin resolver!). Espero que se diviertan descifrando esto. ¡Nos vemos a la vuelta, reina de los análisis de malware! 🏆\n\nNo olvides que eres increíblemente inteligente. ¡Lo lograste todo con una sonrisa!'
             },
             'ALEJANDRO-MARIA-PART1-35791': {
                 username: 'alejandro_maria',
-                role: 'Especialistas en Criptografía',
+                role: '🔐 Especialistas en Criptografía',
                 files: {
-                    'readme.txt': 'Hemos interceptado una comunicación secreta en la red interna, pero está protegida por un cifrado clásico (ROT13). Descífralo para obtener la clave de acceso final.',
-                    'traffic.enc': 'Fhcbatb_dhr_yn_ivqn_dhrefvn_dhr_abf_rapbagerzbf'
+                    'readme.txt': '🔍 Hemos interceptado una comunicación secreta protegida por cifrado clásico (ROT13). Descífrala.',
+                    'traffic.enc': 'Fhcbatb_dhr_yn_ivqn_dhrefvn_dhr_abf_rapbagezbf',
+                    'hint.txt': '💡 Pista: Usa un descodificador ROT13 online si lo necesitas.',
+                    '.config': '⚙️ [Alejandro] Pirate esto en 5 segundos. [María] Auditaré la operación.'
                 },
                 finalKey: 'Supongo_que_la_vida_queria_que_nos_encontremos',
-                secretMessage: '¡Alejandro y María! Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba la operación. ¡Son unos cracks, gracias por todo!'
+                secretMessage: '¡Alejandro y María! 👫 Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba cada paso de la operación. ¡Son unos CRACKS absolutos, gracias por todo!\n\nAlejandro, tu velocidad es brutal. María, tu precisión impeccable. Juntos son prácticamente imparables. 🚀\n\n¡Que disfruten Bolivia (bueno, yo el que me voy 😅) y las futuras aventuras de criptografía!'
             },
             'ARIANA-PART1-24680': {
                 username: 'ariana',
-                role: 'Auditora de Base de Datos',
+                role: '📊 Auditora de Base de Datos',
                 files: {
-                    'task.list': '1. Terminar TFM.\n2. Revisar la base de datos de respaldo en backup.sql y ver si hay variables residuales.',
-                    'backup.sql': `CREATE TABLE secrets (\n    id INT PRIMARY KEY,\n    username VARCHAR(50),\n    final_key VARCHAR(100)\n);\n\nINSERT INTO secrets VALUES (1, 'ariana', 'No_tiene_tiempo_por_hacer_el_TFM');`
+                    'task.list': '1️⃣ Terminar TFM (¡casi ahí!)\n2️⃣ Revisar backup.sql para variables residuales\n3️⃣ Descansar cuando todo esto termine 😴',
+                    'backup.sql': `CREATE TABLE secrets (\n    id INT PRIMARY KEY,\n    username VARCHAR(50),\n    final_key VARCHAR(100)\n);\n\nINSERT INTO secrets VALUES (1, 'ariana', 'No_tiene_tiempo_por_hacer_el_TFM');\n-- ¡Encontraste el secreto! 🎉`,
+                    '.notes': '📝 "Ariana sin tiempo pero siempre aquí para ayudar. Leyenda absoluta."'
                 },
                 finalKey: 'No_tiene_tiempo_por_hacer_el_TFM',
-                secretMessage: '¡Ariana! Sé perfectamente que no tenías tiempo para mis juegos, pero admítelo, ¡fue divertido resolverlo! Disfruta las semanas sin mí.'
+                secretMessage: '¡Ariana! 💪 Sé perfectamente que no tenías tiempo para mis juegos de ciberseguridad. PERO ADMÍTELO, ¡fue un poco divertido resolverlo! 😏\n\nTu dedicación al TFM es legendaria. Tu capacidad de hacer mil cosas a la vez es sobrehumana. Disfruta estas semanas sin hacer nada más que respirar.\n\n¡Te lo mereces, auditora de bases de datos más ocupada del máster! 👑'
             },
             'MARTA-PART1-13579': {
                 username: 'marta',
-                role: 'Ingeniera de DevSecOps',
+                role: '⚙️ Ingeniera de DevSecOps',
                 files: {
-                    'readme.txt': 'El administrador ha dejado la clave de desarrollo en las variables de entorno locales del servidor. ¡Búscalas usando comandos avanzados de listado!',
-                    '.env': 'FINAL_KEY=La_que_te_lee_la_mente_con_sus_ojos_bonitos'
+                    'readme.txt': '🔑 El admin dejó las variables de entorno en .env. ¡Búscalas con comandos avanzados de listado!',
+                    '.env': `DATABASE_PASSWORD=P@ssw0rd123\nAPI_KEY=sk_live_12345678\nFINAL_KEY=La_que_te_lee_la_mente_con_sus_ojos_bonitos\nMARTA_SKILL_LEVEL=9001 (¡Rompió el entorno!)`,
+                    'LEAKED_DATABASE.txt': '⚠️ RIESGO CRÍTICO: Variables de entorno en texto plano. ¡Marta, arregla esto! 😨'
                 },
                 finalKey: 'La_que_te_lee_la_mente_con_sus_ojos_bonitos',
-                secretMessage: '¡Marta! Lograste romper el entorno. Te dejo un abrazo gigante, cuídate mucho durante estos meses y no extrañen mis dudas en clase.'
+                secretMessage: '¡Marta! 🎯 Lograste romper LITERALMENTE el entorno durante el máster (y lo arreglaste después). Eso merece respeto absoluto.\n\nTe dejo un abrazo de 2000 km desde Bolivia. Cuídate mucho durante estos meses. No dejen de ser geniales, y cuando vuelva, quiero que sigas rompiendo cosas... en el buen sentido. 🤗\n\n¡Eres la DevSecOps más caótica y brillante del grupo! 💥'
             }
+        };
+
+        // Mensajes chistosos para errores
+        this.funnyErrors = [
+            '❌ Código incorrecto. ¿Estuviste durmiendo cuando lo pasé? 😴',
+            '❌ Nope. Sigue intentando, campeón.',
+            '❌ Eso está más lejos que Bolivia. 🌍',
+            '❌ ¿De verdad? Inténtalo de nuevo.',
+            '❌ ERROR 403: Tu intuición falló esta vez.',
+            '❌ Casi. Pero no es. 🎯'
+        ];
+
+        // Easter eggs de comandos
+        this.easterEggs = {
+            'whoami': () => '👤 eres: Hacker_de_Ismael_v1.0',
+            'date': () => '📅 ' + new Date().toLocaleString('es-ES'),
+            'echo hola': () => '🔊 hola',
+            'pwd': () => '/ismael/despedida/cifrada/2026',
+            'sl': () => '🚂 choo choo! (solo era un easter egg)',
+            'hack the planet': () => '🌍 ¡Estás en una película de 1995!',
+            'sudo make me a sandwich': () => '🥪 Acceso denegado. Hazlo tú mismo.',
+            'rm -rf /': () => '☠️ ¡Acabas de borrar el sistema! (No, era broma 😅)',
+            'matrix': () => `\nThe Matrix has you... (es solo un easter egg)\n        Follow the white rabbit... 🐰`,
         };
 
         // Estado del juego
         this.currentUserData = null;
         this.encryptedMessages = {};
+        this.terminalCommands = [];
+        this.commandIndex = -1;
 
         // Elementos del DOM
         this.gateContainer = document.getElementById('gate-container');
         this.dashboardContainer = document.getElementById('dashboard-container');
-        
         this.accessInput = document.getElementById('access-key-input');
         this.gateSubmitBtn = document.getElementById('gate-submit-btn');
         this.gateErrorMsg = document.getElementById('gate-error-msg');
 
         this.terminalOutput = document.getElementById('terminal-output');
         this.terminalInput = document.getElementById('terminal-input-field');
-
         this.profileUser = document.getElementById('profile-user');
         this.profileRole = document.getElementById('profile-role');
         this.finalKeyInput = document.getElementById('final-key-input');
@@ -72,32 +99,28 @@ class CTFGame {
         this.successOverlay = document.getElementById('success-overlay');
         this.decryptedMessageDiv = document.getElementById('decrypted-message');
         this.resetBtn = document.getElementById('reset-btn');
-
-        // Nuevos Elementos para la Broma del Contador
         this.countdownHeader = document.getElementById('countdown-header');
         this.timerSeconds = document.getElementById('timer-seconds');
         this.prankContainer = document.getElementById('prank-container');
         this.prankAcceptBtn = document.getElementById('prank-accept-btn');
         this.successTitle = document.getElementById('success-title');
-        this.timerId = null;
 
-        // Elementos del Buzón de Respuesta
         this.replyContainer = document.getElementById('reply-container');
         this.replyText = document.getElementById('reply-text');
         this.replySendBtn = document.getElementById('reply-send-btn');
         this.replyStatusMsg = document.getElementById('reply-status-msg');
         
-        // Email de administración para recibir notificaciones
         this.adminEmail = 'ismaelhinojosa@hotmail.com';
+        this.timerId = null;
 
         this.initializeEncryption();
         this.setupEventListeners();
     }
 
-    // Cifrar los mensajes en memoria al arrancar usando la clave correspondiente (Seguridad real)
+    // Inicializar encriptación
     initializeEncryption() {
         if (typeof CryptoJS === 'undefined') {
-            console.error("CryptoJS is not loaded! Please check internet connection.");
+            console.error("❌ CryptoJS no está cargado!");
             return;
         }
         for (const [accessKey, data] of Object.entries(this.gameData)) {
@@ -106,40 +129,53 @@ class CTFGame {
         }
     }
 
-    // Configurar listeners de eventos
+    // Setup de eventos
     setupEventListeners() {
-        // Submit de la clave de acceso de Instagram
         this.gateSubmitBtn.addEventListener('click', () => this.handleAccessLogin());
         this.accessInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') this.handleAccessLogin();
         });
 
-        // Comandos de la terminal de exploración
         this.terminalInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 this.processTerminalCommand();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                this.navigateCommandHistory('up');
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                this.navigateCommandHistory('down');
             }
         });
 
-        // Desencriptar mensaje final
         this.decryptSubmitBtn.addEventListener('click', () => this.handleFinalDecryption());
         this.finalKeyInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') this.handleFinalDecryption();
         });
 
-        // Aceptar el reto de restauración (Broma)
         this.prankAcceptBtn.addEventListener('click', () => this.handlePrankAccept());
-
-        // Enviar respuesta
         this.replySendBtn.addEventListener('click', () => this.handleReplySend());
-
-        // Reset / Cerrar sesión
-        this.resetBtn.addEventListener('click', () => {
-            window.location.reload();
-        });
+        this.resetBtn.addEventListener('click', () => window.location.reload());
     }
 
-    // FASE 1: Login de acceso desde Instagram
+    // Navegación de historial (Arrow Up/Down)
+    navigateCommandHistory(direction) {
+        if (this.terminalCommands.length === 0) return;
+
+        if (direction === 'up') {
+            this.commandIndex = Math.min(this.commandIndex + 1, this.terminalCommands.length - 1);
+        } else {
+            this.commandIndex = Math.max(this.commandIndex - 1, -1);
+        }
+
+        if (this.commandIndex >= 0) {
+            this.terminalInput.value = this.terminalCommands[this.commandIndex];
+        } else {
+            this.terminalInput.value = '';
+        }
+    }
+
+    // FASE 1: Login
     handleAccessLogin() {
         const inputKey = this.accessInput.value.trim();
         
@@ -147,20 +183,23 @@ class CTFGame {
             this.currentUserData = this.gameData[inputKey];
             this.transitionToDashboard();
         } else {
+            this.gateErrorMsg.textContent = this.funnyErrors[Math.floor(Math.random() * this.funnyErrors.length)];
             this.gateErrorMsg.style.opacity = '1';
-            this.accessInput.style.borderColor = 'var(--neon-pink)';
+            this.gateContainer.classList.add('glitch');
+            this.accessInput.style.borderColor = '#ff1493';
+            
             setTimeout(() => {
                 this.gateErrorMsg.style.opacity = '0';
                 this.accessInput.style.borderColor = 'var(--border-color)';
-            }, 3000);
+                this.gateContainer.classList.remove('glitch');
+            }, 3500);
         }
     }
 
-    // Transición del Portal de Acceso al Dashboard
+    // Transición al Dashboard
     transitionToDashboard() {
         this.gateContainer.classList.add('hidden');
         
-        // Cargar datos de perfil
         this.profileUser.textContent = this.currentUserData.username.toUpperCase();
         this.profileRole.textContent = this.currentUserData.role;
 
@@ -171,14 +210,20 @@ class CTFGame {
         }, 400);
     }
 
-    // FASE 2: Consola Sandbox de Archivos
+    // Bienvenida en terminal
     printTerminalWelcome() {
-        this.printLine(`=== CONSOLA DE EXPLORACIÓN DE ARCHIVOS PARA EL ROL: ${this.currentUserData.role.toUpperCase()} ===`);
-        this.printLine('Estableciendo entorno local y montando volumen virtual...');
-        this.printLine('Introduce "help" para ver la lista de comandos disponibles.');
+        this.printLine('╔════════════════════════════════════════════════════════════╗');
+        this.printLine('║  🎮 ISMAEL\'S LAST MISSION - SANDBOX TERMINAL v2.1 🎮     ║');
+        this.printLine('╚════════════════════════════════════════════════════════════╝');
+        this.printLine('');
+        this.printLine('🔐 Conexión establecida con el nodo de archivos cifrados.');
+        this.printLine('📁 Rol detectado: ' + this.currentUserData.role);
+        this.printLine('');
+        this.printLine('💡 Introduce "help" para ver comandos disponibles.');
         this.printLine('');
     }
 
+    // Procesar comando
     processTerminalCommand() {
         const rawInput = this.terminalInput.value;
         const input = rawInput.trim();
@@ -186,14 +231,21 @@ class CTFGame {
 
         if (!input) return;
 
-        // Imprimir el prompt con el comando del usuario
-        this.printLine(`guest@ciberseguridad-sandbox:~$ ${rawInput}`, 'var(--neon-cyan)');
+        // Guardar en historial
+        this.terminalCommands.unshift(input);
+        this.commandIndex = -1;
+
+        // Mostrar prompt con comando
+        this.printLine(`guest@ismael-sandbox:~$ ${rawInput}`, '#ec4899');
 
         const parts = input.split(' ');
         const cmd = parts[0].toLowerCase();
         const args = parts.slice(1);
 
-        if (cmd === 'help') {
+        // Easter eggs primero
+        if (this.easterEggs[input.toLowerCase()]) {
+            this.printLine(this.easterEggs[input.toLowerCase()]());
+        } else if (cmd === 'help') {
             this.cmdHelp();
         } else if (cmd === 'clear') {
             this.cmdClear();
@@ -202,21 +254,25 @@ class CTFGame {
         } else if (cmd === 'cat') {
             this.cmdCat(args);
         } else {
-            this.printLine(`bash: ${cmd}: comando no encontrado. Escribe "help" para ver comandos disponibles.`, 'var(--neon-pink)');
+            this.printLine(`bash: ${cmd}: comando no encontrado ❌`, '#ff1493');
+            this.printLine('Escribe "help" para ver comandos disponibles.');
         }
 
-        // Scroll automático
         this.terminalOutput.scrollTop = this.terminalOutput.scrollHeight;
     }
 
-    // Comandos de consola
+    // Comandos
     cmdHelp() {
-        this.printLine('Comandos disponibles en el sistema de exploración:');
-        this.printLine('  ls          - Listar archivos en el directorio actual');
-        this.printLine('  ls -a       - Listar todos los archivos (incluyendo archivos ocultos)');
-        this.printLine('  cat [file]  - Mostrar el contenido de un archivo específico');
-        this.printLine('  clear       - Limpiar la pantalla de la terminal');
+        this.printLine('');
+        this.printLine('📋 COMANDOS DISPONIBLES:');
+        this.printLine('  ls          - Listar archivos');
+        this.printLine('  ls -a       - Listar archivos (incluyendo ocultos)');
+        this.printLine('  cat [file]  - Mostrar contenido de archivo');
+        this.printLine('  clear       - Limpiar pantalla');
         this.printLine('  help        - Mostrar esta ayuda');
+        this.printLine('');
+        this.printLine('🎮 También hay Easter Eggs ocultos... ¡intenta comandos aleatorios!');
+        this.printLine('');
     }
 
     cmdClear() {
@@ -229,27 +285,26 @@ class CTFGame {
         let fileList = [];
 
         for (const filename of Object.keys(files)) {
-            // Filtrar archivos ocultos (los que empiezan con '.') a menos que se use -a
-            if (filename.startsWith('.') && !showAll) {
-                continue;
-            }
+            if (filename.startsWith('.') && !showAll) continue;
             fileList.push(filename);
         }
 
+        this.printLine('');
         if (fileList.length === 0) {
             this.printLine('(Directorio vacío)');
         } else {
-            // Imprimir archivos con colores llamativos
             fileList.forEach(file => {
-                const color = file.startsWith('.') ? 'var(--neon-pink)' : '#fff';
-                this.printLine(`  ${file}`, color);
+                const icon = file.startsWith('.') ? '🔒' : '📄';
+                const color = file.startsWith('.') ? '#a855f7' : '#a8e6b8';
+                this.printLine(`${icon}  ${file}`, color);
             });
         }
+        this.printLine('');
     }
 
     cmdCat(args) {
         if (args.length === 0) {
-            this.printLine('Error: Especifica el nombre de un archivo. Uso: cat [nombre_archivo]', 'var(--neon-pink)');
+            this.printLine('❌ Uso: cat [nombre_archivo]');
             return;
         }
 
@@ -257,23 +312,25 @@ class CTFGame {
         const files = this.currentUserData.files;
 
         if (files[filename] !== undefined) {
-            // Imprimir contenido del archivo
+            this.printLine('');
             this.printLine(files[filename]);
+            this.printLine('');
         } else {
-            this.printLine(`cat: ${filename}: No existe el archivo o directorio en este nodo.`, 'var(--neon-pink)');
+            this.printLine(`❌ cat: ${filename}: No existe.`);
         }
     }
 
-    // FASE 3: Desencriptación Final
+    // FASE 3: Desencriptación
     handleFinalDecryption() {
         if (typeof CryptoJS === 'undefined') {
-            this.showCyberAlert('Error: La librería criptográfica no se ha cargado. Verifica tu conexión a internet.');
+            this.showCyberAlert('❌ Error: CryptoJS no cargado. Verifica internet.');
             return;
         }
+
         const inputKey = this.finalKeyInput.value.trim();
 
         if (!inputKey) {
-            this.showCyberAlert('Por favor introduce la clave final.');
+            this.showCyberAlert('⚠️ Introduce la clave final.');
             return;
         }
 
@@ -281,30 +338,28 @@ class CTFGame {
         const ciphertext = this.encryptedMessages[username];
 
         try {
-            // Intentar descifrar el mensaje secreto usando la clave introducida
             const bytes = CryptoJS.AES.decrypt(ciphertext, inputKey);
             const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
 
             if (decryptedText) {
-                // ÉXITO - Iniciar simulación de autodestrucción (Broma)
+                // ÉXITO
                 this.decryptedMessageDiv.textContent = decryptedText;
 
-                // Reproducir audio de victoria personalizado
+                // Audio de victoria
                 const music = document.getElementById('victory-music');
                 if (music) {
                     music.src = `audio/${this.currentUserData.username}.mp3`;
                     music.load();
-                    music.play().catch(err => console.log('Autoplay bloqueado o error de audio:', err));
+                    music.play().catch(() => {});
                 }
 
-                // Notificar descifrado con éxito
-                const subject = `CTF: ¡${this.currentUserData.username} ha descifrado su mensaje!`;
-                const bodyContent = `Hola Ismael,\n\nTu amigo/a ${this.currentUserData.username} ha superado el reto y ha descifrado su mensaje secreto con éxito.\n\nClave utilizada: ${inputKey}\n\n---\nEnviado automáticamente desde el portal CTF.`;
-                this.sendNotification(subject, bodyContent).catch(err => console.error('Error al notificar:', err));
+                // Notificar
+                const subject = `🎉 ¡${this.currentUserData.username} decodificó su mensaje!`;
+                const bodyContent = `Hola Ismael,\n\n${this.currentUserData.username} ha superado el reto y decodificó su mensaje con éxito.\n\nClave: ${inputKey}\n\n---\nDesde el portal ISMAEL'S LAST MISSION`;
+                this.sendNotification(subject, bodyContent).catch(() => {});
 
                 this.startPrankCountdown();
             } else {
-                // ERROR DE CLAVE
                 this.showFinalDecryptionError();
             }
         } catch (e) {
@@ -312,20 +367,16 @@ class CTFGame {
         }
     }
 
-    // Iniciar el temporizador de la broma de autodestrucción
+    // Contador de broma
     startPrankCountdown() {
         this.successOverlay.classList.add('visible');
         
-        // Resetear visibilidad por defecto
         this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
-        this.successTitle.style.color = 'var(--neon-green)';
-        this.successTitle.style.textShadow = '0 0 10px rgba(57, 255, 20, 0.4)';
-        
+        this.successTitle.style.color = '#ec4899';
         this.countdownHeader.style.display = 'block';
         this.decryptedMessageDiv.style.display = 'block';
         this.decryptedMessageDiv.style.filter = 'none';
         this.decryptedMessageDiv.style.opacity = '1';
-        
         this.prankContainer.style.display = 'none';
         this.prankAcceptBtn.style.display = 'none';
         this.resetBtn.style.display = 'none';
@@ -344,70 +395,64 @@ class CTFGame {
             }
             this.timerSeconds.textContent = timeLeft.toFixed(1);
 
-            // Efecto visual: ir difuminando y desvaneciendo el texto
-            const blurVal = Math.max(0, (7.0 - timeLeft) * 2.5); // De 0px a 17.5px de difuminado
+            const blurVal = Math.max(0, (7.0 - timeLeft) * 2.5);
             const opacityVal = Math.max(0.05, timeLeft / 7.0);
             this.decryptedMessageDiv.style.filter = `blur(${blurVal}px)`;
             this.decryptedMessageDiv.style.opacity = opacityVal;
         }, 100);
     }
 
-    // El tiempo expira: se censura el mensaje y se muestran instrucciones difíciles
+    // Se expira el tiempo
     triggerPrankMeltdown() {
         this.successTitle.textContent = '❌ SISTEMA BLOQUEADO ❌';
-        this.successTitle.style.color = 'var(--neon-pink)';
-        this.successTitle.style.textShadow = '0 0 10px rgba(255, 0, 127, 0.5)';
+        this.successTitle.style.color = '#ff1493';
 
         this.countdownHeader.style.display = 'none';
         this.decryptedMessageDiv.style.display = 'none';
 
-        // Mostrar instrucciones graciosas y botón de aceptar reto
         this.prankContainer.style.display = 'block';
         this.prankAcceptBtn.style.display = 'block';
     }
 
-    // El usuario acepta el reto: se le dice que es broma y se restaura el mensaje final
+    // Aceptar la broma
     handlePrankAccept() {
-        this.showCyberAlert('😜 ¡Es broma!<br><br>Reto de recuperación aceptado (y las rondas de cervezas/comidas quedan registradas en el sistema). Acceso de lectura restaurado.', () => {
+        this.showCyberAlert('😜 ¡ES BROMA!<br><br>Has aceptado el reto. Las cervezas/comidas quedan registradas en el sistema. Acceso restaurado.', () => {
             this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
-            this.successTitle.style.color = 'var(--neon-green)';
-            this.successTitle.style.textShadow = '0 0 10px rgba(57, 255, 20, 0.4)';
+            this.successTitle.style.color = '#ec4899';
 
-            // Esconder broma
             this.prankContainer.style.display = 'none';
             this.prankAcceptBtn.style.display = 'none';
 
-            // Mostrar el mensaje original de forma legible
             this.decryptedMessageDiv.style.display = 'block';
             this.decryptedMessageDiv.style.filter = 'none';
             this.decryptedMessageDiv.style.opacity = '1';
 
-            // Mostrar el formulario de respuesta
             this.replyContainer.style.display = 'flex';
             this.replyText.disabled = false;
             this.replySendBtn.style.display = 'block';
             this.replySendBtn.disabled = false;
-            this.replySendBtn.textContent = 'Enviar Respuesta';
-            this.replyStatusMsg.textContent = '';
 
-            // Mostrar el botón de Cerrar Sesión real
             this.resetBtn.style.display = 'block';
         });
     }
 
+    // Error de clave
     showFinalDecryptionError() {
-        this.finalKeyInput.style.borderColor = 'var(--neon-pink)';
+        this.finalKeyInput.style.borderColor = '#ff1493';
         this.finalKeyInput.value = '';
-        this.finalKeyInput.setAttribute('placeholder', 'CLAVE INCORRECTA - INTENTA DE NUEVO');
+        this.finalKeyInput.setAttribute('placeholder', '❌ CLAVE INCORRECTA - INTENTA DE NUEVO');
+        
+        this.finalKeyInput.classList.add('glitch');
         
         setTimeout(() => {
             this.finalKeyInput.style.borderColor = 'var(--border-color)';
-            this.finalKeyInput.setAttribute('placeholder', 'Introduce la Clave Final...');
+            this.finalKeyInput.setAttribute('placeholder', 'Introduce la clave encontrada...');
+            this.finalKeyInput.classList.remove('glitch');
         }, 2500);
     }
 
-    // Utilidad para imprimir líneas en la terminal
-    printLine(text, color = '#bbf7d0') {
+    // Utilidades
+    printLine(text, color = '#a8e6b8') {
         const line = document.createElement('div');
         line.className = 'terminal-line';
         line.style.color = color;
@@ -415,7 +460,7 @@ class CTFGame {
         this.terminalOutput.appendChild(line);
     }
 
-    // Modal de Alerta Cyberpunk Personalizado
+    // Modal
     showCyberAlert(message, callback) {
         const alertEl = document.getElementById('cyber-alert');
         const alertMsg = document.getElementById('cyber-alert-msg');
@@ -424,12 +469,10 @@ class CTFGame {
         alertMsg.innerHTML = message;
         alertEl.style.display = 'flex';
         
-        // Efecto fade-in
         setTimeout(() => {
             alertEl.style.opacity = '1';
         }, 10);
         
-        // Clonar botón para eliminar listeners antiguos
         const newBtn = alertBtn.cloneNode(true);
         alertBtn.parentNode.replaceChild(newBtn, alertBtn);
         
@@ -442,41 +485,41 @@ class CTFGame {
         });
     }
 
-    // Gestionar el envío de la respuesta
+    // Enviar respuesta
     handleReplySend() {
         const text = this.replyText.value.trim();
         if (!text) {
             this.replyStatusMsg.textContent = '❌ El mensaje no puede estar vacío.';
-            this.replyStatusMsg.style.color = 'var(--neon-pink)';
+            this.replyStatusMsg.style.color = '#ff1493';
             return;
         }
 
         this.replySendBtn.disabled = true;
         this.replySendBtn.textContent = 'Enviando...';
-        this.replyStatusMsg.textContent = 'Enviando respuesta a Ismael...';
-        this.replyStatusMsg.style.color = 'var(--neon-cyan)';
+        this.replyStatusMsg.textContent = 'Enviando respuesta...';
+        this.replyStatusMsg.style.color = '#a855f7';
 
-        const subject = `CTF: ¡${this.currentUserData.username} ha respondido!`;
-        const bodyContent = `Hola Ismael,\n\nTu amigo/a ${this.currentUserData.username} ha descifrado su mensaje y te ha dejado la siguiente respuesta:\n\n"${text}"\n\n---\nEnviado automáticamente desde el portal CTF.`;
+        const subject = `💬 ${this.currentUserData.username} te dejó una respuesta`;
+        const bodyContent = `Hola Ismael,\n\n${this.currentUserData.username} te dejó este mensaje:\n\n"${text}"\n\n---\nISMAEL'S LAST MISSION`;
 
         this.sendNotification(subject, bodyContent)
             .then(() => {
-                this.replyStatusMsg.textContent = '✅ ¡Respuesta enviada con éxito! Gracias.';
-                this.replyStatusMsg.style.color = 'var(--neon-green)';
+                this.replyStatusMsg.textContent = '✅ ¡Respuesta enviada con éxito!';
+                this.replyStatusMsg.style.color = '#a855f7';
                 this.replyText.value = '';
                 this.replyText.disabled = true;
                 this.replySendBtn.style.display = 'none';
             })
             .catch((error) => {
                 console.error(error);
-                this.replyStatusMsg.textContent = '❌ Error al enviar. Inténtalo de nuevo.';
-                this.replyStatusMsg.style.color = 'var(--neon-pink)';
+                this.replyStatusMsg.textContent = '❌ Error al enviar.';
+                this.replyStatusMsg.style.color = '#ff1493';
                 this.replySendBtn.disabled = false;
-                this.replySendBtn.textContent = 'Enviar Respuesta';
+                this.replySendBtn.textContent = '📤 Enviar Respuesta';
             });
     }
 
-    // Enviar notificación a través de FormSubmit
+    // Enviar notificación
     sendNotification(subject, bodyContent) {
         return fetch(`https://formsubmit.co/ajax/${this.adminEmail}`, {
             method: "POST",
@@ -490,15 +533,13 @@ class CTFGame {
             })
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Network response error');
             return response.json();
         });
     }
 }
 
-// Iniciar aplicación
+// Inicializar cuando carga el DOM
 document.addEventListener('DOMContentLoaded', () => {
-    new CTFGame();
+    new ISMAELSLastMission();
 });
