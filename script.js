@@ -4,54 +4,17 @@
 
 class ISMAELSLastMission {
     constructor() {
-        // Base de datos de juegos
-        this.gameData = {
-            'JULIA-PART1-98241': {
-                username: 'julia',
-                role: '🧠 Analista de Malware',
-                files: {
-                    'readme.txt': '🔍 Analiza el archivo log de conexiones para buscar fugas de credenciales de sesión.',
-                    'connections.log': `[INFO] Connection established from IP 192.168.1.45\n[INFO] User julia logged in successfully.\n[WARNING] Session hijacked. AuthToken: Q2xhdmUgZmluYWw6IE11Y2hhc190YXJkZXNfQnVlbmFzX2dyYWNpYXNfaGFoYWhh\n[ALERT] Connection terminated. System logged.\n[EASTER_EGG] Secret message: "Te extrañarás de mis preguntas en clase, ¿verdad?"`,
-                    '.hidden_file': '🙈 Este archivo está oculto. Solo se ve con "ls -a"'
-                },
-                finalKey: 'Muchas_tardes_Buenas_gracias_hahaha',
-                secretMessage: '¡Hola Julia! 👋 Te acordaste del peor dolor de cabeza del máster (¡esos bugs sin resolver!). Espero que se diviertan descifrando esto. ¡Nos vemos a la vuelta, reina de los análisis de malware! 🏆\n\nNo olvides que eres increíblemente inteligente. ¡Lo lograste todo con una sonrisa!'
-            },
-            'ALEJANDRO-MARIA-PART1-35791': {
-                username: 'alejandro_maria',
-                role: '🔐 Especialistas en Criptografía',
-                files: {
-                    'readme.txt': '🔍 Hemos interceptado una comunicación secreta protegida por cifrado clásico (ROT13). Descífrala.',
-                    'traffic.enc': 'Fhcbatb_dhr_yn_ivqn_dhrefvn_dhr_abf_rapbagezbf',
-                    'hint.txt': '💡 Pista: Usa un descodificador ROT13 online si lo necesitas.',
-                    '.config': '⚙️ [Alejandro] Pirate esto en 5 segundos. [María] Auditaré la operación.'
-                },
-                finalKey: 'Supongo_que_la_vida_queria_que_nos_encontremos',
-                secretMessage: '¡Alejandro y María! 👫 Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba cada paso de la operación. ¡Son unos CRACKS absolutos, gracias por todo!\n\nAlejandro, tu velocidad es brutal. María, tu precisión impeccable. Juntos son prácticamente imparables. 🚀\n\n¡Que disfruten Bolivia (bueno, yo el que me voy 😅) y las futuras aventuras de criptografía!'
-            },
-            'ARIANA-PART1-24680': {
-                username: 'ariana',
-                role: '📊 Auditora de Base de Datos',
-                files: {
-                    'task.list': '1️⃣ Terminar TFM (¡casi ahí!)\n2️⃣ Revisar backup.sql para variables residuales\n3️⃣ Descansar cuando todo esto termine 😴',
-                    'backup.sql': `CREATE TABLE secrets (\n    id INT PRIMARY KEY,\n    username VARCHAR(50),\n    final_key VARCHAR(100)\n);\n\nINSERT INTO secrets VALUES (1, 'ariana', 'No_tiene_tiempo_por_hacer_el_TFM');\n-- ¡Encontraste el secreto! 🎉`,
-                    '.notes': '📝 "Ariana sin tiempo pero siempre aquí para ayudar. Leyenda absoluta."'
-                },
-                finalKey: 'No_tiene_tiempo_por_hacer_el_TFM',
-                secretMessage: '¡Ariana! 💪 Sé perfectamente que no tenías tiempo para mis juegos de ciberseguridad. PERO ADMÍTELO, ¡fue un poco divertido resolverlo! 😏\n\nTu dedicación al TFM es legendaria. Tu capacidad de hacer mil cosas a la vez es sobrehumana. Disfruta estas semanas sin hacer nada más que respirar.\n\n¡Te lo mereces, auditora de bases de datos más ocupada del máster! 👑'
-            },
-            'MARTA-PART1-13579': {
-                username: 'marta',
-                role: '⚙️ Ingeniera de DevSecOps',
-                files: {
-                    'readme.txt': '🔑 El admin dejó las variables de entorno en .env. ¡Búscalas con comandos avanzados de listado!',
-                    '.env': `DATABASE_PASSWORD=P@ssw0rd123\nAPI_KEY=sk_live_12345678\nFINAL_KEY=La_que_te_lee_la_mente_con_sus_ojos_bonitos\nMARTA_SKILL_LEVEL=9001 (¡Rompió el entorno!)`,
-                    'LEAKED_DATABASE.txt': '⚠️ RIESGO CRÍTICO: Variables de entorno en texto plano. ¡Marta, arregla esto! 😨'
-                },
-                finalKey: 'La_que_te_lee_la_mente_con_sus_ojos_bonitos',
-                secretMessage: '¡Marta! 🎯 Lograste romper LITERALMENTE el entorno durante el máster (y lo arreglaste después). Eso merece respeto absoluto.\n\nTe dejo un abrazo de 2000 km desde Bolivia. Cuídate mucho durante estos meses. No dejen de ser geniales, y cuando vuelva, quiero que sigas rompiendo cosas... en el buen sentido. 🤗\n\n¡Eres la DevSecOps más caótica y brillante del grupo! 💥'
-            }
+        // Base de datos de juegos cifrada (CryptoJS AES + SHA-256)
+        // Ningún dato sensible (usuarios, roles, archivos, claves o mensajes) está visible en texto plano en el F12.
+        this.encryptedDB = {
+            "5cd7c4fe6f74cf06f4a5534608b899623e63fcd8136c7d6ffc4a0d5ac23e1c06": "U2FsdGVkX1/+jcN3Fr/04IyglJU06gly2zWzERDYArH6mxeWhm/Iq540hBVwFxoitIyJGYoNcIBGaavDiA57MwvjCYSvRAGzSp/fI3yIv8VQuVUVDAzVuqqmFBNFDu5SYGd2wlLrsWA2ZUvlET2xrG+C4FURN/KZmh0W5KLvOmbjLkpPNUA2p/Us+SciMb+HQclupvDJyTM+GttCM1C71UyU395zpYhOfIA4GARoc2uShsNX/TWNXdCtkUA/8jGM20bkkg2sbeUdT294PhTw3SajmLc7K9v8L44IjQCNyAls9BHBysC7WgO8o6Qlu3HskKuAagxv/fLhz19AIR4Akb9wGvZvIVyttRCkaBfEysjzczgZaMYpOLr/ZushNwuJItqlRxCYBTu2zI8SPbbVrZ798JBQAe4rgSHLcWp6w5XBG+iBQVZa9sOOEQno+VU1SJ7TRWXcV3FGk6Yp8MfHh7rtcVfj88Xawz3m4v1UC0RTol2iFoXdQQowmXqPiQHJxxDwbRcswWv4uE5zVlwVxpjzD7SVxkXunN0HZp/XmNIiyaO5bXtg/gxvwJzKfBbwjcAdu1vCfSXXRvo3VqMxy71G8/9xcBn8U3qKAGozRIP6JLTXIEYWkNA2Ff1IDRGqv5oFKe8/O1byWQEfGpr5t25lgx+iOMT57uhFCw+M9KamiD0I/agxP5SKAI0blJbb7b/Q3gXBSxXvdhKAfzVSllv5dPx2+ErBt0bXEjdclhGOj61CnO327qhHH2zq6UY5nk6pWzgJ5ESg23y6WS7gMW3aIQ2+kWV0pnVdAuHbtncjxo4j91Ww7NcLJ1hBMU/7560IfFMn/9X6diFbQhIiS2cRExnfPLDIXbO1B+4RecSpvcoGbjEJe7q0MV5X4kqUSN/tKtsIO/a7hlUJf6abiAiQ4caPc5hH5YGhs63rbkWjR+sVz+jyo/TuOISdG5d73vqdXYvcKeTUzZ0C5Nt5LJLJqXInShH7PAHka6SpjtpbdXXuFajjlRPTEXflwlXqkyYk3Yr86OGV9l1gszAEO62MxogspECKR/BXn7w4xiToLRpxzuHa9i48IdJk0EW8gD3HZIGRLK/gLnpBoY2XMcdcET/zKH8nWzbn/MSWXDrEf/YRwXDY0rh8IKb2dlmG9preh0oovHD3F3Qr7DXrievuE0DHnSv01vfNXYp+B0XGIiP8un4FPoNZ3+x+0BRRU40Je6oety/1onZSH+HC0iftl8xwtOwRgZZAZjH7OMkQuApWX7G6J9HunvHf4g3KHpZeUsYJvkWm7SGStlqjJZJEbrs/u2MHBUV4oeisNSg+fC2F8EbgIjFXgTkaxc1uZPQoSQHrHUhAQbgfEIrefc0WexTiQmtChTOIXCUDME8KzxrsF5e5apxV/XGUaHXJYbjwzIL4aox8W0Rp7FJI+A==",
+            "403a928582a6b3b0324e91d1805777ef96d49b7cd15607f285d673270d553412": "U2FsdGVkX19iK6Xn5qSm7qfHMfHUkzunMa+MXlC36oMyhVlAfVcfAKiYfsZzF3NO8SAdCfUI2cHu9mL9g+R2Ci6VMcDmFGSZ5+bbyyJbZJsSkxewyYJI2jiT93CziTF0RNDYyihWhadY7hiuXBwbhkRkLjJliy6/N2P/Rv1Y71CqbhsO3U3CRPO6pzOVhLW6wqVisq02QJGLS3Zp3IgOsfA4iitYQBdwDUblHLDLED5/CmRRNDYZc8mgnfQH7D0RjR1UYV8RbH1nogmxD7qb5CtnY0eP6WzexJUY3GUVXz5w4PopXT7AIQ/IiBtvpFWmUBDLMgdHlJ9tjIK6mL3lnex/uS0EROaz7cAg0YPK6ijotN77KakRABBhNwhtCIBpYuVu3Pyo9TSVP0ULNTbGcWZoCgvPR+cAfCBkRchl9Gfd16K252HZU/lKj9SMo35qaqB5XPH5EnYc3xOCkpbk+8zlDlEn6UxGmCY+guTBMxOJy+77N3oILclzC5KH+4wkVTatPGGNvFfq519GKt503Ut1YPP6d+7z/wJGO1S5PZpsNb6t8eottSQgVNbj68jFOx/aaQTkYXBbBK5EfVDNE1VcCX3NvoLJ56OsYR9LIw4kev23hDyrj7lr3CjIZliPzVxk5Hi2nhN26y5MoXuTJ/HWxN/M7qqLMzAl1NnK4RFU6GF61H7xT0klVbaYAade1PCbB8fi9b/I6XSitteOrtz6GppwaZRZjgQC+GRt/O1gtfMBT3kEhKqybJBsUBAPALeKdj6cC5beg9/Nc/ZEcwUwIBlD/emA+FuwSIhceYr1saQcv3l8SAauImrW0DVzeTnyWpd7vprcq9zg23r+4mTGelbgeHvPdiH4rwCt9ygzWYazYLkfZ8gj6XpIgHvwgXdAXqztdalwDjPuXsULswlVEdQMI4pRb/zJmDGk2iWtuJDGA/Tai4hRbafhBsWrmdwI8C+jqoa5FP95Jor1K+O1fXCEYJ/OkaJB1zMSkXCY4lb+V+kIYdksLGZPGnBZm9m1GZ56bIaL4hAfBx6mefMsvbQNJBE395QgLA41Or14NeKkfQowCl1+eqpaN+rk1RvGpfYtG6wtj/6MSPFpNfeV/eo3EFsSL4wOHMpHMdkZtSlZsZLZmTrbX81ajZpNcm3s2oV7dKqWy5BU1yPLTIu1d1uKem4GK0EBZx0qBo3GPiJIx/V6viktxj17nIr8atJ/sjKqITOb7W/n8iOJB1ZUwNXf2o007WF4KxqQ6sAU2f5pV/ngtn7buMFz+PcoZhdU9a3YLzyZCR7LidftDabtUXBXRR1oUe9GlmsWSoB9naKxbNvV82QPXHUCJMCq7/zaZ6ebe3givuLGDMHfSXqd8wXFDSnmKP+HpkkQvWyIqautJiVSiyg92G1OelOb",
+            "9880a11702a0fdd064154b17df6eb0e07b7364968a2c86197b51a7328dd53c41": "U2FsdGVkX18A1yLdL49y4MDxrJPYFzueXbNNUIesNkG+7kngZ0HC0p92BQOEDvt80mECrv0oxgDvLATTnm2t5zbOw+IhKWN+bhGpw5UxzlDRpjaQH6dYHcUkHh+KyjkpyM8dVh76TzIUd3ekLFh0yQaBEvopMKtGxO+QdHpTWZloTn966Xn8cOHfNdWTC4UHVtxnDjN1O9q/Mtfh+TDsNe84+KUHJTruYqMSfXu+Prx6QJhvxDr5rqtGNU67ScV15mGKTz7z+i4NXEBxdecgmkQdLxFX6d/hroNWRm4zAMtcOoHhR4WZdtI0wsv4alznGhUR0Gu5/5F+8CEWwdqsdJUF9WGTLhY7fvvFCfyqc9fiCFO2mMbu7zLeqGfD2Xzg7e1pUXglhoAm8bngzr9YUXslqniWZPozCmHvJyVIUtAUJcGAVN0ZAJSb2gOk9Yh2cs/eH9EHbfMV5huWs4D5sPxYOv1xH0D08fq7ETQ2mskJzibrPmOyqImoqL672hT3qYB3eEUYPe30EtQHF775aeIfhXD0tCHT/Kdnec9UPGx91Q4tC6whAybqa360Ffx+g2pCsnuecINS56VC3zKGPJIIkM1RgBaL0dcYkDFnGOW42iqmtcx9Xksr+GKspXA0PtfNo0WH2c8b49j/lms6d458hnyHhG9bvcG6JAiEUs8VtPYBmIxcLIeCM2Wr8cywbOS7AgMh8gmJx/SyXNY1hi BRJMB5EQOtl4XrAIBXSom00JHVTqAplQNZZzy9pt9uvQZnB9Sad5F2YadGzrqLErczLsNna9EHA57YC5Ony5LAsFdasuggLnzYLpZhideoSMJNwMVaDubcpb1ODmpKy5SeI2HFWM7yfDZ5VUkpkUXyf9MfxhPU/QvZf5wHWK5TxnSpzi/ZMtL7auXSwYcCoUHAqjMb2ZlipmslAKPVify/um2BkatpdirkrIZDB/YZ1gGP/rWv+9USbrw2oe491QNB1ohYcqW67pkIkklDZR958T5/3oEjnfFpJJIQQ/ffKY2155Njg/0o1YyuRLfZUmty7wlnbdgewhnBa510fwOOzYRe1Ck4GnS1xXOmIBcUl4kTPyfz//AHLJ/RbW1y4kFhpGYzTnItJ1pIg7MjPh3jS7ICexuL+kseLJD1qosBRk7JFuqBBCxQgi7bbDD2FcUPp4+VmcYcB2RoytbFQeHzSjLAN+lL1Ppd3N0jMJ2tAU+VDI9j+Nbz5uAFlpO2XZVOgNx/Iwfsissy7mQ193bxA688ZUkZILkIl+3+8TboZ3KaCoZB2OpQ0R1ajoJdLhkDM3UaX1E13zx2+WppURE8FN/N5KUo/8RlbPkzfE6B0E2RmSk+J3WKWiYgYLsEOmY8M+NjRTx2wY9NSupL9uWEdByrVq6btE4ABTlAEc17Tn/DumZskGPADRk1zHR5YNdxZznjXOYLY85y9d+bqAqlPy/B7Ilbns4m/pm3oDTnbTOGL11S56LXJMbGGpY/bSfaHbzQJ3vrv5j08xBqL54=",
+            "b3ca34e44d8e15e5f4001320329d6060ce6bf272895ee70ae5e395c3f607e5c4": "U2FsdGVkX1+CfnOxvVn6gbqZdWDUY5CDiYsMfcp/lAVHHoi965o6qWLy8eIFxo2i0+K9nCl/5/Tg2wKDX/kQ/X/UseLvIauqY3oJzFy6DNzMv4iJQzYIlg0kM6rRwVgq7i5B5G/wBI196KvYM0Js15djcUMMbBB2XMLYHmqWNDL4qHv0PFnpYk0LrzPmjD3GZYbE4PWkMC01ubZHbJeC+WjdjvB/EfPN6dsOjcioL9aCdJdbx5gCWxqcBRsRp140eFUYmezZPVKB2xJD4A+/ygxuDV71OJGnUbsZNUNQGxmUKHwmiAvE3sDJDQ4Aqu2wVzQCxodO40bpmh8g7qCMQppv9jKB4P+1EAdLs9vdBHLDimMgjbGGUuTlVC66HONJt7kqdmHobsMaTDNFfcpOnASDIDR15vTdr4rN0PujJgb9CJoU5hy/OLHqlUC4Pk0Xn7vR+lHDSnfV0vALvgv+e5zustZ11lWKeEiaVc3iFpXiyNatV2Yih/n8oo2TL1lDq/tJLPMF47PjzZ9tohvJeg5glsFjqezxh8oysbTphTV3im6QmAGPbpMxfG05yIWNIG6WjPZ6DgrUbmFfX4afoyjNi3Iwf/X76WOzxqfJsp6Jh2CtxEGBLkiNwQapJEv2MVOOA1zITlfrOBdPGOKkZ945NkezkatwAFuYVnY6ew4JCsDjnx6gRkO+L37XidUKJkS/guRNtJ1ZWrGZMICAV5PF7o0J7WYD9d0gUyROqURPFL6Dd3P9ThMCfZ9R/6yZn8m0enF/qfoDg/fL7WTrxxmTeXniMHorVjkYkInJ6YXwIRrdYysesV5Y4BxiZU1yWoSxb8RY1kI+dOAMFsqQwWHSOT1FRrMeScQhZnqK0uM5aCmsEAceZiGaSIdGbZ9EodPhOK9B7GU/x+fMorXfn0Ya18c09bi4Od3xvdrcgvTUv4ReFb+jMPB5i39n3qvwfaPNMaxV4X5m/aKAnPWIChTXm8OrwMS+TIrD9GGQKq5yYJfDNsuts/imXePpqi9L4Wr9Vm0U1gAxawD4ToQS4+f9yP6uxYZtttnJL1Ot3TFpcDH+VrDwHhVBIWs1ABrCBZYa1yVSeBbbVnCXV7ObGoapDv5i2TKSilQL2/rN+jPQqjLmVhoMgql1MQML49g12pN7HiCVjSHrEk4f03SbhQ7JRDafCyxHFyBCEiOCmjL/FQZtsiRBoIyUikbnosdIDPOGbOxaZmYwPPorEozXjPCbquSNrUMcRezmb/nKntPGvvieR4wbxglf6a8o6cX0/v0ZJmQxbKWHhYAQgRS0fBZH8/K41uk+d6m7Bz9vDe2pFzIvnF0qtDqcm/6s7wcxfSIX8FuhsRVaLzIctIkeoMSvUGfp2UCiO3b1xUxGEUrUKlWBV65TtXCp9ZWE49A"
         };
+
+        // Nombres de usuarios válidos para inicializar el contador
+        this.usernamesList = ['julia', 'marta', 'ariana', 'alejandro_maria'];
 
         // Mensajes chistosos para errores
         this.funnyErrors = [
@@ -78,7 +41,6 @@ class ISMAELSLastMission {
 
         // Estado del juego
         this.currentUserData = null;
-        this.encryptedMessages = {};
         this.terminalCommands = [];
         this.commandIndex = -1;
 
@@ -138,7 +100,6 @@ class ISMAELSLastMission {
         this.boliviaArrivalTime = new Date('2026-07-06T04:45:00+02:00').getTime();
         this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas de prórroga
 
-        this.initializeEncryption();
         this.setupEventListeners();
         this.detectIdentifiedUser();
 
@@ -152,17 +113,7 @@ class ISMAELSLastMission {
         document.addEventListener('keydown', startMusicOnInteraction);
     }
 
-    // Inicializar encriptación
-    initializeEncryption() {
-        if (typeof CryptoJS === 'undefined') {
-            console.error("❌ CryptoJS no está cargado!");
-            return;
-        }
-        for (const [accessKey, data] of Object.entries(this.gameData)) {
-            const ciphertext = CryptoJS.AES.encrypt(data.secretMessage, data.finalKey).toString();
-            this.encryptedMessages[data.username] = ciphertext;
-        }
-    }
+    // (Encriptación ahora se realiza de forma estática offline)
 
     // Setup de eventos
     setupEventListeners() {
@@ -217,21 +168,48 @@ class ISMAELSLastMission {
     handleAccessLogin() {
         const inputKey = this.accessInput.value.trim();
         
-        if (this.gameData[inputKey]) {
-            this.currentUserData = this.gameData[inputKey];
-            this.transitionToDashboard();
-        } else {
-            this.gateErrorMsg.textContent = this.funnyErrors[Math.floor(Math.random() * this.funnyErrors.length)];
-            this.gateErrorMsg.style.opacity = '1';
-            this.gateContainer.classList.add('glitch');
-            this.accessInput.style.borderColor = '#ff1493';
-            
-            setTimeout(() => {
-                this.gateErrorMsg.style.opacity = '0';
-                this.accessInput.style.borderColor = 'var(--border-color)';
-                this.gateContainer.classList.remove('glitch');
-            }, 3500);
+        if (typeof CryptoJS === 'undefined') {
+            console.error("❌ CryptoJS no está cargado!");
+            return;
         }
+
+        // Obtener el hash SHA-256 del inputKey
+        const hashedInput = CryptoJS.SHA256(inputKey).toString();
+
+        if (this.encryptedDB[hashedInput]) {
+            const ciphertext = this.encryptedDB[hashedInput];
+            try {
+                // Intentar desencriptar el perfil con la clave ingresada (inputKey)
+                const bytes = CryptoJS.AES.decrypt(ciphertext, inputKey);
+                const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+                
+                if (decryptedText) {
+                    const profile = JSON.parse(decryptedText);
+                    this.currentUserData = {
+                        username: profile.username,
+                        role: profile.role,
+                        files: profile.files,
+                        encryptedSecretMessage: profile.encryptedSecretMessage
+                    };
+                    this.transitionToDashboard();
+                    return;
+                }
+            } catch (e) {
+                console.error("Error al descifrar el perfil:", e);
+            }
+        }
+
+        // Error de login
+        this.gateErrorMsg.textContent = this.funnyErrors[Math.floor(Math.random() * this.funnyErrors.length)];
+        this.gateErrorMsg.style.opacity = '1';
+        this.gateContainer.classList.add('glitch');
+        this.accessInput.style.borderColor = '#ff1493';
+        
+        setTimeout(() => {
+            this.gateErrorMsg.style.opacity = '0';
+            this.accessInput.style.borderColor = 'var(--border-color)';
+            this.gateContainer.classList.remove('glitch');
+        }, 3500);
     }
 
     // Transición al Dashboard
@@ -375,8 +353,7 @@ class ISMAELSLastMission {
             return;
         }
 
-        const username = this.currentUserData.username;
-        const ciphertext = this.encryptedMessages[username];
+        const ciphertext = this.currentUserData.encryptedSecretMessage;
 
         try {
             const bytes = CryptoJS.AES.decrypt(ciphertext, inputKey);
@@ -597,9 +574,8 @@ class ISMAELSLastMission {
         
         if (u) {
             u = u.toLowerCase().trim();
-            const match = Object.values(this.gameData).find(data => data.username === u);
-            if (match) {
-                this.identifiedUser = match.username;
+            if (this.usernamesList.includes(u)) {
+                this.identifiedUser = u;
                 this.initializeTimer();
             }
         }
