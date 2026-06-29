@@ -525,20 +525,31 @@
             text-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
             font-size: 1.1rem;
         }
-        .mute-btn {
-            background: transparent;
-            border: none;
+        .floating-mute-btn {
+            position: fixed;
+            top: 8px;
+            right: 15px;
+            z-index: 250; /* Por encima de todo */
+            background: rgba(15, 8, 28, 0.9);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
-            margin-left: 15px;
-            vertical-align: middle;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: all 0.3s ease;
             outline: none;
         }
-        .mute-btn:hover {
+        .floating-mute-btn:hover {
             transform: scale(1.1);
-            opacity: 0.8;
+            box-shadow: 0 0 18px var(--neon-cyan);
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
         }
 
         /* Ajuste para el body con barra superior */
@@ -664,10 +675,12 @@
 </head>
 <body>
 
+    <!-- Botón de Silencio de Música Flotante -->
+    <button id="music-mute-btn" class="floating-mute-btn" title="Silenciar Música">🔊</button>
+
     <!-- Barra de Temporizador Superior -->
     <div id="global-countdown-bar" class="global-countdown-bar">
         ⏱️ TIEMPO HASTA QUE ISMAEL LLEGUE A BOLIVIA: <span id="top-timer-clock">14:00:00</span>
-        <button id="music-mute-btn" class="mute-btn" title="Silenciar Música">🔊</button>
     </div>
 
     <!-- Overlay de Bienvenida y Activación de Temporizador -->
@@ -839,6 +852,6 @@
 
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.0.9"></script>
+    <script src="script.js?v=1.1.0"></script>
 </body>
 </html>
