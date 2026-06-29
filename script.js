@@ -725,7 +725,7 @@ class ISMAELSLastMission {
         if (bgMusic && bgMusic.paused) {
             bgMusic.src = 'audio/background.mp3';
             bgMusic.load();
-            bgMusic.volume = 0.12; // Volumen suave (12%) para acompañar sin aturdir
+            bgMusic.volume = 0.08; // Volumen muy suave (8%) para acompañar de fondo
             bgMusic.muted = this.isMuted;
             bgMusic.play().catch(err => {
                 console.log('Autoplay suspendido por el navegador, esperando interacción:', err);
