@@ -203,6 +203,15 @@ class ISMAELSLastMission {
         this.profileUser.textContent = this.currentUserData.username.toUpperCase();
         this.profileRole.textContent = this.currentUserData.role;
 
+        // Iniciar reproducción de la música de fondo
+        const bgMusic = document.getElementById('background-music');
+        if (bgMusic) {
+            bgMusic.src = 'audio/background.mp3';
+            bgMusic.load();
+            bgMusic.volume = 0.35; // Volumen moderado para no aturdir
+            bgMusic.play().catch(err => console.log('Autoplay de música de fondo bloqueado:', err));
+        }
+
         setTimeout(() => {
             this.dashboardContainer.classList.add('visible');
             this.terminalInput.focus();
@@ -344,6 +353,12 @@ class ISMAELSLastMission {
             if (decryptedText) {
                 // ÉXITO
                 this.decryptedMessageDiv.textContent = decryptedText;
+
+                // Detener música de fondo
+                const bgMusic = document.getElementById('background-music');
+                if (bgMusic) {
+                    bgMusic.pause();
+                }
 
                 // Audio de victoria
                 const music = document.getElementById('victory-music');
