@@ -548,6 +548,9 @@ class ISMAELSLastMission {
 
     // Enviar notificación
     sendNotification(subject, bodyContent) {
+        console.log(`📧 [CTF] Enviando notificación a ${this.adminEmail}...`);
+        console.log(`   Asunto: ${subject}`);
+
         return fetch(`https://formsubmit.co/ajax/${this.adminEmail}`, {
             method: "POST",
             headers: {
@@ -560,8 +563,17 @@ class ISMAELSLastMission {
             })
         })
         .then(response => {
-            if (!response.ok) throw new Error('Network response error');
+            console.log(`📡 [CTF] FormSubmit HTTP status: ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return response.json();
+        })
+        .then(data => {
+            console.log('✅ [CTF] FormSubmit respuesta OK:', data);
+            return data;
+        })
+        .catch(err => {
+            console.error('❌ [CTF] Error al enviar notificación:', err.message);
+            throw err;
         });
     }
 
