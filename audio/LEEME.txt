@@ -5,7 +5,9 @@ El nombre del archivo debe coincidir exactamente con el nombre de usuario de cad
 2. Para Marta: marta.mp3
 3. Para Ariana: ariana.mp3
 4. Para Alejandro y María: alejandro_maria.mp3
+5. Para la música de fondo del juego: background.mp3
 
 Recomendaciones para los archivos de audio:
 - Formato: MP3 (.mp3)
 - Calidad recomendada: 96 kbps o 128 kbps (para que cada archivo sea liviano, idealmente entre 500 KB y 1.5 MB). Esto asegura que cargue rápido en la web y no consuma muchos datos móviles de tus amigos.
+- Nota para la música de fondo: Dado que sonará de forma continua mientras resuelven el juego, te sugerimos utilizar una melodía o instrumental estilo Synthwave, Cyberpunk o Retrowave que no sea muy estridente para no distraerles.
