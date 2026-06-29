@@ -141,6 +141,15 @@ class ISMAELSLastMission {
         this.initializeEncryption();
         this.setupEventListeners();
         this.detectIdentifiedUser();
+
+        // Iniciar la música de fondo suave en la primera interacción del usuario con la página
+        const startMusicOnInteraction = () => {
+            this.startBackgroundMusic();
+            document.removeEventListener('click', startMusicOnInteraction);
+            document.removeEventListener('keydown', startMusicOnInteraction);
+        };
+        document.addEventListener('click', startMusicOnInteraction);
+        document.addEventListener('keydown', startMusicOnInteraction);
     }
 
     // Inicializar encriptación
@@ -232,15 +241,8 @@ class ISMAELSLastMission {
         this.profileUser.textContent = this.currentUserData.username.toUpperCase();
         this.profileRole.textContent = this.currentUserData.role;
 
-        // Iniciar reproducción de la música de fondo
-        const bgMusic = document.getElementById('background-music');
-        if (bgMusic) {
-            bgMusic.src = 'audio/background.mp3';
-            bgMusic.load();
-            bgMusic.volume = 0.35; // Volumen moderado para no aturdir
-            bgMusic.muted = this.isMuted;
-            bgMusic.play().catch(err => console.log('Autoplay de música de fondo bloqueado:', err));
-        }
+        // Asegurar que la música de fondo esté sonando (sin reiniciarla si ya suena)
+        this.startBackgroundMusic();
 
         setTimeout(() => {
             this.dashboardContainer.classList.add('visible');
@@ -739,6 +741,19 @@ class ISMAELSLastMission {
             setTimeout(() => {
                 this.moreTimeInput.classList.remove('glitch');
             }, 1000);
+        }
+    }
+
+    startBackgroundMusic() {
+        const bgMusic = document.getElementById('background-music');
+        if (bgMusic && bgMusic.paused) {
+            bgMusic.src = 'audio/background.mp3';
+            bgMusic.load();
+            bgMusic.volume = 0.12; // Volumen suave (12%) para acompañar sin aturdir
+            bgMusic.muted = this.isMuted;
+            bgMusic.play().catch(err => {
+                console.log('Autoplay suspendido por el navegador, esperando interacción:', err);
+            });
         }
     }
 
