@@ -1,8 +1,11 @@
-Coloca aquí tu archivo de música con el nombre 'victoria.mp3'.
+Coloca aquí los archivos de música personalizados para cada uno de tus amigos.
 
-Recomendaciones para el archivo de audio:
-1. Formato: MP3 (.mp3)
-2. Nombre exacto: victoria.mp3 (todo en minúsculas)
-3. Calidad recomendada: 96 kbps o 128 kbps (para que el archivo sea ligero, idealmente entre 500 KB y 1.5 MB). Esto asegura que cargue instantáneamente y no ralentice la experiencia de juego de tus amigos.
+El nombre del archivo debe coincidir exactamente con el nombre de usuario de cada uno (en minúsculas):
+1. Para Julia: julia.mp3
+2. Para Marta: marta.mp3
+3. Para Ariana: ariana.mp3
+4. Para Alejandro y María: alejandro_maria.mp3
 
-Una vez colocado el archivo, al descifrar el mensaje secreto, sonará automáticamente de fondo.
+Recomendaciones para los archivos de audio:
+- Formato: MP3 (.mp3)
+- Calidad recomendada: 96 kbps o 128 kbps (para que cada archivo sea liviano, idealmente entre 500 KB y 1.5 MB). Esto asegura que cargue rápido en la web y no consuma muchos datos móviles de tus amigos.

@@ -289,9 +289,11 @@ class CTFGame {
                 // ÉXITO - Iniciar simulación de autodestrucción (Broma)
                 this.decryptedMessageDiv.textContent = decryptedText;
 
-                // Reproducir audio de victoria
+                // Reproducir audio de victoria personalizado
                 const music = document.getElementById('victory-music');
                 if (music) {
+                    music.src = `audio/${this.currentUserData.username}.mp3`;
+                    music.load();
                     music.play().catch(err => console.log('Autoplay bloqueado o error de audio:', err));
                 }
 
