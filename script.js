@@ -366,11 +366,7 @@ class ISMAELSLastMission {
                 // Marcar como resuelto para detener el temporizador de Bolivia
                 localStorage.setItem('game_solved_' + this.currentUserData.username, 'true');
 
-                // Detener música de fondo (la canción personal arrancará al aceptar el reto)
-                const bgMusic = document.getElementById('background-music');
-                if (bgMusic) {
-                    bgMusic.pause();
-                }
+                // La música de fondo sigue sonando hasta que el usuario pulse CONFIRMAR
 
                 // Notificar
                 const subject = `🎉 ¡${this.currentUserData.username} decodificó su mensaje!`;
@@ -453,7 +449,10 @@ class ISMAELSLastMission {
 
             this.resetBtn.style.display = 'block';
 
-            // Arrancar la canción personal del usuario al aceptar el reto
+            // Parar el fondo e iniciar la canción personal al confirmar
+            const bgMusic = document.getElementById('background-music');
+            if (bgMusic) bgMusic.pause();
+
             const music = document.getElementById('victory-music');
             if (music) {
                 music.src = `audio/${this.currentUserData.username}.mp3`;
