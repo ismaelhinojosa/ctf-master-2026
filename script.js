@@ -133,9 +133,9 @@ class ISMAELSLastMission {
         this.timerIntervalId = null;
         this.isMuted = false;
 
-        // FECHA Y HORA REAL DE LLEGADA A BOLIVIA (Ajusta con tu vuelo real)
-        // Por defecto: 1 de Julio de 2026 a las 15:00:00 (Hora de España / UTC+2)
-        this.boliviaArrivalTime = new Date('2026-07-01T15:00:00+02:00').getTime();
+        // FECHA Y HORA REAL DE LLEGADA A BOLIVIA (Salida de Madrid: 5 de Julio a las 14:45 + 14 horas de viaje)
+        // Aterrizaje en Bolivia: 6 de Julio de 2026 a las 04:45:00 (Hora de España / UTC+2)
+        this.boliviaArrivalTime = new Date('2026-07-06T04:45:00+02:00').getTime();
         this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas de prórroga
 
         this.initializeEncryption();
