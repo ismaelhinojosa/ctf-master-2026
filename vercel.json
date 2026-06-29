@@ -1,15 +1,5 @@
 {
-  "buildCommand": "",
-  "devCommand": "",
-  "installCommand": "",
-  "outputDirectory": ".",
-  "public": true,
-  "env": {},
-  "git": {
-    "deploymentEnabled": {
-      "main": true
-    }
-  },
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/robots.txt",
