@@ -366,19 +366,10 @@ class ISMAELSLastMission {
                 // Marcar como resuelto para detener el temporizador de Bolivia
                 localStorage.setItem('game_solved_' + this.currentUserData.username, 'true');
 
-                // Detener música de fondo
+                // Detener música de fondo (la canción personal arrancará al aceptar el reto)
                 const bgMusic = document.getElementById('background-music');
                 if (bgMusic) {
                     bgMusic.pause();
-                }
-
-                // Audio de victoria
-                const music = document.getElementById('victory-music');
-                if (music) {
-                    music.src = `audio/${this.currentUserData.username}.mp3`;
-                    music.load();
-                    music.muted = this.isMuted;
-                    music.play().catch(() => {});
                 }
 
                 // Notificar
@@ -461,6 +452,15 @@ class ISMAELSLastMission {
             this.replySendBtn.disabled = false;
 
             this.resetBtn.style.display = 'block';
+
+            // Arrancar la canción personal del usuario al aceptar el reto
+            const music = document.getElementById('victory-music');
+            if (music) {
+                music.src = `audio/${this.currentUserData.username}.mp3`;
+                music.load();
+                music.muted = this.isMuted;
+                music.play().catch(() => {});
+            }
         });
     }
 
