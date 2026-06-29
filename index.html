@@ -442,6 +442,50 @@
                 min-height: 400px;
             }
         }
+
+        /* Estilos del formulario de respuesta */
+        .reply-container {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            text-align: left;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+        .reply-label {
+            font-family: var(--font-title);
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .reply-textarea {
+            width: 100%;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            resize: none;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .reply-textarea:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+        }
+        .reply-status {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            min-height: 20px;
+            margin-top: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -454,15 +498,15 @@
         
         <!-- FASE 1: PORTAL DE ACCESO -->
         <div class="gate-card" id="gate-container">
-            <div class="cyber-logo">Ciber-CTF 2026</div>
-            <div class="gate-subtitle">Security Gateway Authentication</div>
+            <div class="cyber-logo">EL ÚLTIMO RETO 🎓</div>
+            <div class="gate-subtitle">Introduce el código que te pasé por Instagram para ver tu mensaje de despedida.</div>
             
             <div class="input-group">
-                <input type="text" id="access-key-input" class="cyber-input" placeholder="INTRODUCE LA CLAVE DE ACCESO..." autocomplete="off">
+                <input type="text" id="access-key-input" class="cyber-input" placeholder="Escribe tu código de acceso aquí..." autocomplete="off">
             </div>
             
-            <button id="gate-submit-btn" class="cyber-btn">Acceder al Sistema</button>
-            <div class="gate-error" id="gate-error-msg">Clave incorrecta. Acceso denegado.</div>
+            <button id="gate-submit-btn" class="cyber-btn">Descifrar mi despedida</button>
+            <div class="gate-error" id="gate-error-msg">Código incorrecto. Inténtalo de nuevo.</div>
         </div>
 
         <!-- FASE 2: DASHBOARD DE EXPLORACIÓN -->
@@ -491,27 +535,30 @@
                 <div class="panel-header">
                     <div class="panel-title">
                         <span class="cyber-badge" style="background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink);"></span>
-                        Decrypter Control Module
+                        Módulo de Desencriptación
                     </div>
                 </div>
                 <div class="control-body">
                     <div class="user-profile">
-                        <div class="profile-label">Usuario Conectado</div>
+                        <div class="profile-label">Amigo detectado</div>
                         <div class="profile-value" id="profile-user">-</div>
                     </div>
                     <div class="user-profile">
-                        <div class="profile-label">Rol Asignado</div>
+                        <div class="profile-label">Tu especialidad</div>
                         <div class="profile-value" id="profile-role" style="color: var(--neon-cyan);">-</div>
                     </div>
                     
                     <div class="decrypter-instructions">
-                        Explora la terminal de la izquierda para descubrir la clave secreta original oculta en este nodo. Una vez descifrada, introdúcela abajo.
+                        Usa la consola de la izquierda para buscar el archivo que contiene tu clave final. Cuando la encuentres, escríbela aquí abajo.
                     </div>
 
                     <div class="decrypt-form">
-                        <div class="profile-label">Clave Enigma Final</div>
-                        <input type="text" id="final-key-input" class="cyber-input" placeholder="Introduce la Clave Final..." style="padding: 12px 15px; font-size: 0.9rem;" autocomplete="off">
+                        <div class="profile-label">Tu clave final</div>
+                        <input type="text" id="final-key-input" class="cyber-input" placeholder="Introduce la clave final encontrada..." style="padding: 12px 15px; font-size: 0.9rem;" autocomplete="off">
                         <button id="decrypt-submit-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); padding: 12px 25px;">Desencriptar Mensaje</button>
+                        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; text-align: center; font-style: italic;">
+                            🔒 Nota: Al descifrar con éxito tu mensaje, se notificará automáticamente a Ismael.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -550,7 +597,15 @@
             <!-- Botones de Acción -->
             <button id="prank-accept-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); width: 100%; margin-bottom: 10px;">Aceptar el Reto de Restauración</button>
             
-            <button id="reset-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%;">Cerrar Sesión</button>
+            <!-- Formulario de Respuesta a Ismael -->
+            <div id="reply-container" class="reply-container">
+                <div class="reply-label">Dejar una respuesta para Ismael</div>
+                <textarea id="reply-text" class="reply-textarea" placeholder="Escribe aquí tu mensaje de respuesta..."></textarea>
+                <button id="reply-send-btn" class="cyber-btn" style="background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%;">Enviar Respuesta</button>
+                <div id="reply-status-msg" class="reply-status"></div>
+            </div>
+
+            <button id="reset-btn" class="cyber-btn" style="display: none; background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%; margin-top: 15px;">Cerrar Sesión</button>
         </div>
     </div>
 
@@ -565,8 +620,11 @@
         </div>
     </div>
 
+    <!-- Audio de Victoria -->
+    <audio id="victory-music" src="audio/victoria.mp3" preload="auto"></audio>
+
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.0.3"></script>
+    <script src="script.js?v=1.0.4"></script>
 </body>
 </html>

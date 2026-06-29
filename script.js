@@ -81,6 +81,15 @@ class CTFGame {
         this.successTitle = document.getElementById('success-title');
         this.timerId = null;
 
+        // Elementos del Buzón de Respuesta
+        this.replyContainer = document.getElementById('reply-container');
+        this.replyText = document.getElementById('reply-text');
+        this.replySendBtn = document.getElementById('reply-send-btn');
+        this.replyStatusMsg = document.getElementById('reply-status-msg');
+        
+        // Email de administración para recibir notificaciones
+        this.adminEmail = 'ismaelhinojosa@hotmail.com';
+
         this.initializeEncryption();
         this.setupEventListeners();
     }
@@ -120,6 +129,9 @@ class CTFGame {
 
         // Aceptar el reto de restauración (Broma)
         this.prankAcceptBtn.addEventListener('click', () => this.handlePrankAccept());
+
+        // Enviar respuesta
+        this.replySendBtn.addEventListener('click', () => this.handleReplySend());
 
         // Reset / Cerrar sesión
         this.resetBtn.addEventListener('click', () => {
@@ -276,6 +288,18 @@ class CTFGame {
             if (decryptedText) {
                 // ÉXITO - Iniciar simulación de autodestrucción (Broma)
                 this.decryptedMessageDiv.textContent = decryptedText;
+
+                // Reproducir audio de victoria
+                const music = document.getElementById('victory-music');
+                if (music) {
+                    music.play().catch(err => console.log('Autoplay bloqueado o error de audio:', err));
+                }
+
+                // Notificar descifrado con éxito
+                const subject = `CTF: ¡${this.currentUserData.username} ha descifrado su mensaje!`;
+                const bodyContent = `Hola Ismael,\n\nTu amigo/a ${this.currentUserData.username} ha superado el reto y ha descifrado su mensaje secreto con éxito.\n\nClave utilizada: ${inputKey}\n\n---\nEnviado automáticamente desde el portal CTF.`;
+                this.sendNotification(subject, bodyContent).catch(err => console.error('Error al notificar:', err));
+
                 this.startPrankCountdown();
             } else {
                 // ERROR DE CLAVE
@@ -356,6 +380,14 @@ class CTFGame {
             this.decryptedMessageDiv.style.filter = 'none';
             this.decryptedMessageDiv.style.opacity = '1';
 
+            // Mostrar el formulario de respuesta
+            this.replyContainer.style.display = 'flex';
+            this.replyText.disabled = false;
+            this.replySendBtn.style.display = 'block';
+            this.replySendBtn.disabled = false;
+            this.replySendBtn.textContent = 'Enviar Respuesta';
+            this.replyStatusMsg.textContent = '';
+
             // Mostrar el botón de Cerrar Sesión real
             this.resetBtn.style.display = 'block';
         });
@@ -405,6 +437,61 @@ class CTFGame {
                 alertEl.style.display = 'none';
                 if (callback) callback();
             }, 300);
+        });
+    }
+
+    // Gestionar el envío de la respuesta
+    handleReplySend() {
+        const text = this.replyText.value.trim();
+        if (!text) {
+            this.replyStatusMsg.textContent = '❌ El mensaje no puede estar vacío.';
+            this.replyStatusMsg.style.color = 'var(--neon-pink)';
+            return;
+        }
+
+        this.replySendBtn.disabled = true;
+        this.replySendBtn.textContent = 'Enviando...';
+        this.replyStatusMsg.textContent = 'Enviando respuesta a Ismael...';
+        this.replyStatusMsg.style.color = 'var(--neon-cyan)';
+
+        const subject = `CTF: ¡${this.currentUserData.username} ha respondido!`;
+        const bodyContent = `Hola Ismael,\n\nTu amigo/a ${this.currentUserData.username} ha descifrado su mensaje y te ha dejado la siguiente respuesta:\n\n"${text}"\n\n---\nEnviado automáticamente desde el portal CTF.`;
+
+        this.sendNotification(subject, bodyContent)
+            .then(() => {
+                this.replyStatusMsg.textContent = '✅ ¡Respuesta enviada con éxito! Gracias.';
+                this.replyStatusMsg.style.color = 'var(--neon-green)';
+                this.replyText.value = '';
+                this.replyText.disabled = true;
+                this.replySendBtn.style.display = 'none';
+            })
+            .catch((error) => {
+                console.error(error);
+                this.replyStatusMsg.textContent = '❌ Error al enviar. Inténtalo de nuevo.';
+                this.replyStatusMsg.style.color = 'var(--neon-pink)';
+                this.replySendBtn.disabled = false;
+                this.replySendBtn.textContent = 'Enviar Respuesta';
+            });
+    }
+
+    // Enviar notificación a través de FormSubmit
+    sendNotification(subject, bodyContent) {
+        return fetch(`https://formsubmit.co/ajax/${this.adminEmail}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                _subject: subject,
+                mensaje: bodyContent
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
         });
     }
 }

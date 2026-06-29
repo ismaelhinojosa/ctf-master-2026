@@ -1,0 +1,8 @@
+Coloca aquí tu archivo de música con el nombre 'victoria.mp3'.
+
+Recomendaciones para el archivo de audio:
+1. Formato: MP3 (.mp3)
+2. Nombre exacto: victoria.mp3 (todo en minúsculas)
+3. Calidad recomendada: 96 kbps o 128 kbps (para que el archivo sea ligero, idealmente entre 500 KB y 1.5 MB). Esto asegura que cargue instantáneamente y no ralentice la experiencia de juego de tus amigos.
+
+Una vez colocado el archivo, al descifrar el mensaje secreto, sonará automáticamente de fondo.
