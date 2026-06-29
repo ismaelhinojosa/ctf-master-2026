@@ -127,11 +127,16 @@ class ISMAELSLastMission {
         this.globalCountdownBar = document.getElementById('global-countdown-bar');
         this.topTimerClock = document.getElementById('top-timer-clock');
 
-        // Estado del temporizador
+        // Estado del temporizador y audio
+        this.musicMuteBtn = document.getElementById('music-mute-btn');
         this.identifiedUser = null;
         this.timerIntervalId = null;
-        this.countdownDuration = 14 * 60 * 60 * 1000; // 14 horas
-        this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas
+        this.isMuted = false;
+
+        // FECHA Y HORA REAL DE LLEGADA A BOLIVIA (Ajusta con tu vuelo real)
+        // Por defecto: 1 de Julio de 2026 a las 15:00:00 (Hora de España / UTC+2)
+        this.boliviaArrivalTime = new Date('2026-07-01T15:00:00+02:00').getTime();
+        this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas de prórroga
 
         this.initializeEncryption();
         this.setupEventListeners();
@@ -177,6 +182,9 @@ class ISMAELSLastMission {
         this.prankAcceptBtn.addEventListener('click', () => this.handlePrankAccept());
         this.replySendBtn.addEventListener('click', () => this.handleReplySend());
         this.resetBtn.addEventListener('click', () => window.location.reload());
+        if (this.musicMuteBtn) {
+            this.musicMuteBtn.addEventListener('click', () => this.toggleMute());
+        }
     }
 
     // Navegación de historial (Arrow Up/Down)
@@ -230,6 +238,7 @@ class ISMAELSLastMission {
             bgMusic.src = 'audio/background.mp3';
             bgMusic.load();
             bgMusic.volume = 0.35; // Volumen moderado para no aturdir
+            bgMusic.muted = this.isMuted;
             bgMusic.play().catch(err => console.log('Autoplay de música de fondo bloqueado:', err));
         }
 
@@ -389,6 +398,7 @@ class ISMAELSLastMission {
                 if (music) {
                     music.src = `audio/${this.currentUserData.username}.mp3`;
                     music.load();
+                    music.muted = this.isMuted;
                     music.play().catch(() => {});
                 }
 
@@ -595,10 +605,10 @@ class ISMAELSLastMission {
 
     initializeTimer() {
         const username = this.identifiedUser;
-        const timerStart = localStorage.getItem('timer_start_' + username);
+        const timerStarted = localStorage.getItem('timer_started_' + username) === 'true';
         
-        if (!timerStart) {
-            // Mostrar modal de bienvenida si no ha iniciado el contador
+        if (!timerStarted) {
+            // Mostrar modal de bienvenida si no ha iniciado el reto
             this.introUsernameSpan.textContent = username.toUpperCase();
             this.timerIntroOverlay.classList.add('visible');
             this.timerStartBtn.addEventListener('click', () => this.startCountdown());
@@ -610,7 +620,7 @@ class ISMAELSLastMission {
 
     startCountdown() {
         const username = this.identifiedUser;
-        localStorage.setItem('timer_start_' + username, Date.now().toString());
+        localStorage.setItem('timer_started_' + username, 'true');
         this.timerIntroOverlay.classList.remove('visible');
         this.startCountdownLoop();
     }
@@ -639,12 +649,8 @@ class ISMAELSLastMission {
             return;
         }
 
-        const timerStart = parseInt(localStorage.getItem('timer_start_' + username), 10);
-        if (!timerStart) return;
-
         const isExtended = localStorage.getItem('timer_extended_' + username) === 'true';
-        const totalDuration = this.countdownDuration + (isExtended ? this.extensionDuration : 0);
-        const expirationTime = timerStart + totalDuration;
+        const expirationTime = this.boliviaArrivalTime + (isExtended ? this.extensionDuration : 0);
         const timeLeft = expirationTime - Date.now();
 
         if (timeLeft <= 0) {
@@ -734,6 +740,18 @@ class ISMAELSLastMission {
                 this.moreTimeInput.classList.remove('glitch');
             }, 1000);
         }
+    }
+
+    toggleMute() {
+        this.isMuted = !this.isMuted;
+        const bgMusic = document.getElementById('background-music');
+        const victoryMusic = document.getElementById('victory-music');
+
+        if (bgMusic) bgMusic.muted = this.isMuted;
+        if (victoryMusic) victoryMusic.muted = this.isMuted;
+
+        this.musicMuteBtn.textContent = this.isMuted ? '🔇' : '🔊';
+        this.musicMuteBtn.setAttribute('title', this.isMuted ? 'Activar Música' : 'Silenciar Música');
     }
 }
 

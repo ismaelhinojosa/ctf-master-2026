@@ -512,6 +512,21 @@
             text-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
             font-size: 1.1rem;
         }
+        .mute-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-left: 15px;
+            vertical-align: middle;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            outline: none;
+        }
+        .mute-btn:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
 
         /* Ajuste para el body con barra superior */
         body.has-top-bar {
@@ -639,6 +654,7 @@
     <!-- Barra de Temporizador Superior -->
     <div id="global-countdown-bar" class="global-countdown-bar">
         ⏱️ TIEMPO HASTA QUE ISMAEL LLEGUE A BOLIVIA: <span id="top-timer-clock">14:00:00</span>
+        <button id="music-mute-btn" class="mute-btn" title="Silenciar Música">🔊</button>
     </div>
 
     <!-- Overlay de Bienvenida y Activación de Temporizador -->
@@ -810,6 +826,6 @@
 
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.0.7"></script>
+    <script src="script.js?v=1.0.8"></script>
 </body>
 </html>
