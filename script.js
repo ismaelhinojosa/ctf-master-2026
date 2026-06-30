@@ -110,6 +110,8 @@ class ISMAELSLastMission {
         };
         document.addEventListener('click', startMusicOnInteraction);
         document.addEventListener('keydown', startMusicOnInteraction);
+
+        this.initializeTimer();
     }
 
     // (Encriptación ahora se realiza de forma estática offline)
@@ -615,12 +617,12 @@ class ISMAELSLastMission {
     }
 
     initializeTimer() {
-        const username = this.identifiedUser;
+        const username = 'global';
         const timerStarted = localStorage.getItem('timer_started_' + username) === 'true';
 
         if (!timerStarted) {
             // Mostrar modal de bienvenida si no ha iniciado el reto
-            this.introUsernameSpan.textContent = username.toUpperCase();
+            
             this.timerIntroOverlay.classList.add('visible');
             this.timerStartBtn.addEventListener('click', () => this.startCountdown());
         } else {
@@ -630,7 +632,7 @@ class ISMAELSLastMission {
     }
 
     startCountdown() {
-        const username = this.identifiedUser;
+        const username = 'global';
         localStorage.setItem('timer_started_' + username, 'true');
         this.timerIntroOverlay.classList.remove('visible');
         this.startCountdownLoop();
@@ -650,7 +652,7 @@ class ISMAELSLastMission {
     }
 
     updateCountdown() {
-        const username = this.identifiedUser;
+        const username = 'global';
 
         if (localStorage.getItem('game_solved_' + username) === 'true') {
             clearInterval(this.timerIntervalId);
@@ -679,7 +681,7 @@ class ISMAELSLastMission {
     }
 
     triggerTimeExpired() {
-        const username = this.identifiedUser;
+        const username = 'global';
         const isExtended = localStorage.getItem('timer_extended_' + username) === 'true';
 
         this.timerExpiredOverlay.classList.add('visible');
@@ -734,7 +736,7 @@ class ISMAELSLastMission {
         const isValid = validPhrases.some(phrase => cleanText.includes(phrase)) || cleanText.includes('por favor') || cleanText.includes('porfavor');
 
         if (isValid) {
-            const username = this.identifiedUser;
+            const username = 'global';
             localStorage.setItem('timer_extended_' + username, 'true');
             this.timerExpiredOverlay.classList.remove('visible');
             this.moreTimeInput.value = '';
