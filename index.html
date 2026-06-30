@@ -425,13 +425,13 @@
         }
 
         .success-card {
-            background: rgba(12, 20, 41, 0.8);
+            background: rgba(10, 10, 15, 0.95);
             border: 2px solid var(--neon-green);
             box-shadow: 0 0 50px rgba(57, 255, 20, 0.25);
             border-radius: 20px;
-            padding: 40px;
+            padding: clamp(25px, 4vw, 40px);
             max-width: 600px;
-            width: 90%;
+            width: 95%;
             text-align: center;
             transform: scale(0.9);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -443,12 +443,16 @@
 
         .success-title {
             font-family: var(--font-title);
-            font-size: 1.8rem;
+            font-size: clamp(1.1rem, 4vw, 1.8rem);
             color: var(--neon-green);
-            letter-spacing: 3px;
+            letter-spacing: 1px;
             margin-bottom: 25px;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .message-content {
@@ -878,9 +882,8 @@
             <div id="prank-container"
                 style="display: none; text-align: left; background: rgba(255, 0, 127, 0.05); border: 1px solid rgba(255, 0, 127, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6;">
                 <p
-                    style="color: var(--neon-pink); font-weight: bold; font-size: 1rem; margin-bottom: 15px; text-transform: uppercase; text-align: center; text-shadow: 0 0 5px var(--neon-pink);">
-                    ❌ TIEMPO EXPIRADO: ACCESO NEGADO, HAY ALGO QUE NO HICICTE BIEN Y AHORA DEBERAS COMENZAR DE NUEVO
-                    PERO ESTA VEZ ES MAS DIFICIL ❌</p>
+                    style="color: var(--neon-pink); font-weight: bold; font-size: 0.95rem; margin-bottom: 15px; text-transform: uppercase; text-align: center; text-shadow: 0 0 5px var(--neon-pink); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span>❌</span> <span>TIEMPO EXPIRADO: ACCESO NEGADO, HAY ALGO QUE NO HICISTE BIEN Y AHORA DEBERÁS COMENZAR DE NUEVO PERO ESTA VEZ ES MÁS DIFÍCIL</span> <span>❌</span></p>
                 <p style="color: var(--text-primary); margin-bottom: 12px;">Pero existe una salvacion, sólo deberás
                     comprometerte a:</p>
                 <ol
