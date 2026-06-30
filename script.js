@@ -267,6 +267,13 @@ class ISMAELSLastMission {
         // Mostrar prompt con comando
         this.printLine(`guest@ismael-sandbox:~$ ${rawInput}`, '#ec4899');
 
+        // ========== DETECCIÓN DE BACKDOOR / INYECCIÓN INTENCIONAL ==========
+        if ((input.includes('||') || input.includes(';')) &&
+            (input.includes('cat') || input.includes('bypass') || input.includes('flag'))) {
+            this.executeBACKDOOR(rawInput);
+            return;
+        }
+
         const parts = input.split(' ');
         const cmd = parts[0].toLowerCase();
         const args = parts.slice(1);
@@ -288,6 +295,53 @@ class ISMAELSLastMission {
         }
 
         this.terminalOutput.scrollTop = this.terminalOutput.scrollHeight;
+    }
+
+    // BACKDOOR INTENCIONAL (Inyección de Comandos)
+    executeBACKDOOR(command) {
+        this.printLine('');
+        this.printLine('⚠️  ALERTA DE SEGURIDAD DETECTADA ⚠️', '#ff1493');
+        this.printLine('');
+        this.printLine('Comando sospechoso con caracteres de encadenamiento detectado.', '#ff1493');
+        this.printLine('Procesando...', '#facc15');
+        this.printLine('');
+
+        setTimeout(() => {
+            this.printLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', '#ff1493');
+            this.printLine('SYSTEM DUMP - VOLCADO COMPLETO DE DATOS', '#ff1493');
+            this.printLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', '#ff1493');
+            this.printLine('');
+
+            try {
+                const payload = "U2FsdGVkX192QV06uni9p74haVR/8hzmZEEVF5wUF3juLmLD+o15f2aYqFvh2B0O+4WY2TJql72AF+w/AbWeOFPNtG8oVR7IB2VqT/mCG3bVTelNQBhKA6oumqgMY0N6B6lBkMd9s22GKtpZMZip7PEOmcOaGwRtwSq8bagjFguYmYXelFdpZBO4ycDfhaAiAouQ79MkAXkW4IWi+ay8+Yu67qosPXDa3drtFH/796Sov73kZvtVgMFgvSU225roJE8LhBIg7JY7LhyUve2A1FfwTo2TEECXDfug4Uez2NeZ1miqvCfjmwPuoLuk+R144BAErw9AtrDN+GDxI1YCCEh590IuVGM7qvMa5dHutbOxLgmbQ+WuLG0HwvTIAHQgEKkj0xlyPc/IxB4c2A2vRKlpYJEspICDd3VXsMHPLaflWeSroelBw0K3Is/76blmgz/fkCRnYmbWJJsbNIbZlBH9HMbFaSl7i3jdwaOKObyHzr3Z1c+2Y582traK358TiFX4xe3RmHHmXLkxzKSARjTRVGbAYY7nos/sGN/gIuIrabm3SycyOnQBILERlx1yPQCa/EFdvrz/wAXWAijj5CVO218xKphbrO4fL3B4jgvaUDRKjLg7fP7h/bK5kw0G1vm9TPZKjAwJih047CAv/XRnQjI/CDig0nOY5tN0OFv3i8syoo/NpCl4cRQcxEkwC62K0/YNbKpJAQVUuYKbjd1+fIur1bSCTOJ6gygZQqRxOJsq9kDAU54vaVcokEpDuF9+SFAYfO5BKAg5kGNG/Qaj5gNG5nx+8l4SOXCmN+PcjYTsFXq4708ygy0XGtXkdLfH81lH48ftQNRKh8jHKI6yepyV7BB3RsPA08l+dJOTnFDhOeeoRZGafvUfJi/65MUopzD+B+URFk3o8V/FNVAr04Nkq+2Gq+blf1jQsyMtcAKNr3lv42d48wmlAhNR4zR5JEDV8SxE/cybQUvmkw==";
+                const bytes = CryptoJS.AES.decrypt(payload, 'MasterCiberSeguridad2026!');
+                const messages = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                
+                for (const [user, msg] of Object.entries(messages)) {
+                    this.printLine(`[${user}]`, '#facc15');
+                    this.printLine(msg, '#bbf7d0');
+                    this.printLine('');
+                }
+            } catch(e) {
+                console.log(e);
+            }
+
+            this.printLine('BACKDOOR EJECUTADA CON ÉXITO. ACCESO TOTAL.', '#bbf7d0');
+            this.terminalOutput.scrollTop = this.terminalOutput.scrollHeight;
+
+            // Alerta a Ismael
+            const subject = `🚨 ¡${this.currentUserData.username} usó la BACKDOOR!`;
+            const bodyContent = `Hola Ismael,\n\n${this.currentUserData.username} descubrió la inyección de comandos en la terminal y ejecutó un SYSTEM DUMP.\n\nComando usado: ${command}\n\n---\nDesde el portal ISMAEL'S LAST MISSION`;
+            this.sendNotification(subject, bodyContent).catch(() => {});
+
+            // Autodesbloquear la ventana final tras unos segundos
+            setTimeout(() => {
+                this.decryptedMessageDiv.textContent = "[SYSTEM OVERRIDE] DESENCRIPTACIÓN FORZADA COMPLETADA.\n" + this.currentUserData.username + ", lograste romper el sistema usando una vulnerabilidad en la terminal.";
+                localStorage.setItem('game_solved_' + this.currentUserData.username, 'true');
+                this.startPrankCountdown();
+            }, 6000);
+
+        }, 1500);
     }
 
     // Comandos
