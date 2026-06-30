@@ -394,6 +394,7 @@ class ISMAELSLastMission {
 
     // Contador de broma
     startPrankCountdown() {
+        window.scrollTo(0, 0);
         this.successOverlay.classList.add('visible');
 
         this.successTitle.innerHTML = '<span>🔐</span> <span>SISTEMA DECODIFICADO</span> <span>🔐</span>';
@@ -558,10 +559,14 @@ class ISMAELSLastMission {
             })
             .catch((error) => {
                 console.error(error);
-                this.replyStatusMsg.textContent = `❌ Error: ${error.message}`;
+                if (error.message && error.message.toLowerCase().includes('spam')) {
+                    this.replyStatusMsg.innerHTML = `❌ El servidor anti-spam bloqueó tu mensaje por hacer demasiadas pruebas.<br>Usa este enlace: <a href="mailto:ismaelhinojosa6@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}" style="color:var(--neon-cyan);text-decoration:underline;">Enviar por Email Clásico</a>`;
+                } else {
+                    this.replyStatusMsg.textContent = `❌ Error: ${error.message}`;
+                }
                 this.replyStatusMsg.style.color = '#ff1493';
                 this.replySendBtn.disabled = false;
-                this.replySendBtn.textContent = 'Enviar Respuesta';
+                this.replySendBtn.textContent = 'Reintentar';
             });
     }
 
@@ -646,6 +651,7 @@ class ISMAELSLastMission {
             }
             // Mostrar modal de bienvenida si no ha iniciado el reto
             
+            window.scrollTo(0, 0);
             this.timerIntroOverlay.classList.add('visible');
             this.timerStartBtn.addEventListener('click', () => this.startCountdown());
         } else {
@@ -714,6 +720,7 @@ class ISMAELSLastMission {
     }
 
     triggerTimeExpired() {
+        window.scrollTo(0, 0);
         const username = 'global';
         const isExtended = localStorage.getItem('timer_extended_' + username) === 'true';
 
