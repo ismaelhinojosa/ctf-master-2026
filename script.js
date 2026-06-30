@@ -782,22 +782,6 @@ class ISMAELSLastMission {
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     window.game = new ISMAELSLastMission();
-
-    // Lógica para el botón de música
-    const bgMusic = document.getElementById('bg-music');
-    const musicToggle = document.getElementById('music-toggle');
-
-    if (bgMusic && musicToggle) {
-        bgMusic.volume = 0.2;
-        
-        musicToggle.addEventListener('click', () => {
-            if (bgMusic.paused) {
-                bgMusic.play();
-                musicToggle.textContent = '🔊';
-            } else {
-                bgMusic.pause();
-                musicToggle.textContent = '🔇';
-            }
         });
     }
 });
