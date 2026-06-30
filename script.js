@@ -395,7 +395,7 @@ class ISMAELSLastMission {
     startPrankCountdown() {
         this.successOverlay.classList.add('visible');
 
-        this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
+        this.successTitle.innerHTML = '<span>🔐</span> <span>SISTEMA DECODIFICADO</span> <span>🔐</span>';
         this.successTitle.style.color = '#ec4899';
         this.countdownHeader.style.display = 'block';
         this.decryptedMessageDiv.style.display = 'block';
@@ -428,7 +428,7 @@ class ISMAELSLastMission {
 
     // Se expira el tiempo
     triggerPrankMeltdown() {
-        this.successTitle.textContent = '❌ SISTEMA BLOQUEADO ❌';
+        this.successTitle.innerHTML = '<span>❌</span> <span>SISTEMA BLOQUEADO</span> <span>❌</span>';
         this.successTitle.style.color = '#ff1493';
 
         this.countdownHeader.style.display = 'none';
@@ -441,7 +441,7 @@ class ISMAELSLastMission {
     // Aceptar la broma
     handlePrankAccept() {
         this.showCyberAlert('😜 ¡SOLO ES UNA  BROMA!<br><br>Has aceptado el reto. Pero lo de la pizza no es broma y ya aceptaste!! jaja. Acceso restaurado.', () => {
-            this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
+            this.successTitle.innerHTML = '<span>🔐</span> <span>SISTEMA DECODIFICADO</span> <span>🔐</span>';
             this.successTitle.style.color = '#ec4899';
 
             this.prankContainer.style.display = 'none';
