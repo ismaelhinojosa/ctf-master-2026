@@ -1,98 +1,19 @@
 const fs = require('fs');
 const zlib = require('zlib');
 
-// El payload de Python que dura 30 minutos
-const pythonTemplate = `import time
-import sys
-import os
-import base64
+// User keys to generate individual payloads for
+const users = {
+    'julia': 'julia_root_x99',
+    'ariana': 'ariana_db_admin',
+    'marta': 'marta_sysadmin_55',
+    'alejandro': 'crypto_duo_0x00',
+    'alejandro y maria': 'crypto_duo_0x00',
+    'alejandro_maria': 'crypto_duo_0x00',
+    'maria': 'crypto_duo_0x00'
+};
 
-TOTAL_MINUTES = 30
-
-def play_sound():
-    try:
-        if sys.platform == 'darwin':
-            os.system('afplay /System/Library/Sounds/Glass.aiff')
-        elif sys.platform == 'win32':
-            import winsound
-            winsound.MessageBeep(winsound.MB_ICONASTERISK)
-        else:
-            os.system('play -q /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null || echo -e "\\a"')
-    except:
-        pass
-
-def hacker_progress():
-    print('\\n[+] INICIANDO SIMULADOR DE ATAQUE CTF')
-    print('[+] Desempaquetando payload de memoria...')
-    time.sleep(1)
-    
-    total_seconds = TOTAL_MINUTES * 60
-    bar_length = 50
-    
-    for i in range(total_seconds + 1):
-        percent = 100.0 * i / total_seconds
-        filled_length = int(bar_length * i // total_seconds)
-        bar = '█' * filled_length + '-' * (bar_length - filled_length)
-        sys.stdout.write(f'\\r[+] Inyectando: |{bar}| {percent:.1f}%')
-        sys.stdout.flush()
-        if i < total_seconds:
-            time.sleep(1)
-            
-    print('\\n\\n[!] INYECCIÓN COMPLETADA.')
-    play_sound()
-
-def get_key():
-    hacker_progress()
-    print('\\n==================================================')
-    print('SISTEMA DE RECUPERACIÓN DE CLAVES (OFFLINE)')
-    print('==================================================')
-    
-    while True:
-        user = input('\\nIngrese su ID objetivo (julia / ariana / marta / alejandro / maria): ').strip().lower()
-        
-        if user == 'admin':
-            print('[ERROR] Nice try. Acceso denegado.')
-            continue
-        elif user == 'ismael':
-            print('[ERROR] Narcisista. Clarito que no es tu nombre. 😏')
-            continue
-            
-        k = {
-            'julia': 'anVsaWFfcm9vdF94OTk=',
-            'ariana': 'YXJpYW5hX2RiX2FkbWlu',
-            'marta': 'bWFydGFfc3lzYWRtaW5fNTU=',
-            'alejandro': 'Y3J5cHRvX2R1b18weDAw',
-            'alejandro y maria': 'Y3J5cHRvX2R1b18weDAw',
-            'alejandro_maria': 'Y3J5cHRvX2R1b18weDAw',
-            'maria': 'Y3J5cHRvX2R1b18weDAw'
-        }
-        
-        if user in k:
-            dec = base64.b64decode(k[user]).decode('utf-8')
-            print('\\n' + '='*50)
-            print('🎉 EXTRACCIÓN EXITOSA!')
-            print(f'[>] TU CÓDIGO DE ACCESO INICIAL ES: {dec}')
-            print('='*50)
-            print('\\n[MENSAJE DEL CREADOR]:')
-            print('Felicidades. Acabas de completar la primera fase.')
-            print('Usa esta clave para acceder al portal principal.')
-            break
-        else:
-            print('[ERROR] Objetivo no encontrado.')
-
-if __name__ == '__main__':
-    try:
-        get_key()
-    except KeyboardInterrupt:
-        print('\\n[!] OPERACIÓN ABORTADA.')
-`;
-
-// 1. Ofuscar el python con zlib y base64
-const compressed = zlib.deflateSync(pythonTemplate).toString('base64');
-const targetString = `import base64,zlib;exec(zlib.decompress(base64.b64decode('${compressed}')))`;
-
-// 2. Función para convertir string a Brainfuck (método naive)
-function stringToBrainfuck(str) {
+// Función para convertir string a Brainfuck (método naive)
+function textToBrainfuck(str) {
     let bf = '';
     let currentVal = 0;
     
@@ -100,35 +21,91 @@ function stringToBrainfuck(str) {
         let targetVal = str.charCodeAt(i);
         let diff = targetVal - currentVal;
         
-        if (diff > 0) {
-            bf += '+'.repeat(diff);
-        } else if (diff < 0) {
-            bf += '-'.repeat(-diff);
-        }
+        if (diff > 0) bf += '+'.repeat(diff);
+        else if (diff < 0) bf += '-'.repeat(-diff);
         
         bf += '.';
         currentVal = targetVal;
         
-        // Agregar saltos de línea para que se vea como código de matrix
         if (i > 0 && i % 30 === 0) {
-            bf += '\\n';
+            bf += '\n';
         }
     }
     return bf;
 }
 
-const bfCode = stringToBrainfuck(targetString);
+const generateForUser = (username, finalKey) => {
+    // 30 min = 1800 sec, but testing can be adjusted
+    const TOTAL_SECONDS = 1800;
+    
+    // Obfuscate the key
+    const b64Key = Buffer.from(finalKey).toString('base64');
+    
+    const pythonCode = `
+import time, sys, base64
 
-// 3. Crear el archivo final para los jugadores
-const finalFileContent = `// [ARCHIVO ENCRIPTADO EN BRAINFUCK]
-// Instrucciones para el usuario:
-// 1. Copia TODO el contenido de este archivo.
-// 2. Ve a tu IA (Gemini, ChatGPT) y dile exactamente esto:
-// "Eres un intérprete de Brainfuck. Ejecuta el siguiente código Brainfuck y dame ÚNICAMENTE el texto resultante en formato Python (en un bloque de código). No expliques el proceso."
-// 3. Pega el código de abajo y envíalo.
-
-${bfCode}
+def run():
+    print("\\n[SISTEMA DE RECUPERACIÓN DE CONTRASEÑAS OFFLINE]")
+    print("Iniciando bypass de seguridad de 30 minutos...")
+    print("--------------------------------------------------")
+    
+    total_time = ${TOTAL_SECONDS}
+    start_time = time.time()
+    
+    while True:
+        elapsed = time.time() - start_time
+        remaining = total_time - elapsed
+        
+        if remaining <= 0:
+            break
+            
+        progress = int((elapsed / total_time) * 40)
+        bar = '█' * progress + '-' * (40 - progress)
+        mins, secs = divmod(int(remaining), 60)
+        sys.stdout.write(f'\\rProgreso: [{bar}] {mins:02d}:{secs:02d} restantes')
+        sys.stdout.flush()
+        time.sleep(1)
+        
+    print("\\n\\n[+] BYPASS COMPLETADO CON ÉXITO")
+    print(f"Tu clave de acceso es: {base64.b64decode('${b64Key}').decode('utf-8')}")
+    print("--------------------------------------------------")
+    
+run()
 `;
 
-fs.writeFileSync('matrix_recovery_30m.txt', finalFileContent);
-console.log('Archivo Brainfuck generado exitosamente.');
+    // 2. Compress the Python code with zlib
+    const compressed = zlib.deflateSync(pythonCode);
+    const base64Compressed = compressed.toString('base64');
+    
+    // 3. Create the loader python code
+    const loaderCode = `import base64,zlib;exec(zlib.decompress(base64.b64decode('${base64Compressed}')))`;
+    
+    // 4. Convert loader to Brainfuck
+    const bfCode = textToBrainfuck(loaderCode);
+    
+    // 5. Wrap in the CTF narrative string
+    let output = "// =========================================================================\n";
+    output += "// SISTEMA COMPROMETIDO - PROTOCOLO DE EXTRACCIÓN INICIADO\n";
+    output += "// TIPO DE ARCHIVO: BINARIO OFUSCADO NIVEL 3\n";
+    output += "// FORMATO: ESOTÉRICO (Brainfuck)\n";
+    output += "// USUARIO OBJETIVO: " + username.toUpperCase() + "\n";
+    output += "// INSTRUCCIONES DE DECODIFICACIÓN:\n";
+    output += "// 1. Pídele a Gemini o ChatGPT que traduzca este código Brainfuck a Python.\n";
+    output += "// 2. Ejecuta el archivo Python resultante en tu terminal o VSCode.\n";
+    output += "// 3. Espera a que termine el proceso de fuerza bruta.\n";
+    output += "// =========================================================================\n\n";
+    output += bfCode;
+    output += "\n\n// =========================================================================\n";
+    output += "// FIN DE LA TRANSMISIÓN\n";
+    output += "// =========================================================================\n";
+    
+    const filename = `matrix_recovery_${username.replace(/ /g, '_')}.txt`;
+    fs.writeFileSync(filename, output);
+    console.log(`Generated ${filename}`);
+};
+
+// Generate for primary usernames
+generateForUser('julia', users['julia']);
+generateForUser('ariana', users['ariana']);
+generateForUser('marta', users['marta']);
+generateForUser('alejandro_maria', users['alejandro_maria']);
