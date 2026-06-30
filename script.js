@@ -69,6 +69,7 @@ class ISMAELSLastMission {
         // Estado del temporizador y audio
         this.musicMuteBtn = document.getElementById('music-mute-btn');
         this.identifiedUser = null;
+        this.usernamesList = ['julia', 'ariana', 'marta', 'alejandro', 'maria', 'alejandro_maria'];
         this.timerIntervalId = null;
         this.isMuted = false;
 
