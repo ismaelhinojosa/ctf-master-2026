@@ -141,7 +141,10 @@ class ISMAELSLastMission {
 
         this.prankAcceptBtn.addEventListener('click', () => this.handlePrankAccept());
         this.replySendBtn.addEventListener('click', () => this.handleReplySend());
-        this.resetBtn.addEventListener('click', () => window.location.reload());
+        this.resetBtn.addEventListener('click', () => {
+            localStorage.clear();
+            window.location.reload();
+        });
         if (this.musicMuteBtn) {
             this.musicMuteBtn.addEventListener('click', () => this.toggleMute());
         }
