@@ -31,6 +31,7 @@
             --neon-cyan: #06b6d4;
             --neon-pink: #ff1493;
             --neon-magenta: #ec4899;
+            --neon-magenta: #ec4899;
             --neon-green: #22c55e;
             --neon-violet: #a855f7;
             --text-primary: #f3f4f6;
@@ -865,7 +866,7 @@
                     placeholder="👤 Escribe tu código de acceso aquí..." autocomplete="off">
             </div>
 
-            <button id="gate-submit-btn" class="cyber-btn">⚡ Venga, descifrá ya!</button>
+            <button id="gate-submit-btn" class="cyber-btn">⚡ Comenzar a descifrar</button>
             <div class="gate-error" id="gate-error-msg">Código incorrecto. Inténtalo de nuevo.</div>
         </div>
 
@@ -912,8 +913,7 @@
                     </div>
 
                     <div class="decrypter-instructions">
-                        Usa la consola de la izquierda para buscar el archivo que contiene tu clave final. Cuando la
-                        encuentres, escríbela aquí abajo.
+                        Hay una clave escondida en los archivos. Encontrála y escríbila acá. 🕵️‍♂️
                     </div>
 
                     <div class="decrypt-form" style="margin-bottom: 15px;">
@@ -958,7 +958,7 @@
                 style="display: none; text-align: left; background: rgba(255, 0, 127, 0.05); border: 1px solid rgba(255, 0, 127, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6;">
                 <p
                     style="color: var(--neon-pink); font-weight: bold; font-size: 0.95rem; margin-bottom: 15px; text-transform: uppercase; text-align: center; text-shadow: 0 0 5px var(--neon-pink); display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span>❌</span> <span>Tu mensaje se está borrando... pero espera.\nExiste UNA forma de salvarlo (es obvio que es una broma):</span> <span>❌</span></p>
+                    <span>❌</span> <span>Tu mensaje se está borrando... pero no del todo.\nExiste UNA forma de salvarlo:</span> <span>❌</span></p>
                 <p style="color: var(--text-primary); margin-bottom: 12px;">Pero existe una salvacion, sólo deberás
                     comprometerte a:</p>
                 <ol
@@ -1017,7 +1017,12 @@
 
     <!-- CryptoJS desde CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.3.16"></script>
-    </body>
+    <script src="script.js?v=1.3.17"></script>
+        <!-- Audio de Fondo (Música) -->
+    <audio id="bg-music" autoplay loop volume="0.2">
+        <source src="audio/background-music.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 50; padding: 10px 15px; background: linear-gradient(135deg, var(--neon-violet), var(--neon-magenta)); border: none; color: white; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.2rem; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);">🎵</button>
+</body>
 
 </html>

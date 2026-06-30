@@ -496,7 +496,7 @@ class ISMAELSLastMission {
 
     // Aceptar la broma
     handlePrankAccept() {
-        this.showCyberAlert('😜 ¡SOLO ES UNA  BROMA!<br><br>Has aceptado el reto. Pero lo de la pizza no es broma y ya aceptaste!! jaja. Acceso restaurado.', () => {
+        this.showCyberAlert('😜 ¡ES BROMA!<br><br>Pero lo de la pizza NO. ¡Ya aceptaste! 🍕<br><br>Acceso restaurado. Ahora sí, leé tu mensaje.', () => {
             this.successTitle.innerHTML = '<span>🔐</span> <span>SISTEMA DECODIFICADO</span> <span>🔐</span>';
             this.successTitle.style.color = '#ec4899';
 
