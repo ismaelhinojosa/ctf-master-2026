@@ -617,10 +617,25 @@ class ISMAELSLastMission {
     }
 
     initializeTimer() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let uParam = urlParams.get('u');
+        let displayName = 'Hacker';
+        
+        if (uParam) {
+            uParam = uParam.toLowerCase();
+            if (uParam === 'julia') displayName = 'Julia';
+            else if (uParam === 'alejandro') displayName = 'Alejandro y María';
+            else if (uParam === 'ariana') displayName = 'Ariana';
+            else if (uParam === 'marta') displayName = 'Marta';
+        }
+
         const username = 'global';
         const timerStarted = localStorage.getItem('timer_started_' + username) === 'true';
 
         if (!timerStarted) {
+            if (this.introUsernameSpan) {
+                this.introUsernameSpan.textContent = displayName;
+            }
             // Mostrar modal de bienvenida si no ha iniciado el reto
             
             this.timerIntroOverlay.classList.add('visible');
