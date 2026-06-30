@@ -456,6 +456,7 @@ class ISMAELSLastMission {
             const music = document.getElementById('victory-music');
             if (music) {
                 music.src = `audio/${this.currentUserData.username}.mp3`;
+                music.volume = 0.9; // Canción personal al 90% de volumen
                 music.load();
                 music.muted = this.isMuted;
                 music.play().catch(() => {});
@@ -532,17 +533,17 @@ class ISMAELSLastMission {
         this.sendNotification(subject, bodyContent)
             .then(() => {
                 this.replyStatusMsg.textContent = '✅ ¡Respuesta enviada con éxito!';
-                this.replyStatusMsg.style.color = '#a855f7';
+                this.replyStatusMsg.style.color = '#22c55e';
                 this.replyText.value = '';
                 this.replyText.disabled = true;
                 this.replySendBtn.style.display = 'none';
             })
             .catch((error) => {
                 console.error(error);
-                this.replyStatusMsg.textContent = '❌ Error al enviar.';
+                this.replyStatusMsg.textContent = `❌ Error: ${error.message}`;
                 this.replyStatusMsg.style.color = '#ff1493';
                 this.replySendBtn.disabled = false;
-                this.replySendBtn.textContent = '📤 Enviar Respuesta';
+                this.replySendBtn.textContent = 'Enviar Respuesta';
             });
     }
 
@@ -561,7 +562,9 @@ class ISMAELSLastMission {
                 access_key: '58513408-780b-4735-a859-393851651943',
                 subject: subject,
                 message: bodyContent,
-                from_name: 'CTF Ciberseguridad 2026'
+                from_name: 'CTF Ciberseguridad 2026',
+                email: 'ismaelhinojosa6@gmail.com',
+                botcheck: ''
             })
         })
         .then(response => {
