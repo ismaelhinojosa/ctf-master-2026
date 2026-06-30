@@ -783,8 +783,6 @@ class ISMAELSLastMission {
             }
         }, 2500);
     }
-    }
-
     startBackgroundMusic() {
         const bgMusic = document.getElementById('background-music');
         if (bgMusic && bgMusic.paused) {
