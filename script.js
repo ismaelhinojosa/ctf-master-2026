@@ -87,6 +87,7 @@ class ISMAELSLastMission {
         this.moreTimeError = document.getElementById('more-time-error');
         this.globalCountdownBar = document.getElementById('global-countdown-bar');
         this.topTimerClock = document.getElementById('top-timer-clock');
+        this.introTimerClock = document.getElementById('intro-timer-clock');
 
         // Estado del temporizador y audio
         this.musicMuteBtn = document.getElementById('music-mute-btn');
@@ -632,6 +633,12 @@ class ISMAELSLastMission {
         const username = 'global';
         const timerStarted = localStorage.getItem('timer_started_' + username) === 'true';
 
+        if (this.timerIntervalId) clearInterval(this.timerIntervalId);
+        this.timerIntervalId = setInterval(() => {
+            this.updateCountdown();
+        }, 1000);
+        this.updateCountdown();
+
         if (!timerStarted) {
             if (this.introUsernameSpan) {
                 this.introUsernameSpan.textContent = displayName;
@@ -691,7 +698,11 @@ class ISMAELSLastMission {
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
             const format = (num) => String(num).padStart(2, '0');
-            this.topTimerClock.textContent = `${format(hours)}:${format(minutes)}:${format(seconds)}`;
+            const timeString = `${format(hours)}:${format(minutes)}:${format(seconds)}`;
+            this.topTimerClock.textContent = timeString;
+            if (this.introTimerClock) {
+                this.introTimerClock.textContent = timeString;
+            }
         }
     }
 
