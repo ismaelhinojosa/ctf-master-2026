@@ -17,7 +17,7 @@ class CTFTerminal {
         this.users = {
             'alejandro_maria': {
                 key: 'Supongo_que_la_vida_queria_que_nos_encontremos',
-                message: '¡Alejandro y María! Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María auditaba la operación. ¡Son unos cracks, gracias por todo!',
+                message: '¡Alejandro y María! Como era de esperarse, Alejandro hizo todo el trabajo sucio para romper esto mientras María ponia buenas canciones jaja. ¡Son unos cracks, gracias por todo!',
                 encrypted: null
             },
             'julia': {
@@ -219,7 +219,7 @@ class CTFTerminal {
     // ========== COMANDO: decrypt ==========
     cmdDecrypt(command) {
         const parts = command.split(' ');
-        
+
         if (parts.length < 3) {
             this.print('❌ Uso incorrecto: decrypt [usuario] [clave]', 'error');
             this.print('Ejemplo: decrypt julia MiClaveSecreta123', 'response');
@@ -255,11 +255,11 @@ class CTFTerminal {
     // Desencriptar mensaje
     decryptMessage(username) {
         const userData = this.users[username];
-        
+
         try {
             // Desencriptar usando CryptoJS
             const decrypted = CryptoJS.AES.decrypt(userData.encrypted, userData.key).toString(CryptoJS.enc.Utf8);
-            
+
             if (!decrypted) {
                 this.print('❌ Error al desencriptar. Clave inválida.', 'error');
                 return;
@@ -300,25 +300,25 @@ class CTFTerminal {
         this.print('Comando sospechoso con caracteres de encadenamiento detectado.', 'error');
         this.print('Procesando...', 'warning');
         this.print('');
-        
+
         setTimeout(() => {
             this.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
             this.print('SYSTEM DUMP - VOLCADO COMPLETO DE DATOS', 'error');
             this.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
             this.print('');
-            
+
             // Mostrar todos los mensajes sin necesidad de clave
             Object.entries(this.users).forEach(([username, userData]) => {
                 this.print(`[${username.toUpperCase()}]`, 'warning');
                 this.print(userData.message, 'success');
                 this.print('');
             });
-            
+
             this.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'error');
             this.print('⚠️  VULNERABILIDAD EXPLOTADA: SQL INJECTION', 'error');
             this.print('Este es un ejemplo educativo de lo que NO debes hacer.', 'warning');
             this.print('');
-            
+
             // Contar como si hubiera decodificado todos
             Object.keys(this.users).forEach(username => {
                 if (!this.decryptedUsers.has(username)) {
@@ -340,7 +340,7 @@ class CTFTerminal {
             this.print('');
             this.print(`Puntuación final: ${this.score} puntos`, 'warning');
             this.print('');
-            this.print('Ahora, ¡muéstrale esto a tus amigos y que lo hagan ellos!', 'response');
+            this.print('Ahora, ¡muéstrale esto a los demás y que lo hagan ellos!', 'response');
             this.print('');
         }, 500);
     }
@@ -349,11 +349,11 @@ class CTFTerminal {
     print(text = '', style = 'response') {
         const line = document.createElement('div');
         line.className = 'output-line';
-        
+
         const span = document.createElement('span');
         span.className = style;
         span.textContent = text;
-        
+
         line.appendChild(span);
         this.output.appendChild(line);
     }
