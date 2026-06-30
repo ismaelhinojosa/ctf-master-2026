@@ -630,6 +630,7 @@ class ISMAELSLastMission {
             else if (uParam === 'marta') displayName = 'Marta';
         }
 
+        this.guestName = displayName;
         const username = 'global';
         const timerStarted = localStorage.getItem('timer_started_' + username) === 'true';
 
@@ -658,6 +659,12 @@ class ISMAELSLastMission {
         localStorage.setItem('timer_started_' + username, 'true');
         this.timerIntroOverlay.classList.remove('visible');
         this.startCountdownLoop();
+
+        const guest = this.guestName || 'Un Hacker';
+        this.sendNotification(
+            `🚀 ${guest} ha aceptado el reto inicial`,
+            `Hola Ismael,\n\n${guest} acaba de pulsar el botón "Aceptar y Comenzar Reto" en la pantalla de bienvenida y el contador está en marcha para ellos.\n\n---\nISMAEL'S LAST MISSION`
+        ).catch(e => console.log('Silenced notification error:', e));
     }
 
     startCountdownLoop() {
