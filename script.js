@@ -546,29 +546,31 @@ class ISMAELSLastMission {
             });
     }
 
-    // Enviar notificación
+    // Enviar notificación (Web3Forms - sin CORS, sin activación)
     sendNotification(subject, bodyContent) {
-        console.log(`📧 [CTF] Enviando notificación a ${this.adminEmail}...`);
+        console.log(`📧 [CTF] Enviando notificación...`);
         console.log(`   Asunto: ${subject}`);
 
-        return fetch(`https://formsubmit.co/ajax/${this.adminEmail}`, {
-            method: "POST",
+        return fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
-                _subject: subject,
-                mensaje: bodyContent
+                access_key: '58513408-780b-4735-a859-393851651943',
+                subject: subject,
+                message: bodyContent,
+                from_name: 'CTF Ciberseguridad 2026'
             })
         })
         .then(response => {
-            console.log(`📡 [CTF] FormSubmit HTTP status: ${response.status}`);
+            console.log(`📡 [CTF] Web3Forms HTTP status: ${response.status}`);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return response.json();
         })
         .then(data => {
-            console.log('✅ [CTF] FormSubmit respuesta OK:', data);
+            console.log('✅ [CTF] Email enviado correctamente:', data);
             return data;
         })
         .catch(err => {
