@@ -782,6 +782,4 @@ class ISMAELSLastMission {
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     window.game = new ISMAELSLastMission();
-        });
-    }
 });
