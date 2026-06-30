@@ -72,7 +72,7 @@ class ISMAELSLastMission {
         this.replySendBtn = document.getElementById('reply-send-btn');
         this.replyStatusMsg = document.getElementById('reply-status-msg');
         
-        this.adminEmail = 'ismaelhinojosa@hotmail.com';
+        this.adminEmail = 'ismaelhinojosa6@gmail.com';
         this.timerId = null;
 
         // Elementos del temporizador superior e overlays
