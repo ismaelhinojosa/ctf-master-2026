@@ -1,4 +1,18 @@
-//
+// ============================================================================
+// ISMAEL'S LAST MISSION - LÓGICA MEJORADA CON EASTER EGGS Y EFECTOS
+// ============================================================================
+
+class ISMAELSLastMission {
+    constructor() {
+        // Base de datos de juegos cifrada (CryptoJS AES + SHA-256)
+        // Ningún dato sensible (usuarios, roles, archivos, claves o mensajes) está visible en texto plano en el F12.
+        this.encryptedDB = {
+    "f1685f8c3900e66ed0ab3a46e12f61dbd3fafed935bbf22034ff01c95d810735": "U2FsdGVkX1+DKnvtJGil7MpAkjgk5HbvqKlLfCgidMtKAV14M3g6DYCYrJgI/R//5+yx9Flw47yX9WIzfnVBdtiwK0zsbr0UQTkB5vS6WvoLMrTQOsmzGsUZ5t3uPdENJoepOld+E9CSdp5kO3KSf+Sx50MrYD881qCKMOje9F7eEmxsBIODKQ83fJ5m7gyKb6cC73G6xoA/FKrDnDexfaEMJKkggr0rkngiX0FtjvPDjBJahwsmaiRXEwYawsR0rAGsSnuH9z87fU0oa2jNXbXCDLPymI8VPUjEVouwr+/CaP9WYAAW2y9epcPoeAPzILc6Wx0Cjer7ivT+TGD/DSBJxL6K3araBhnm3F5lR4izPoPRXrGM7FV77jmOAhB4ElttkOxvO/rcHqmX5u4WLs0+sl3MNvS1rr/OgXv/37+BolMxYeReXdHfj2xEUxggAwUH0nBQ1NIwG175Zkn66zVpWG6aMRRMC/HjHpIFG/61AN7AHAHdhkI3jS8iiOzBQHi+juqhQeEKdZnr6ERLM+IfYknnhb8xKV4etguEBEHm/2JhXlmu6pAuDRxoQh6fxFhAlEONjgT6Qo9mkEWusgT/YBkK4mrSdbb3iYrZIgS5yIOBfwJc7WZbyUEAPkiSmA+nRNmKeiihj7CeI16RPiSpMpjIy2wEhtkrjXSTSF085m4HxybqAd5hntfG/wOiXByEihJRmTjw3qWGFA3pUkU6rloNydYPzSyEafY5VLrYl3qYJL9QFyMOql3Yfb6RgaBmoOKSASlRg4lvCuqZaz1sAsAEdWwNkcXXQ+5OMSkX5V3YgYG0tefHlVyeMfEC94gh+9Cewx6YxcaagzQxNcmqdlu/fuMKuSudbcHCtdcxjae+LOQ/J5/b8oTulbhCVMnZ0NTxeEA5T8jlP1W2Nxp84X4dRANSqTKmOkv7dUzwKJ/zHvFfwz9tKo068BkSuQy6sByrQrl/DTQTGVwB6xC1NKbv7Zmx5V9bcUD/ao7T9Ea+5m/KYyJkD0HMUXOFu2ZSdBUC9x9gt8nHOqvC3rczCSSG8X9n/kzcyucPYrA=",
+    "e9990cbd1cb11a559f635dd8c3b93a11368e9bad5ffe7e27ee23d5dc4658a197": "U2FsdGVkX1/hDPB639YTahPtzfgjryMbm1mIR9qxvcXfd9JCwLAxo9mK3vq3fWD4DOnfTzHOOsWRnj92nPZCME/wQGAHxo+KFErpBfwLW63dmP1H0Pj6FI+cxMa3OYzHnvGUNt8AyRTlykdwwblAK+bCO1dLjWCOIwnlrue21reuKNCM/yy998Z/6Vg8cc68njNagFjrn8E9KKrcLQf9vVGDxbuiTQXFRmfkK3rLYEDf4UWg1H0HH0ls3ReyCx1m0ONpja47zKZ6co26ZsGXQ2aa8DexEBAVelYTTWQ5f2BvMW19tKQ6TzW2MWJ83i8DlxPCM5iobuvKNdQViI1QizGaImbid/zcMt3uivNOZNgXniyZoCcCHoGCB8rbSSr6uw4Bl1xk84+rvBZw/MG6r/xAsi+KMgCDc33lxcAZFGe2y6eXytKPnhdk0T6vrvZpShtHw+JRR0mPbQe05omM7vDf/jd0keCPed/Ia7U3E/RoejUeSV22U/+T9xs0RjD3g4MnY9YR97a1lR5jIRTFC5LhK5hVzHcNcaFXK9/VUNxyZJGgh20YCecVmOge8cwcl0OGzwYPLf6E7dlXCVTSuKDKMUEEMO2lA7jN7dpsynJD8KjkeKRfARt3KZf3t6lW/QzUuW/Yj5E+G4zujsKtREXlkyKYztY8HVsLP5wVp3MkBXaigE/RN6srQ3dsJYquTaa5xh8WHU/2/vRyGAoLu1Pd2CWUB2kuJIyskCSufAhutySSxoT/jCYmZ4mNa6Hy/yabauQ1BVwY6iDMrtMOGIfKgZTQoN5E/fbLVsSfNay99PmQxjYEhCDODZwCAX4tXLTudAEEMDfkf4JGDXZ0tAv8GQ9WQUcWJyneyEnRK0dYe/hgv/SJzctEwuyFWT8T",
+    "c0a664a8d0ae4505fa5a431c099b01838efb7240f8d2440b1d70fb19892d2571": "U2FsdGVkX1/WzvGdKITL7+z1yQk8tLEbSPuBpel/M7UqfldaeSqvmoTP9NwuV+bQ0NXrqaYvwwvjxzDm58VR7Nu3CyU62LsU1+iSJDZrFMkuFvBZ5w2fAInzbXMEdaNjqzD705eSTD60//dL0uRw31QNZB3+PUydUd5mw2F5HYUpagxfmsWoBy2t7WtBZ+nBBElmKNMwyWCcBD6Plin0tEZTyDcrhI3Pl+FBj6oO3n/gyRMm5GhRNn0mp8XdM5Ri4+ziPlT1usAUXL9aSLx29J0kGO3P4kYyWR4lXJhnpM6xDbErrn20X46Mc23UgaL0g/sxEXmzatooSasAzTWIfuHiMhYSjE29sv+XWPh/EdUeBYTpROre6QLEDDSNHzrMG0xCOIxbe1uUUZpVYP+dHvKC9zaWYQczqrBcaO3+mBmuwU9XQGREC4LyY58i6oS6yLGvsD3NFurTFnWIgwtpKfnOoWxlagQRR1jMl9CaF0r/S0tz+CFB2wf4IEzPVhU8/w+EDubSJrgOuPROrcmRX9SLP8oJe/MW4l2ov63stlB+6LYsLJmYnzJQqaCbspVPFjx7j50ebiM0+g9A3A96S8OFUs/8/rq1GdAg48b1hDUmSCfd+Y98fGLA4s/c15M9QJBnWMUv8bcA0H+FsugJU5RjQE9TcNI/U5eWY98gL7b7lVtveeihIBrHgkXrtJUmnkQA+MiCCAQSHQbWYGegUOOpe/65MDsIFxv5uCuAJ8cusHZnXAauEDQNTV9cSL4/zYj15OfhT+GIH5Gvh71/axPB6G4d0yjOrpnIJ/GLrtofEWcaqq9K6A156wZpzGFTphcrSgv167alHfbm+DwbKIsMNyHdpZSgF3O29yTjXxN3z+dtHMpQEZrU50PdDV1d+e4pL5cweY6n+1n+B8DwInr5AY8MOJEuiI5F0szYlqJZDUNs91VHBE8p6Ge8wQbgH+6hm4Yv0C8CVbHfMY9/EOcl+id2VsjtBZKAzBUaQ/Q=",
+    "21f6feabd94a959ab7246301a9b3ac8d6cb7d1b5101cd956002d3d576f48b855": "U2FsdGVkX18gN85LoyxD/kVSsd2WBHBgHyVgh+P+Ji4KnTozWRYhyfGHlEYhPQz5/bOhvmF72q2nDxgl5O7581waok4QmtXckDzwMrzogxJzroCs1Zb7IdwNsQwB4jxTHsHpNHmVm8B025zPXluvZLzjTOwWykW3tcOH+HhHCECiXqAp9UkPaEyb6wLAT1RaZGsIlzmcsAx/Udd0DGBfpYDEYmoXbTgOtD0aOQHH8t98CnTF5Q5JaeX6w9iTNellywcehd2hxS2foiOxBMqamJ6qDGZxVkAWMkdVTwgeSgBGBqfhldB060ZThQ8cifpXkf5k36g/1b2m1kBHj5ija3jTnQbqmJ0KccmTOC8J8jqPNkvYKQ3RhB5/9eagNyVSvHMzOqtJo1OxW0180NRC6AgUOWtE6H0JHba9RX1XWPJeJu7usp+r2x3Yr7Srj6L7kvkNW/isgDv2jBFOnI6h8IQiSEinVT0XEwM5rdT3Y8NFzS73RfLtcuCXPa3VsU5NkB54iU3pGaR8OEihlDKtHZsi+0QTra0xnlMnl++1lq9ZY/soMqRsVEcZvax7R6E3rG3E12DbZFiyRMYSBRWrpZ55QVpqtzI6stLN/Yc0+ps7yvZjnQaQYuQQjHxnVtcX9kaacWqXhEmz9GCbMMt/VzfRU1iCqmet4/EcWzRWvZPnGAXnyAqLsBWzRNbgidRoofoy+FV+coPrrtv9ILaEetHzZjsl7eVqZreTLRCfL9gn6GkIdCJO4TyaXwjMBXycbtf3XihhNBa3Ga/tYDjop/XClDuD3zCjlTBrVIm0B/KXzxeNM7WKLKDTmv1bgfQInrSBihyDbeIcFoekjwcukA=="
+};
+
         // Estado del juego
         this.currentUserData = null;
         this.terminalCommands = [];
@@ -12,7 +26,6 @@
         this.gateErrorMsg = document.getElementById('gate-error-msg');
         this.recoveryLinkContainer = document.getElementById('recovery-link-container');
         this.recoveryLink = document.getElementById('recovery-link');
-
 
         this.terminalOutput = document.getElementById('terminal-output');
         this.terminalInput = document.getElementById('terminal-input-field');
@@ -77,7 +90,6 @@
         document.addEventListener('keydown', startMusicOnInteraction);
 
         this.initializeTimer();
-
     }
 
     // (Encriptación ahora se realiza de forma estática offline)
@@ -636,14 +648,6 @@
             u = u.toLowerCase().trim();
             if (this.usernamesList.includes(u)) {
                 this.identifiedUser = u;
-                
-                // Configurar enlace de recuperación si existe en el DOM
-                if (this.recoveryLinkContainer && this.recoveryLink) {
-                    this.recoveryLinkContainer.style.display = 'block';
-                    const targetFile = (u === 'alejandro' || u === 'maria' || u === 'alejandro_maria' || u === 'alejandro y maria') ? 'alejandro_maria' : u;
-                    this.recoveryLink.href = 'matrix_recovery_' + targetFile + '.txt';
-                }
-
                 this.initializeTimer();
             }
         }
