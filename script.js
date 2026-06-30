@@ -7,23 +7,22 @@ class ISMAELSLastMission {
         // Base de datos de juegos cifrada (CryptoJS AES + SHA-256)
         // Ningún dato sensible (usuarios, roles, archivos, claves o mensajes) está visible en texto plano en el F12.
         this.encryptedDB = {
-    "5cd7c4fe6f74cf06f4a5534608b899623e63fcd8136c7d6ffc4a0d5ac23e1c06": "U2FsdGVkX19GIHeX1HeDXcuwjhZiXVsuoLQjD17zYHIEsDB21fm1ffzBr84lZTjXMBMnAA74SguurcvBBmnf7cfxhEU4fe8t7ziBGbNrPsX+ULLU7wvTrbdO5tvhQg9F28LgOL2BUoNPouByxjn1BGC5L38GTIC+rm60InubPbinvhdjKdFxs0dMfNjEDVLgmf9tchskXdTiRIAdYS1pdz+SVGaP7Ff94hy5AgyPBUJyyKNk95n2/17chHkEYF2gbMzFJL9R8onN6tQ4Q7KyVChM6UTqmgPJwqaw0+98ctczP8WWt68a6ssTUKppMm/xWLzxMI8s9lw3GS1mHN5laysAA3Ag0bOdCFTMPEftRPyVFEz6igJ9LZHt6sI8Oe3F8uRGtOPJFX+dD7FKeMc8dDhbpuB+wyPBLcWD+581AT/5QmyQOy8Yd5ZnEfyhxELEOshQsZVzfiO0DMVGsNnemXKrGTCTLv+HxORRHLr4vTCLT42ob//UOHwUBCCPA8VzKDHXfPtDm3yu06D+l9HTj+JplG51AITzZIBgzVNf0DAkOZthjtf5OtOyNLIba9V2BYwqDrsb1hMI1WsC9on/Snd1g2MGBTFzz8ujeFxIbs13x57/0XHAtGsWw6gpQdDC6C5Q1HPs646wxXrttRgTA0vvQTabjhYIaEXuHkBKWm9+CwSk4a6QVvnL3yRNGbq0Bf8wSVtUSOWasHOidJfndnEEHYn1jjA4Cu23uIfTh7iaugD+quvo0maZfTh0OAN6o48xssImOOHN4rQ7ZcY37UP2QGKg5UxDvTbG6tfQfsedDm/fW4A1QlW1IAhbJh6S/848KHGR4SV0lj8CUcYxNpSHQPkB4LRgc7T+C37fCLb0tFPVifjQBeFXaNeSd13XWuIY2UxMF1nBUP28aTmXsw==",
-    "403a928582a6b3b0324e91d1805777ef96d49b7cd15607f285d673270d553412": "U2FsdGVkX1+OupnlBoqgOyoB9AL+MhRCdSuKIMmO0MB15g8eZ1xKGZiQpn/voBOy5jY8YPmQZvULR7IpvDf6JrVl+9EvLLZbyLw9rwTHsZEhe8mWO618fb8ZX8o0RC2dOTwlE1bpOcpMw+0PPukl+idJ9kb3aDJlTOXk2LCxQS7C9BZpz+EROM9nB7vqpkVq0Jps8AOjGiUgYcBOss7Rw8Y36tMtvYvijqrDpV2cAlXHNzGg5ly0LL5Ry54exe8xtQ6lcn38Arj8kllvgtffOkx0oOjh4CxGdCeTFQFhMmm4VBmm/uDfeXVZbqnBotpk/F8EUVim2utnfWzBJgoQ0JbpiRQ3D6hyHyKZLJe5BN3izijz63RWYsLaBt7AoGWCe/One0ZZS733XvDvPNqC3Q7lC05pADmjlgqaK67IHihfRQK0uU/EAZJArLbUwx7AiPLag4S1G2OcuYkEITl1SFiFFkxx6j1m7+K/eTMSTF5llhZoS03YmX7S/Ps+9VrYpsPChlMPtKQDx+RaEUDcLYl0cOrmBo3E4eHPj/icTdFGchzcWSYUcpdeIBRmEzAp/oXQ/IvpQUwDcw2u2tcDfg4cc+tKPqhOMPnGHOyMFnX2afD8nAEmSY01/G+AOEwpwcQSx6RdOhfGoIS8OqV//QnP7L99DgSfEcmnyhacpRcGd1pFgXfr1BSPZu+aqkBaPdFc8tdvdgI9y+AshrhMm9Zi3hpc5E0sfq9Ia6Y67X/xVfKsaFfq5ZSzGSq62bV+0LSqTQVsN4TFibeFGzptDjiavIbX9nxU2/DJAdF5lhNKZKl6qWEHz0wZACU4LLggg8oQrKghW37HI+t/VQW6Bg==",
-    "9880a11702a0fdd064154b17df6eb0e07b7364968a2c86197b51a7328dd53c41": "U2FsdGVkX1/gT9CJfESjMdPwrwISr/UWSTSYRWcvNKExrUINtI4diNnaq4jHEONLlxFliTatkRFf4Koeog214d0QtBcT/Da2JGFgANMpw+bbd9Q1wqKRFabeOaydhW6zIDODkDhtbx55NaaAG+sR8IO1h6isAVbeMnS02GXcLvl1gLxPZgNc20MEJfgQbKYxQLWuEnBoWvczepyBeBVNYz8nRy1U2C1NIOrU1aGpdH6J6Al7T1h3v4+rdnaqaRe4fcX3LXBlkxzBS5F5T5WkMoZK1lmQiMlNkJHm4L5TqshWyiEXYg8KItkQXHgSyx2sip/N0BwO+91vSc1Xe/cgYjwceJjmyvLdTNclapSXbSRa0t1F7a+NnS4fVPmsJ4PYDSIpiuzClivMCnP6uHCIo2grutv7Ej1Fz4XvFPxLozcbNFLVE6Wcgg9HI2QBjNTGApWRG2hfhPljSZmy3p7wobVNlDxWQDiTWsPXphJ4leLItMEaz0m1E4SpDFV9T9Q9xqNUr7BLnB0drYAcY5Oy/XSr+66Y5lOxOnsTga3XMutoS27Q0nRrukVq+KNRcp7tYaGxYJ1ub+DFaYBiVdoVAgf08wkrfVJ1bi6vJzNMEoc0GZD/VM8LdTpe8AkYlBSaNIwGaEtTC3NrEu1zPCEQfEh4W8XWoepzTUbMpExFuW8hP5gO5Lm7LEhjua16b1q5zX1pTFJ1CReBrY8Bl/kJfr7Qht8n9f0fqkIWBd9yLs0ipc7QXMTlcpZoLs57Npzc3iG3gwYgF0gKvcz4/TJkFl9XPacOC/2gMfboLiM9nJFdfpXTEzwZmahVLuIOp9p7sPhPsjflIpU6EBhOjh7Qb7pK1nbIfLCkxEOyWGlLmvA=",
-    "b3ca34e44d8e15e5f4001320329d6060ce6bf272895ee70ae5e395c3f607e5c4": "U2FsdGVkX1/Pt+D8CHdR4H/o+z1DfIBXBfnL8Fv65qynP+mcvGUkmfLmU6zMMlaO9yAVnvS/uLnNHwqh117e7k+BkEFXIH2YInhHoUv9iMGZ9bZ7f9E14covUB7zhpCDNUHXqYgjDDzB+rTJhvHgBrPcgfkl7NzjVXD6ocjJBgWUaBwFjkSG3C2CydYtjsS+SL79aiCeGm1RVtdxtrVtBdRmn9+2dzSGM5pDilkFki682w4Erh2wuqsiHfw51lR/ZRA8SuDqf/p3InWl7pU7j5j7uKQCkEyoCH4jxccCvEgR+0tNbrQrWN4/kPvIiJgKsyGfFJmwFMvNAFhf8GR6Lc5TCMekvB6j/VlXMWOFIKJ6BTNyY8cupNAQJ8BGZa8MkHCJhOO/GH579PK8AAle4ygvlVCylX/33tWuFAXSKfUNmAgRUEOgCG3HfWK+G/DXSBALomtnNKpnb4qGATCxpeBjSNdelZNwbY7A8WDuSdyL79C4O90E3txd3y4QV1/TceA3yn0pCDbkopC5BsfbkvbIPIU4olIPelDZl7wrHXzzBs/aWwM8XfVDD0dXL3G/nA7yrVCzMVGobn4wmv4lB8VzQbWNbWyK4DqYoza7jrj1dgp1PMq0OapJmNUEWKqSykPnHBOiwHf/yobA/3TEiL95GpZ0ErBdInwAEAzxx9NmHNjZStUozcP4aKWelOrroFsYMDzVupRO+EqYKVsNU0uSSEfbSMRZ4TG7cjKozoI="
+    "5cd7c4fe6f74cf06f4a5534608b899623e63fcd8136c7d6ffc4a0d5ac23e1c06": "U2FsdGVkX19Om81+zFDjUCyJsmbO93cl9Njw+3VaImiQ3KuYZQFmjVi4jEE65X7JQv7QVI1AJgXzI51C6Ay7nBeSLmSVTbfeQY8Odr+pAGKMRyu8URv6fRfA6gI64Ihlc1wVNiRgDTDe+6nMfzFWBCyUr65q2wnWX32QnqloYF6yGNo8p4lrBZFPaKjYEZpYV/Oh2M5RsH17UUN5a7mP1usP4nolEotp4OiYJEEcpTA5o6y1Z403YciSNg3praFQcCx3Q9IjmRtjmmJ9fIrDYsYiHrCTQgNcDzeZAx5jZQy7e5i50xu9GkJEY6I+DC8zfiYYB4KNVpkOMNRZYrfze80gHwRORwxpxENZFcWQDtybWMAsIeoQyVOQO0rHTf6hvJP3qwbZHmywRdEeQz+3w+8/w7rLyRIiAyPdAIgXgJPunmbf4/gprxlUxMrlgb50J8lYkGiYeEdiEfSEaVdZBWtI2tFfq3Is8U3uxsqfzxODjsT6mI/9FRKl5xf82neC4vzXgUcgcPv/u3bDSXAr+pcnB85SIpjclYkQ5kJUNjZ3wuBaybIN3Kdjh635RY1FnlQBI0XVkNoX4t10CeQGBLC84o8CEjXE6xCuZKf505fejbq8LdYLyD7Jtrbqv1h+ATRtoz6GWEetrrz8SxQFNb+nU6FO85RJGeldPGdYzrltGGpxRTRJL8H36EMjIzVKq+ZVpsXr7k6iTIpB+lynkzaDZW+eZUmxKzrJnpNLV1jOUbytoOR9O1jtLlJki+bJDi0a+Y98tjj3CwvHmw8T6aA3v+62mgPwAY07wM9IQ79zMaI+aBCA4J17CEWGezUFA84k/RAeil4mIR9i+oqHWHSjUESm/9zjVJkGjDmVYuICf7aIhEFjKh1WsyCVTRDvntXIsimjiVa5yx5Hi+i/IDaAqU0Ik0u8K+FxXs6LrPZYqGSzX9iIKQe0SY1lCL43Ay4/mZZrApDPIEt7ffHT5Q/C/VHUH+/eTxwvqwkMGTt/SGuouiOC0xQuy+GfhiUl",
+    "403a928582a6b3b0324e91d1805777ef96d49b7cd15607f285d673270d553412": "U2FsdGVkX18/2xlYijQJoymYTM++QdvLNlk6NL0ldJloEDqYhy8ICoQj2SgAEwN37AMwtZYdZ3oNvfY2vBLQ9RE6jmyle9MAOLKz3YG+gHSaK/fjavWqJdz51oJpU6o8A/+W95stYFRkgD8TQskMgWHlUhPQO0wZRHJ6kWGWWJH96pfM9ORO0HFX+8F3Lqxr4P4zgxYDsOM0wP5fi/0lQYVIus0gBRMH9uUbgFoim6cDoWW5lwvayz4nQzix0M4n+S7YEoNNYKzriT+aBEKN2iDGNPRVXnmVWw2SO47TRN2Ok0oLz0nLWdWXqtWU3fz+kZMCUjBr8S5VBku6QtVjQ5UxBX5dI9rqdo50OF5+2jeZJ8o6amVznwgbVdiTTQY8BV1KtpTmO81iBlEbm927S4TewJb5IZTTcMjok1V9py4Qd5rDEbDNaafGM8jRkfwu4JXytl8bawOXgq66/5xTa44Jklze/EeNsjd+5JhsDEyC7XrkvSmFicKMjHBcehX+U1YZv+7vXHu2Rm/wkud7EXociOOFQiR4YsDyi9UhX4QUGeve/9IU04Rl7A6cpWNaBqDLtHzhKJGyZyy9N/whEM/0s/+NwYlIjY+EaVHDYnh9guCcpHbwAO4w8qjWfQFRUr0QP6zp5bzSYA+hc92nJBEt8BEkHRHJOo6WRHdpBJhK9ShQV0uBUojrzsU9n5ohqI3vONWy8wqFzRzqaNJIvn03UYzOKyDw4QONcfYt6cuCmFdaYjlervwPNVctP8MLAefnZPR0pgywrY5Rg6cRlc/glbqX+tUPcoVWPEUY9JUP9MsVvJOmJh2XZ5h+5a8oAF809fxcztHYDCeqBbd+05KFhlrDXlABkjiVrUJX9hcrjr1zR3UbvsXOe4wvcL0+",
+    "9880a11702a0fdd064154b17df6eb0e07b7364968a2c86197b51a7328dd53c41": "U2FsdGVkX19xXQe8TKB1OgrsJDkXeW0ZpitBs+GYx6MRpD80ggsAmLAoEStqQKAnGtoIX1C/a5Ph5zWvC5NKf6WZz/P5KA2v38RntEVmws4ah3FPnDzdXS243Jzi0FhezJIPiScYDaaBkpz5i07OQG8QkgNTnjgu8g9RDQuRTZ3egHmfE44IVc+6y2icLUUIB1KPzjfJqGbAMjUqLoBwB0b/YKdsym08BC8Msxj6zsDS4Mmj7ScScAs/EoOWyRBjRDmeiZR1ceFz1XLEx+7QYECeq7u4m+WcStitLWC1mqXT6EWs+Fya2j80DW0060+gHXUOtWzdJTyUdsub6uq3qg+kcPCfPM96LBestn5HHTSEjmWUZPUW0hsbJLo2SXyGVYCXteOAO2F10eK/DLlBJbhyJAeNtJs+5GtNOhwc7n0QANlNFo6GU2x1kD1qcJooaX7KuZYIZRaTfI14DW4Iilw1NSmqOk9nCeQ0rzrdKIG7wKbUgxkxPxM1fMXr2hsSmJtfpS1WmK5CJVaoHtG6J7ku1Btyh3+lUCJ7V6GtlM76jRdRZStsz+mQ+QW9wD2Wsy4+6vMOsENXEt7exkBnmF0p3LhmF+eKnRrTS/yRgSu1cxWyPaq1MCXACzg2vmHbctGCLoRLJLUiJJyW4AJtfRbbUbpUxicHe05a/OT/o0gl3/9pAUxtGRQQ6k/IGGX6FQlsekEVMPyi+HHKhsRAjKern6cJ4AIAu2txoNCQ7wKEoyM0PsWJfRyT4kUMMWnl5qsad9Fc+QfQ+Pi4NfOD8pnqI1epluLaWfK5A+CMKjED35Is55XWWSLYSUfOFujT1FzcudovaWjR/rkZv6CeQVtCOwedJ5ctpqS5jORDHNRvx11mgI8KoLYkL7PWmHTEw9Y8Qwf5IVbqw91ewXoG5MiBfsljFB8tlBE6nB4bc4+esGwqOic5hTT3H/GIytivhHysGT/H3MInN3raShNktw==",
+    "b3ca34e44d8e15e5f4001320329d6060ce6bf272895ee70ae5e395c3f607e5c4": "U2FsdGVkX18xkMiof+4uyXlWpihb3mJf4oLyRqITDmDTGpGMUye578YD65tzACo4TzuxP8RHbnL/Uztmg1W3GUAQXk9X+DQjocNs9c5QRZc204Kh6l/cS3rk8R1pok5DS+/PfXmPep/WppezjhsWFl+f7q8aouIBSpnnIkc9Nni/4NIvBgX3kFmqPmxc+xIJGrW2MR9BMRy+g4eyqDzMJEc9XDRQeVxbRx8Yx59cdGIKcegwUWRkrDCYiTHmQzDR5n7k8eOgI3xMWxzsoWpXc6m9ENShLpHNnv6Lo/vzbm2dFE1h3fCPUtPd46nTcvngwLFdEL9Kl7cE/JfmlKXWYRVzsMQSbeEMeAe1dTX+3jFmGtPakV42vHSy+k3XU8LzwIbuM77FIKa94G3LunQD0ZTB/0LFLd83h80jWoTwE4L0RwiFNV8al1JzRBl0r9ZaAaRNOOxWyuifh6vltpYEOdOeeO6uvbs1bBFs+I3Ynr+70Mbaaz5D05Zo1jJxXU6jkwawjxKappfbDZALhW35MiwNz7usCtaiR2YOC47AZdwOduf7pxNZGx0j6yFuDcqTl/IDVMv8pQ3A7fvDDaDh1Vxqpz+vtusp5qfTeoZqZJbSIvmX3yj9FcM9uMpLJnEGZvpnfv/9m0cmH/b4KJpOtGyuckER5iJyl85txA0YINigYgv6CrTGa8Ehi+hMMXd/lHgRJZ3Q1gLaIQGzRwF1rno7j0v/HFnAcACU1T0agjHJ0l9bRfEDlubp6dnr9commgWSaRCIqgsmhYLxKPxXYwiMvLnBt6+8qC/o9AKqpRCU82R1L8JnDJ3leBxFiObP26Tt9wuE9KkSQ14wX6a/dA=="
 };
 
         // Nombres de usuarios válidos para inicializar el contador
         this.usernamesList = ['julia', 'marta', 'ariana', 'alejandro_maria'];
 
-        // Mensajes chistosos para errores
-        this.funnyErrors = [
-            '❌ Código incorrecto. ¿Estuviste durmiendo cuando lo pasé? 😴',
-            '❌ Nope. Sigue intentando, campeón.',
-            '❌ Eso está más lejos que Bolivia. 🌍',
-            '❌ ¿De verdad? Inténtalo de nuevo.',
-            '❌ ERROR 403: Tu intuición falló esta vez.',
-            '❌ Casi. Pero no es. 🎯'
+        // Variaciones de mensajes de error humanizadas
+        this.errorMessages = [
+            '❌ Eso no es. ¿Dormías cuando lo pasé por Insta? 😴',
+            '❌ Mmm, no funciona. Más claves!',
+            '❌ Estás cerca pero no es. Dale!',
+            '❌ Nope, ahí no. Pensá un poco más.',
+            '❌ De verdad? Intentá de nuevo.'
         ];
 
         // Easter eggs de comandos
@@ -203,7 +202,7 @@ class ISMAELSLastMission {
         }
 
         // Error de login
-        this.gateErrorMsg.textContent = this.funnyErrors[Math.floor(Math.random() * this.funnyErrors.length)];
+        this.gateErrorMsg.textContent = this.errorMessages[Math.floor(Math.random() * this.errorMessages.length)];
         this.gateErrorMsg.style.opacity = '1';
         this.gateContainer.classList.add('glitch');
         this.accessInput.style.borderColor = '#ff1493';
@@ -241,14 +240,13 @@ class ISMAELSLastMission {
     // Bienvenida en terminal
     printTerminalWelcome() {
         this.printLine('╔════════════════════════════════════════════════════════════╗');
-        this.printLine('║  🎮 ISMAEL\'S LAST MISSION - SANDBOX TERMINAL v2.1 🎮     ║');
-        this.printLine('╚════════════════════════════════════════════════════════════╝');
-        this.printLine('');
-        this.printLine('🔐 Conexión establecida con el nodo de archivos cifrados.');
-        this.printLine('📁 Rol detectado: ' + this.currentUserData.role);
-        this.printLine('');
-        this.printLine('💡 Introduce "help" para ver comandos disponibles.');
-        this.printLine('');
+        this.printToTerminal('║  🎮 ISMAEL\'S TERMINAL 🎮  ║', 'var(--neon-magenta)');
+        this.printToTerminal('╚═════════════════════════════╝', 'var(--neon-violet)');
+        this.printToTerminal('');
+        this.printToTerminal('🔐 Conectado. Los archivos están acá.', '#bbf7d0');
+        this.printToTerminal(`🎯 Rol: ${this.currentUserData.role}`, '#bbf7d0');
+        this.printToTerminal('💡 Escribe "help" si necesitas ayuda.', '#bbf7d0');
+        this.printToTerminal('');
     }
 
     // Procesar comando
@@ -490,6 +488,14 @@ class ISMAELSLastMission {
 
     // Utilidades
     printLine(text, color = '#a8e6b8') {
+        const line = document.createElement('div');
+        line.className = 'terminal-line';
+        line.style.color = color;
+        line.textContent = text;
+        this.terminalOutput.appendChild(line);
+    }
+
+    printToTerminal(text, color = '#a8e6b8') {
         const line = document.createElement('div');
         line.className = 'terminal-line';
         line.style.color = color;
@@ -773,7 +779,25 @@ class ISMAELSLastMission {
     }
 }
 
-// Inicializar cuando carga el DOM
+// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-    new ISMAELSLastMission();
+    window.game = new ISMAELSLastMission();
+
+    // Lógica para el botón de música
+    const bgMusic = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+
+    if (bgMusic && musicToggle) {
+        bgMusic.volume = 0.2;
+        
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicToggle.textContent = '🔊';
+            } else {
+                bgMusic.pause();
+                musicToggle.textContent = '🔇';
+            }
+        });
+    }
 });

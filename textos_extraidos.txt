@@ -1,36 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
+# Textos de la Interfaz (index.html)
 
-<head>
-    <!-- 
-        ======================================================================
-        🛠️ NOTAS DE DESARROLLO (ISMAEL):
-        - Recuerda borrar el archivo /.env del root antes de subir a Vercel!!
-        - TODO: Desactivar el endpoint backdoor temporal para pruebas:
-          /admin_backdoor_secret.html
-        - Las claves de encriptación finales están hardcodeadas en la sandbox, 
-          no busques en el código fuente de index.html porque las respuestas 
-          están cifradas con AES-256 en script.js, listilla/o ;)
-        - Nota: He dejado la base de datos Sqlite temporal en /database/backup.sql,
-          tengo que limpiarlo por si acaso auditan la web.
-        ======================================================================
-    -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTF Ciberseguridad - Portal de Acceso</title>
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-color: #0a0505;
+- CTF Ciberseguridad - Portal de Acceso
+- :root {
+            --bg-color: #05040d;
             --card-bg: rgba(15, 8, 28, 0.6);
-            --border-color: rgba(168, 85, 247, 0.35);;
+            --border-color: rgba(168, 85, 247, 0.25);
             --neon-cyan: #06b6d4;
-            --neon-pink: #ff1493;
-            --neon-magenta: #ec4899;
+            --neon-pink: #ec4899;
             --neon-green: #22c55e;
             --neon-violet: #a855f7;
             --text-primary: #f3f4f6;
@@ -117,65 +93,12 @@
             perspective: 1000px;
         }
 
-        
-        /* ===== NUEVAS ANIMACIONES v2.5 ===== */
-        .gate-card {
-            animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); opacity: 1; }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .cyber-logo {
-            animation: titlePulse 3s infinite alternate;
-        }
-
-        @keyframes titlePulse {
-            0% { filter: drop-shadow(0 0 5px var(--neon-violet)); }
-            100% { filter: drop-shadow(0 0 25px var(--neon-magenta)); }
-        }
-
-        .cyber-badge {
-            animation: badgeBreathing 1.5s infinite alternate;
-        }
-
-        @keyframes badgeBreathing {
-            0% { box-shadow: 0 0 5px var(--neon-magenta); transform: scale(1); }
-            100% { box-shadow: 0 0 15px var(--neon-magenta), 0 0 30px var(--neon-violet); transform: scale(1.2); }
-        }
-
-        .cyber-btn {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cyber-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: rotate(30deg) translateY(-50%) translateX(-150%);
-            animation: shineEffect 4s infinite;
-        }
-
-        @keyframes shineEffect {
-            0% { transform: rotate(30deg) translateY(-50%) translateX(-150%); }
-            100% { transform: rotate(30deg) translateY(-50%) translateX(150%); }
-        }
-        /* ==================================== */
-\n        /* ==================== FASE 1: PORTAL DE ACCESO (GATE) ==================== */
+        /* ==================== FASE 1: PORTAL DE ACCESO (GATE) ==================== */
         .gate-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 40px;
             text-align: center;
@@ -305,8 +228,8 @@
         .panel {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 12px;
             display: flex;
             flex-direction: column;
@@ -776,232 +699,123 @@
                 text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-cyan);
             }
         }
-    </style>
-</head>
-
-<body>
-
-    <!-- Botón de Silencio de Música Flotante -->
-    <button id="music-mute-btn" class="floating-mute-btn" title="Silenciar Música">🔊</button>
-
-    <!-- Barra de Temporizador Superior -->
-    <div id="global-countdown-bar" class="global-countdown-bar">
-        ⏱️ TIEMPO HASTA QUE ISMAEL LLEGUE A BOLIVIA: <span id="top-timer-clock">14:00:00</span>
-    </div>
-
-    <!-- Overlay de Bienvenida y Activación de Temporizador -->
-    <div id="timer-intro-overlay" class="timer-overlay">
-        <div class="timer-card">
-            <div class="timer-card-title">🚨 MISIÓN DETECTADA 🚨</div>
-            <div class="timer-card-text">
-                ¡Hola <span id="intro-username-span" style="color: var(--neon-cyan); font-weight: bold;">Hacker</span>!
-                👋<br><br>
-                Ismael está en camino a Bolivia ✈️. Tienes exactamente <strong>14 horas</strong> para descifrar tu
+- ⏱️ TIEMPO HASTA QUE ISMAEL LLEGUE A BOLIVIA:
+- 🚨 MISIÓN DETECTADA 🚨
+- ¡Hola
+- Hacker
+- Ismael está en camino a Bolivia ✈️. Tienes exactamente
+- 14 horas
+- para descifrar tu
                 mensaje antes de que aterrice y el sistema se bloquee.
-            </div>
-            <div class="timer-clock">14:00:00</div>
-            <button id="timer-start-btn" class="cyber-btn">⚡ Aceptar y Comenzar Reto</button>
-        </div>
-    </div>
-
-    <!-- Overlay de Bloqueo por Expiración de Tiempo -->
-    <div id="timer-expired-overlay" class="timer-overlay">
-        <div class="timer-card" style="border-color: var(--neon-pink); box-shadow: 0 0 30px rgba(236, 72, 153, 0.25);">
-            <div class="timer-card-title"
-                style="color: var(--neon-pink); text-shadow: 0 0 10px rgba(236, 72, 153, 0.4);">⏰ TIEMPO EXPIRADO ⏰
-            </div>
-            <div class="timer-card-text" id="expired-card-text">
-                Ismael ha aterrizado en Bolivia 🇧🇴.<br>
-                El sistema de seguridad ha bloqueado el acceso a tu mensaje final.
-            </div>
-            <button id="ask-more-time-btn" class="cyber-btn"
-                style="background: linear-gradient(135deg, var(--neon-pink), #b91c1c); box-shadow: 0 0 15px rgba(236, 72, 153, 0.3); width: 100%;">¿Quieres
-                más tiempo?</button>
-
-            <div id="more-time-input-container" style="display: none; margin-top: 20px;">
-                <input type="text" id="more-time-input" class="timer-card-input"
-                    placeholder="Escribe tu petición aquí..." autocomplete="off">
-                <button id="more-time-submit-btn" class="cyber-btn" style="width: 100%;">Enviar Petición</button>
-                <div id="more-time-error" class="timer-card-error"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Capa de brillo ambiental de neón -->
-    <div class="ambient-glow glow-cyan"></div>
-    <div class="ambient-glow glow-pink"></div>
-
-    <div class="app-container">
-
-        <!-- FASE 1: PORTAL DE ACCESO -->
-        <div class="gate-card" id="gate-container">
-            <div class="cyber-logo">🎮 ISMAEL'S LAST MISSION 🎮</div>
-            <div class="gate-subtitle">~ Antes de irme a Bolivia... un último reto ~</div>
-
-            <div class="input-group">
-                <input type="text" id="access-key-input" class="cyber-input"
-                    placeholder="👤 Escribe tu código de acceso aquí..." autocomplete="off">
-            </div>
-
-            <button id="gate-submit-btn" class="cyber-btn">⚡ Venga, descifrá ya!</button>
-            <div class="gate-error" id="gate-error-msg">Código incorrecto. Inténtalo de nuevo.</div>
-        </div>
-
-        <!-- FASE 2: DASHBOARD DE EXPLORACIÓN -->
-        <div class="dashboard-container" id="dashboard-container">
-
-            <!-- Panel Izquierdo: Consola Sandbox de Archivos -->
-            <div class="panel terminal-panel">
-                <div class="panel-header">
-                    <div class="panel-title">
-                        <span class="cyber-badge"></span>
-                        🖥️ Sandbox de Hacking
-                    </div>
-                </div>
-                <div class="terminal-body" id="terminal-output">
-                    <div class="terminal-line">Conexión establecida con éxito con el nodo de archivos.</div>
-                    <div class="terminal-line">Introduce <span style="color: var(--neon-cyan)">help</span> para ver los
-                        comandos disponibles.</div>
-                </div>
-                <div class="terminal-input-line">
-                    <span class="terminal-prompt">></span>
-                    <input type="text" id="terminal-input-field" class="terminal-input" placeholder="ls, cat..."
-                        autocomplete="off">
-                </div>
-            </div>
-
-            <!-- Panel Derecho: Módulo de Desencriptación -->
-            <div class="panel control-panel">
-                <div class="panel-header">
-                    <div class="panel-title">
-                        <span class="cyber-badge"
-                            style="background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink);"></span>
-                        🔐 Módulo de Desencriptación
-                    </div>
-                </div>
-                <div class="control-body">
-                    <div class="user-profile">
-                        <div class="profile-label">👤 Amigo detectado</div>
-                        <div class="profile-value" id="profile-user">-</div>
-                    </div>
-                    <div class="user-profile">
-                        <div class="profile-label">🧠 Tu especialidad</div>
-                        <div class="profile-value" id="profile-role" style="color: var(--neon-cyan);">-</div>
-                    </div>
-
-                    <div class="decrypter-instructions">
-                        Usa la consola de la izquierda para buscar el archivo que contiene tu clave final. Cuando la
+- ⚡ Aceptar y Comenzar Reto
+- ⏰ TIEMPO EXPIRADO ⏰
+- Ismael ha aterrizado en Bolivia 🇧🇴.
+- El sistema de seguridad ha bloqueado el acceso a tu mensaje final.
+- ¿Quieres
+                más tiempo?
+- Enviar Petición
+- 🎮 ISMAEL'S LAST MISSION 🎮
+- ~ Antes de irme a Bolivia, un último reto para divertirnos todos ~
+- ⚡ Descifrar mi ¿despedida? o solo un mensaje🤔
+- Código incorrecto. Inténtalo de nuevo.
+- 🖥️ Sandbox de Hacking
+- Conexión establecida con éxito con el nodo de archivos.
+- Introduce
+- help
+- para ver los
+                        comandos disponibles.
+- 🔐 Módulo de Desencriptación
+- 👤 Amigo detectado
+- 🧠 Tu especialidad
+- Usa la consola de la izquierda para buscar el archivo que contiene tu clave final. Cuando la
                         encuentres, escríbela aquí abajo.
-                    </div>
+- 🔑 Tu clave final
+- 🔓
+                            Desencriptar Mensaje
+- 🔒 Nota: Al descifrar con éxito tu mensaje, se notificará automáticamente a Ismael.
+- SISTEMA DECODIFICADO
+- ⚠️ ALERTA: AUTODESTRUCCIÓN DE DATOS EN
+- TIEMPO EXPIRADO: ACCESO NEGADO, HAY ALGO QUE NO HICISTE BIEN Y AHORA DEBERÁS COMENZAR DE NUEVO PERO ESTA VEZ ES MÁS DIFÍCIL
+- Pero existe una salvacion, sólo deberás
+                    comprometerte a:
+- 1️⃣ Realizar un volcado forense completo de tu memoria RAM a mano.
+- 2️⃣ Calcular una colisión SHA-256 en papel en menos de 5 minutos.
+- 3️⃣ Prometer invitarme a comer unas pizzas la proxima vez que te vea.
+- 4️⃣ Hacerme un Bizum para revelarte que que archivos se descargaron y no lo notaste
+- ¿Aceptas las condiciones de
+                    restauración?
+- 👋
+                Aceptar el Reto de Restauración
+- 💬 Si quieres puedes dejar una respuesta aqui :)
+- 📤
+                    Enviar Respuesta
+- Cerrar
+                Sesión
+- SISTEMA INFORMA
+- Confirmar
 
-                    <div class="decrypt-form">
-                        <div class="profile-label">🔑 Tu clave final</div>
-                        <input type="text" id="final-key-input" class="cyber-input"
-                            placeholder="Introduce la clave final encontrada..."
-                            style="padding: 12px 15px; font-size: 0.9rem;" autocomplete="off">
-                        <button id="decrypt-submit-btn" class="cyber-btn"
-                            style="background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); padding: 12px 25px;">🔓
-                            Desencriptar Mensaje</button>
-                        <p
-                            style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; text-align: center; font-style: italic;">
-                            🔒 Nota: Al descifrar con éxito tu mensaje, se notificará automáticamente a Ismael.
-                        </p>
-                    </div>
-                </div>
-            </div>
+# Textos de Consola / Lógica (script.js)
 
-        </div>
-
-    </div>
-
-    <!-- FASE 3: ÉXITO / REVELACIÓN -->
-    <div class="success-overlay" id="success-overlay">
-        <div class="success-card">
-            <div class="success-title" id="success-title"><span>🔐</span> <span>SISTEMA DECODIFICADO</span> <span>🔐</span></div>
-
-            <!-- Contador de Autodestrucción -->
-            <div id="countdown-header"
-                style="color: var(--neon-pink); font-family: var(--font-mono); margin-bottom: 20px; font-weight: bold; font-size: 1rem; letter-spacing: 1px;">
-                ⚠️ ALERTA: AUTODESTRUCCIÓN DE DATOS EN <span id="timer-seconds"
-                    style="color: #fff; text-shadow: 0 0 8px var(--neon-pink); font-size: 1.2rem;">7.0</span>s
-            </div>
-
-            <!-- Contenido del mensaje (se difuminará y ocultará) -->
-            <div class="message-content" id="decrypted-message"
-                style="transition: filter 0.1s linear, opacity 0.1s linear;">
-                ...
-            </div>
-
-            <!-- Pantalla de Broma (Instrucciones imposibles) -->
-            <div id="prank-container"
-                style="display: none; text-align: left; background: rgba(255, 0, 127, 0.05); border: 1px solid rgba(255, 0, 127, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6;">
-                <p
-                    style="color: var(--neon-pink); font-weight: bold; font-size: 0.95rem; margin-bottom: 15px; text-transform: uppercase; text-align: center; text-shadow: 0 0 5px var(--neon-pink); display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span>❌</span> <span>Tu mensaje se está borrando... pero espera.\nExiste UNA forma de salvarlo (es obvio que es una broma):</span> <span>❌</span></p>
-                <p style="color: var(--text-primary); margin-bottom: 12px;">Pero existe una salvacion, sólo deberás
-                    comprometerte a:</p>
-                <ol
-                    style="margin-left: 20px; margin-bottom: 15px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
-                    <li>1️⃣ Hacer un volcado forense de tu RAM. A mano. 📝</li>
-                    <li>2️⃣ Calcular SHA-256 en papel. En 5 minutos. 🤯</li>
-                    <li>3️⃣ Prometerme que me invitas a comer pizza cuando vuelva. 🍕</li>
-                    <li>4️⃣ Reconocer que esto fue lo mejor del máster. ⭐</li>
-                </ol>
-                <p style="color: var(--neon-cyan); text-align: center; font-weight: bold;">¿Aceptás el reto?</p>
-            </div>
-
-            <!-- Botones de Acción -->
-            <button id="prank-accept-btn" class="cyber-btn"
-                style="display: none; background: linear-gradient(135deg, var(--neon-pink), #cc0066); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); width: 100%; margin-bottom: 10px;">👋
-                Aceptar el Reto de Restauración</button>
-
-            <!-- Formulario de Respuesta a Ismael -->
-            <div id="reply-container" class="reply-container">
-                <div class="reply-label">💬 Si quieres puedes dejar una respuesta aqui :) </div>
-                <textarea id="reply-text" class="reply-textarea"
-                    placeholder="Escribe aquí tu mensaje de respuesta..."></textarea>
-                <button id="reply-send-btn" class="cyber-btn"
-                    style="background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%;">📤
-                    Enviar Respuesta</button>
-                <div id="reply-status-msg" class="reply-status"></div>
-            </div>
-
-            <button id="reset-btn" class="cyber-btn"
-                style="display: none; background: linear-gradient(135deg, var(--neon-green), #2db30f); box-shadow: 0 0 15px rgba(57, 255, 20, 0.3); width: 100%; margin-top: 15px;">Cerrar
-                Sesión</button>
-        </div>
-    </div>
-
-    <!-- Modal de Alerta Cyberpunk Personalizado -->
-    <div id="cyber-alert"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 6, 15, 0.9); z-index: 200; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
-        <div class="success-card"
-            style="max-width: 450px; border-color: var(--neon-violet); box-shadow: 0 0 35px rgba(168, 85, 247, 0.25);">
-            <div class="success-title"
-                style="color: var(--neon-cyan); font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);">
-                <span>⚡</span> <span>SISTEMA INFORMA</span> <span>⚡</span>
-            </div>
-            <div id="cyber-alert-msg"
-                style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6; margin-bottom: 25px; text-align: center; color: var(--text-primary);">
-                ...
-            </div>
-            <button id="cyber-alert-btn" class="cyber-btn" style="width: 100%;">Confirmar</button>
-        </div>
-    </div>
-
-    <!-- Audio de Victoria -->
-    <audio id="victory-music" preload="auto"></audio>
-    <!-- Audio de Fondo -->
-    <audio id="background-music" loop preload="auto"></audio>
-
-    <!-- CryptoJS desde CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="script.js?v=1.3.2"></script>
-    <!-- Audio de Fondo (Música) -->
-    <audio id="bg-music" autoplay loop volume="0.2">
-        <source src="audio/background-music.mp3" type="audio/mpeg">
-    </audio>
-    <button id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 50; padding: 10px 15px; background: linear-gradient(135deg, var(--neon-violet), var(--neon-magenta)); border: none; color: white; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.2rem; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);">🎵</button>
-</body>
-
-</html>
+- ❌ Código incorrecto. ¿Estuviste durmiendo cuando lo pasé? 😴
+- ❌ Nope. Sigue intentando, campeón.
+- ❌ Eso está más lejos que Bolivia. 🌍
+- ❌ ¿De verdad? Inténtalo de nuevo.
+- ❌ ERROR 403: Tu intuición falló esta vez.
+- ❌ Casi. Pero no es. 🎯
+- 👤 eres: Hacker_de_Ismael_v1.0
+- echo hola
+- 🔊 hola
+- 🚂 choo choo! (solo era un easter egg)
+- hack the planet
+- 🌍 ¡Estás en una película de 1995!
+- sudo make me a sandwich
+- 🥪 Acceso denegado. Hazlo tú mismo.
+- rm -rf /
+- ☠️ ¡Acabas de borrar el sistema! (No, era broma 😅)
+- ║  🎮 ISMAEL\
+- 🔐 Conexión establecida con el nodo de archivos cifrados.
+- 📁 Rol detectado:
+- 💡 Introduce "help" para ver comandos disponibles.
+- Escribe "help" para ver comandos disponibles.
+- 📋 COMANDOS DISPONIBLES:
+- ls          - Listar archivos
+- ls -a       - Listar archivos (incluyendo ocultos)
+- cat [file]  - Mostrar contenido de archivo
+- clear       - Limpiar pantalla
+- help        - Mostrar esta ayuda
+- 🎮 También hay Easter Eggs ocultos... ¡intenta comandos aleatorios!
+- (Directorio vacío)
+- ❌ Uso: cat [nombre_archivo]
+- ❌ Error: CryptoJS no cargado. Verifica internet.
+- ⚠️ Introduce la clave final.
+- <span>🔐</span> <span>SISTEMA DECODIFICADO</span> <span>🔐</span>
+- <span>❌</span> <span>SISTEMA BLOQUEADO</span> <span>❌</span>
+- 😜 ¡SOLO ES UNA  BROMA!<br><br>Has aceptado el reto. Pero lo de la pizza no es broma y ya aceptaste!! jaja. Acceso restaurado.
+- ❌ CLAVE INCORRECTA - INTENTA DE NUEVO
+- Introduce la clave encontrada...
+- ❌ El mensaje no puede estar vacío.
+- Enviando respuesta...
+- ✅ ¡Respuesta enviada con éxito!
+- Enviar Respuesta
+- CTF Ciberseguridad 2026
+- 📄 [CTF] Respuesta completa Web3Forms:
+- ✅ [CTF] Email enviado correctamente:
+- ❌ [CTF] Error al enviar notificación:
+- DECODIFICADO CON ÉXITO 🎉
+- 0 0 8px rgba(34, 197, 94, 0.5)
+- 00:00:00 - SISTEMA BLOQUEADO
+- por favor
+- si por favor
+- si porfavor
+- mas tiempo por favor
+- mas tiempo porfavor
+- mas tiempo, por favor
+- mas tiempo, porfavor
+- mas tiempo
+- un poco mas de tiempo
+- quiero mas tiempo
+- 🍀 Prórroga concedida.<br><br>Se han añadido 7 horas de acceso adicional. Date prisa, Ismael sigue volando hacia Bolivia.
+- ❌ Petición rechazada. Sé más educado o di "por favor".
+- Autoplay suspendido por el navegador, esperando interacción:
+- Activar Música
+- Silenciar Música

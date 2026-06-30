@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Activar FormSubmit</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #1a1a2e; color: #fff; }
+        .box { background: #16213e; padding: 40px; border-radius: 12px; text-align: center; max-width: 400px; }
+        h2 { color: #00f0ff; margin-bottom: 10px; }
+        p { color: #94a3b8; margin-bottom: 25px; font-size: 0.9rem; }
+        button { background: linear-gradient(135deg, #00f0ff, #00aaff); color: #000; font-weight: bold; border: none; border-radius: 8px; padding: 14px 30px; cursor: pointer; font-size: 1rem; width: 100%; }
+        button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>⚡ Activar FormSubmit</h2>
+        <p>Pulsa el botón para enviar un formulario de activación a FormSubmit.<br><br>
+        Después revisa <strong>ismaelhinojosa@hotmail.com</strong> (incluido el spam) y haz click en el link de confirmación.</p>
+
+        <form action="https://formsubmit.co/ismaelhinojosa@hotmail.com" method="POST">
+            <input type="hidden" name="_subject" value="✅ Activación FormSubmit - CTF Ciberseguridad">
+            <input type="hidden" name="mensaje" value="Este es el email de activación del formulario del CTF. Si recibes esto, haz click en el botón de confirmación que te enviará FormSubmit.">
+            <input type="hidden" name="_next" value="https://ctf-master-2026.vercel.app">
+            <button type="submit">🚀 Enviar y Activar FormSubmit</button>
+        </form>
+    </div>
+</body>
+</html>
