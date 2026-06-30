@@ -2,7 +2,7 @@ const fs = require('fs');
 const CryptoJS = require('crypto-js');
 
 const rawData = {
-    'julia': {
+    'julia_root_x99': {
         username: 'julia',
         role: 'Analista de Malware',
         files: {
@@ -12,7 +12,7 @@ const rawData = {
         finalKey: 'Muchas_tardes_Buenas_gracias_hahaha',
         secretMessage: '¡Julia! Sabía que ibas a descifrar esto en dos segundos.\nSos demasiado inteligente para mis propios trucos.\nMe voy a extrañar tus análisis de malware... y tus risas.\n¡Nos vemos a la vuelta, genia! 🧠'
     },
-    'alejandro_maria': {
+    'crypto_duo_0x00': {
         username: 'alejandro_maria',
         role: 'Especialistas en Criptografía',
         files: {
@@ -22,7 +22,7 @@ const rawData = {
         finalKey: 'Supongo_que_la_vida_queria_que_nos_encontremos',
         secretMessage: '¡Che, Alejandro y María! Se que Ale lo pirateó en 5 segundos\ny María lo auditó en 3. Dupla letal.\nGracias por todo durante el máster. ¡De verdad!\nQue disfruten y cuídense, boludos! 🔥'
     },
-    'ariana': {
+    'ariana_db_admin': {
         username: 'ariana',
         role: 'Auditora de Base de Datos',
         files: {
@@ -32,7 +32,7 @@ const rawData = {
         finalKey: 'No_tiene_tiempo_por_hacer_el_TFM',
         secretMessage: '¡Ariana! Sabía que estabas ocupada con el TFM.\nPero ey, entre tanto trabajo encontraste tiempo para esto.\nSos una máquina. Descansa estas semanas, que te lo mereces.\n¡Nos vemos cuando vuelva! 💪'
     },
-    'marta': {
+    'marta_sysadmin_55': {
         username: 'marta',
         role: 'Ingeniera de DevSecOps',
         files: {

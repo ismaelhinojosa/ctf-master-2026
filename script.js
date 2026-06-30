@@ -7,83 +7,11 @@ class ISMAELSLastMission {
         // Base de datos de juegos cifrada (CryptoJS AES + SHA-256)
         // Ningún dato sensible (usuarios, roles, archivos, claves o mensajes) está visible en texto plano en el F12.
         this.encryptedDB = {
-    "d277670919a94ba361be1887d39852c3f31d7eed817343cbb70fcd8910841f86": "U2FsdGVkX1/AP9et0sIsFqQ8I7caKrNXUk/gCAjcRl9drqLJx7zwpmEbdw3GYP43WCpHw5g8mh69moZJDNPJAiCnG5trmuaXR1g0fMqsJmYjlMWmCDGK6q/ar6hHBHh5mBghdFVyUP+43fUVtK2rga+5mgKWPUWEFiijm2LgB4woXaSBKo3/WFFfdhmfIZ/0uryj35+x4a71ScLQodKRniGV3w0+7BV4XUgQLf9MiMZ56YUEPZLqPOTPClHhrZf8Vuq83FQDYYnFN2Tk8KzFPnWP8uRPZIJYgM9NQaiJBVh0X/lS3+y+YBr07DUWiWz4Y2xbQP0w9lhMciGP916q71DD7YZF5DEONFvglfvyNY70OG79EMPC2OqAEAuMZARWi4Ofbk8vqutI2Kt2KBcUy5LfFwKLYbJBSIkmmt77L6hgxUh7XY4Nd2YarXvDeY9cBbfXgE/3L79/UhwHP5Ygdr+oAvk1CZnscqYyt8yqa5WALq0sGO87ztQfB2zKA0aGkRSG2cYfWVa144hH6XG9OBEL6cituuD5T7YN25iCJ+UPxC5Xo6yoxRXheUVzDWRJ3zqdSDrZVT8wtjdSE1WPEocIZeSDfBm4+OppRXVISd91BD9uOUHhOH7P5n2X5H+Za72B2taTYtKLHk96O3HRjhx5jLapMofwdJCxlHda36BzLA1xcRc7J2U5Ztzoo2D2QUzpcRCoBQxmY9GWic9FOJyeZjWNCN2oditjN9LeMaCMWnt7+O/CACkGDSeHEfFgSTFPc/stBGkmib67tQviuxOy9avldx+cEFxzIRTVvGp2Y5FoAZ27F3It2a8nkXu8/ivBTsnrOHMi78vftdRURsulSqcyYCnALcivArPzNTJtt7lkZlVcwYwxK++yeSCCWP5LqPm9kdcAuITqgJmnUArgx+bQCeXruIH1xpXgSKi4rMzeCS3kmIg0nNR3+ffif5d58QcYbvu7ySSwZyfHon6BjfznEKN3MViY58+mQWC4hklOMry3kdqpCzA6TGar",
-    "f482c00456df7ba0f795d5bd0058e8464047b40186c7da5d84babce449c5f2db": "U2FsdGVkX1/FOS8l1V9SsryIivTiC4rfo3XDruEG/9xBvyBG0nqCcOGKgPicAU5PQg08omJY4rAn2zz1bW9D09JKwSq+s1Za5pca2OCnwTpyL5+7JbJKZCvNeG5+6J9l+SGyq+qeXvoQJlU/KTOQXFZDs93IYtdpaMEq6MkKPcZ39nND9ZKLsZARwvHRhvhRgg+wrJqytEgRGF/vSiuWVM9kXHiY1JApf+DKDmIuxDK2JRc0QvMBF4emzEhaWJ/V5JyjMz8abOvQxIx3x6ACMOKy0alNV84LozlpuIk+lpOakHnzadcYPDGP2UBFMUcu+EsYMUX6Up3qjRmn+CKhYyFEAAQrUVAvWumPeoRYZ4cM0khDLSWMAH/faphK9m0a/Xwi/cFm1YJ0M31DLFoBWwQbblfm2/jjnubqIhRRBKWrU71e1CQH1exng2Cn/Fgw8LQbOysr4FWvoOV28pm+UyRGrwPVoS2RV5Mhp0xeiSoW1oEejalhyiXMj/XejyZwg6AEMbe9ZM3IHbDVt6HiMy4wL0NAXbu4K3csy1QGEZbYsdaKGIQYXv58EOsvyU/ljTaCs77QSe1OkEpOFmgk93zu5E7nH7VjHNpO1tT82VbnrEK8eMX2yJP+MKWDpy26CiHzQV4l2z5Xnjd/QuXk9xGUBWoVmhwLMtpG/Ej2NKTUEZ4paLtERe0fP/TZJ3rfEe9u7xIznzl38YKCG3C4PJn3d6+aAxWUub+6whqcLdPqTSwIA4a7Qg3MFCmmK0j6bw6TvVVIgxN0z2ObRiNJeZRbMQWr708QYapkCRg1S9h0GXaALLt0G0fuoXTBXf1RsBrT66q4eUt9MmcWaG4erFQR3Wvsm8FXgwJQH5gB0S+wQ5ggKkuvnxhxANAY7vOX",
-    "909c99c07883cb8400be24cef9e172712e27b87f4f843be129f9406ff8f2ae11": "U2FsdGVkX19NiJroFjgh8mMdD693BZu8ZPZw255B5ywOCo8EZykOkm2qVhplL4tYp1UkQ7z9igonoBUkcFLkedY4fDi+mGJChXCeDYe4VRH1wKs6tipzAivT4xM1CzULeVO1KruNqKRglhZx43DyPjUcG0O1MfXy7Q9whL6+2JHvaSKNpWvY9YdblILTQYFS2Tqah0d8L3k+647O2Ru+TVgd+DwMxmg5VELGpDcES6fqF6oOPgiZeiowgGg1IlCGwPI2l3jbNACVHdl/O4BvkFod/PTQvipicfAZ6cVB8Z4MQKgVQSud322g32xRXQPxpTeE98sRtrc2WX9DWpsAO6K4IIR/1RvKTMAgcl46TV4rAUrppqhAg51EZGmBeqCXYzk/fh1uGNTb92YdCUPZo6OHFYArxP260KgRh7NENziOI39k9U+6x/E5qxE/IIP3MhwUPw1CEq2InEsmU/3qJi4t3s8wu17SFHZft4OasCFToZrjQtVfnuAF+VK+yybraH8UW8az9mdDfArOjfWSIRIdU+RJiYfcrDQk/v8l0MIx+AyOwFgGufO8ch19wQtb37ybFEHf2rzTwByyzR2XI2idQP5ADXgmD5cVcITPDqhpf7MEo5UYYy40/dxQjFHnL4WC5/jpPHZvYwHSCKn9q/jSbAuzFOrxLr2tTAJeVWinsj2wVEl9K6F4QVoloh3PSkVzA8BQ4cpBjWhRLTM5rEm0ETNgnHa5bYUSD8Qh74Bm/x5Wbi6YKoFJvs3x/IxYYNJyLnD0Z1P4UifNsZ532IG7KzPFPsBbxP8F9veFoNbfqFgSdZ3EmDGqtJnDr87i3pPjpNAgfQhKZRRooMNPFhLbFRWdJyOqylaER4PSEjZfDLUzF90KD4AZsrlg3z8uno/ilIMMsjgaCx25BnojzXresUthkL/33gP9RQBPYUZgNGTsic4iJ6iGBdLn8cHHA9iQa+JCI1Sa1t3cT4xeIg==",
-    "e420eb81d1179e1d06fa9d50691b06a53b8ed79035f4d6c1d3028e9fc4e04487": "U2FsdGVkX18+8bIZI6HJEACdYJtjxbI4NBEdtLboxp3zlPLNeZYD6WtCu1tsyg2shV0JBDzkPe75nMkIrEC6y5zlmFdabNjgRwdgCVTCHVeOQJIAP0VRLKihdqT5lkE6BTb5u2O0Ib0FFthE+OiE6ENC74qCyGYUI3geK5tqqoOsASj4yzmAHTdaUvO19SvfKyNoSsj8AI7rBYCSdVEpFmBcSa+M2fbSz0RgkXwN7/N9q+cieAxqyzsZ9v3fO32erfLNbc/u8GkksiJdoxHX640LOQikrCZe9WE/M5yJ04NWBxVjB1m3Ts/1EuoknwnizEumuCUv0iW5wUWpGR5V5walvFu1a99ZTagqcjKLc8AyOGkIKeP4HfVMCthVNT8QUIGgJhsS+Q/DROZSwS7VIq2F4P7twOza+m7sL+AL5Ek4xbY0GZDzEl9Na4PhOZ90GW6947oiifRanKlc69Heq0gKl8Ygzf9tshW7uzcPRX67av/22YigQB4YIb91knMtEh11jZPbdQIEhYodkAgL7EIPoKA5ouX+4pN9i2osgsdLHopZ8OjBUMd7G2ay4gqP10jvSQdweu4ro0hqYD1RpqnU8BcqibgivqyRxOH1TnmMoLFfp3FjgFXFRx4BAoX2RXceeVsWLkwrnOsgV5Jr2ULxmXq32lOxz41x+yz556VZUXuxQjl9A120NrVHhW1Tg0+l1Y/rPGgbqwHDxbI22Ps7Cob0GbgPG7eFAsDDlygdWtT5nqlufnPZVo5FDkkMbsWF//1YsWQkEKFKpzdvh58wU4R2u6UT1jviTivXjG4TRCYulcYidwB23DZtwCQ4IyKUHO9dNCvghYPD0TA4uQ=="
+    "f1685f8c3900e66ed0ab3a46e12f61dbd3fafed935bbf22034ff01c95d810735": "U2FsdGVkX1/x4rtCkD0wo6Z7gQSWRCj1xETOOG4gCd3lP3t6thpPCMtPZSb3SaziRZdS+UwKu1V6q8u+7w3ZZZsEBRA71T5Ya9ZeLVrBQu333sBCMUev5GuS5lg53RpN4KyYAwW4gM3P0u9cGKr64SXUGvCPuXDTugMFlmpKKQj+f/pTt1ZEe78pfrJceFZ2KeC7TCAh+TGyt5KxrZiJo6tju7vPzuiJQ5vdBvIgjIlctX4EYx2lYkh4LdYjwesu2S0mlPznxtpsSiYcpQIaB11lPxjPugJPgQZBszIpM9XUJUyfuW0rtvf2uXPEwHKUgn4dhS7jVlCS3sctf7Co/y7Hu5wZ+/sqtEitx2EaNp0pbX38Xi7d5czN96C7dDtyGgU12DeJlSj1MqoI/efBboYHrLXXuVBvDadSFByBr58s/NSgi2g4nOBcXsTSdHcbyVzHlnh9T6S38H6TqNuaJieLawHXh5AOcSHKRBNq70z+ZELpN/b8mEGweflTdF6xZuq1UPZRggIyezRGyBvPpD/el802rYKSvW17Udy8+0ORv9jdgVRTKIEqs4i2v9dn4ogAkpq/DGIi5cSx3HnGR9PHTqqRlVO2jpaDDn3soS2ao07ZnFOEY6mpp/zBLQhb1F5px/7MJkXE12dJv7lyt/kxUff/SGD3/0hH8WdOBQ5lKzpD3bYabGwaiolC7KcYKpdiHGeDOweKE9R9MZkjmT5Zquxf4qkECU1MjJg4Iy5fdhSQcEulsC7NQbEyP0EtaEcBK1TkF/9VOSkCzkYR1DLUpS7TfzRkU9obgkSC18HJ20KxUYYNSQ77XboxB+dZWa7NmQ8/nIN6YygZRjrYZj9DsfXsPhK2kDUWczKeIMdFMh9YwAJoGhDgeVtnL5k2r689AoipUVgrRdvOxYI33UroL2Nhbbt3hAWHRrir4qlPovd08UlOvBEk608ZaNtcgR1psdjSd48NfO/h5TgUJkyYfONDDr7zbNh9rL6spBwxI0E4ka1s+uxCgMnwSNUp",
+    "e9990cbd1cb11a559f635dd8c3b93a11368e9bad5ffe7e27ee23d5dc4658a197": "U2FsdGVkX1/AQSk8EryZgTEoClqy7nhSBZnkmXK5XaUOaDjTLjsYAOekXpGdN8tQM/tW/nuPTDDbhZMY8ogsdzBtt/X3r2A0Dehu30EyfGVwSeaRdWdP6iJdM3MC98MMXRV+rXz2/7AeJ2YEmMddSvJdqArT0OLtXbhMu2bGotfLgAP4oCm2Fox/2kIYF0Jej25ZdXG8ZjXtzDLcOx58N66LeEjyv+6LokUnEfVSy1oM9LtFpbnDqJYOasnG1X99gLzIoURwKIgjjzmTGmdcYVVffLiFxCKrDGMzs8Fv4IBiuYZQAqw4RQRiLKCt1Yt2p3W41lKJMsiqu8Enqv/lCnNN/4uk7YRJH1XB/3cyzz6a7DDMoWPUGnfpdPCZzDFr8zEun/wjHHuCtetDtDFXXTPRsPDn/hCQujnjlkzTeLHJLbQW5AaMp/GpPDuYeVI1ANG+fJcKYBGMEoE5hqGEWb0hP9kokfxwlhHTGr53+PKWVRJQduu7bN+WAJDEh9iYqi2JLNkgBS1bLPVjktqgfgSf8UU+HF0iJLU8fB+YvT3WkH5ZR1+CUAX/Sh11eFV2o77KTSSJIHeZ8sJB8TH/O39oReb/BLDilZ7hBX2wtVq7DsTHX0ZrEdcE8ItiVcn5j0IywQFBv8gjYP/pFv3nv0Thre56VbQuLMcKLQ1aWru1LB0tmNaUrLBhVUDfa/meV9uTvlTcChLRIqOgV9ePplNbY20nfa2akQLvqsI2GbDMwdZA5ET1o/dQE7NbSbaj6qR8tu+T1qpmCNajIXfEqEpasn7mkxoEf4omLhvdJI3smU4NrWa+n3J5jehrQcPmba10cnHadY8NfrDIA3P4jPbATQfDbdAoPZ9EmmSQnhyCiD1iEczgvxP4lth7FvRm",
+    "c0a664a8d0ae4505fa5a431c099b01838efb7240f8d2440b1d70fb19892d2571": "U2FsdGVkX18b/adlgQUhZcWERhHaEksD2YRydjAKkPWXJsyTe171hCptBHR+2OeunLuauJ7qqWQzqaOQGbnmXQWYzx5ohaLoMonFPJO/CqNVPKCpzT/dE0v3w2UV3F9/6d9Yh0ZNsa+ncbB5wzY3gStGTdMf/5e1P0kF1RHhDVbA3F54t+7VvyTB30H0NQM0843CejHYz3Q6ydYK9TlECY22UZLwCH55uwTIqVGxhFA7BBiOoChYMx3Q2KmuO520+XUMOxQcfKcZAuBTYCMyf+Q6uAScL69cYgt0oUeFcUZb7kXRrOUiwKY10kaB+J2L/3trGb7PgT/VZAZFP0tzJvYq0bE7YkrA60vsVl+joQbz9WV//EcfDtIvJGlNq8NJuAcVYbnJhi02bwUMWBYOByU5PTRBkY0hRjLv1H4dhKvcScMx7gLynB4aCuLMVXgI/vpgTA2G2x1TJdahbr7sMAd2DYW4mxD87iNjnjNe3Jvw6MFT51xudUEj3NBqCzj0+w01zcRLx0clrQbK4IJxXIjNmYzdIsq4bFP2CF04r7lenGTPANXSXE4/f8JQyHpONGB15a+wKgUoE1cz2CfK5riUwfBNT+9NfNIo7E8UDV6RiiGMce0hh+qLG5F8+299rOdyhXQs91wHrRFmy3TvUYsUH8eUPzYdtvufajct4PdET2LuDPpL2f/ZHnhz4BEn46EuBU4f4f2/EetHXoPzh9J2/MjKDIcsAHmTiWrsrTV8HSn5AszoI+VdWzn2bUKscp4SWbNwSgKDRLMCotmx9K5S/z79k0ZFd6ZhVmWKA6OVqR5vH42W/dhBw/sxOWAVzc2Ay14rlEnbDc1NLhhgj0EkPQRHfvG9E3Dk0NfcYH7CvoaHmH+ccWs53wSPSx3qFY8jeD/F2TXtxBz6zc+Ik4IoT+wvaDR/o5n3GwQZVFo4MFWKOEMTyCGDP5bs9XRTtI7VtbW6c1XKTp50QoQjjA==",
+    "21f6feabd94a959ab7246301a9b3ac8d6cb7d1b5101cd956002d3d576f48b855": "U2FsdGVkX19ijq2mTtfKLGnGsoZYEh3UIq3+xy75KeGnOwDVKrhfmjVDtae5Tq1uYfaZ9NXeIwt0rHUe75ttu+CYblkSF3jh+A0gEZKx4FjwzOdccj2qYQ2iXKIPKS4Dh9dk9OWV51YLIBqmDsWeQtDeXwNNXpKJJpGdSFsgLpyjkX1UoHbOtcNdtbbRyhSaxjLvCPZsERLjTm74RKOQ7JTSCbYmPaTSKq4raDRnUOwZ7i4lSOPPpq6jVfRTwKbNHjO4zOP0DNbWt3xkoI8eMOvee0C62qjmqX3HhqtEMdtBw7mNk6M6QfHRIx1WporrmkJ+YBsUp+j+o65u7x6g1lBKdds4dWSQ2zOTYrUpJNpXNX7vaMb/xbftRr9H/8+fcXj9kOI5m37kOeMeZSAHZCeQHWuCKGYxE78vqFYqFi9MwyOgW2PD1T0uXhuBc7tHhiytlTNwsTCF9PzVcpdsI9E0XO3fDMPtXG0pUEhSggnXaz5q7TBaO4eJEAfSemLj2/yOxAvdHR0E+v73zwh9+1NWh9p5cS2hWRw21r9WBampNF/e90uAPJjOQqPYqsVDnWzec6NhCineFXQE3mlJ1EFWTL4NUJMJvo4eTkVycPfQ+h0kbPOBhusryfhPFlp9shw3Mnou+ABCrj4cWZBLF9lmTsWYuSzZeaQZ8LazJCtonsg18bSzS11c5zgAVoGvWzivqD+5Ipa78kFIzsppzAGtrfNN3mOcnO0z8+rx3029tysmefUy8QABMDjEuoHNRC56ZDdhcmy/FhDYo4lPHnFwF+tJjg7wd2vZMaLw2n5l1VaF5HSOneUm3Xqdyk9SQzkBrXZ1P6q32RjJ6nLppA=="
 };
-
-        // Estado del juego
-        this.currentUserData = null;
-        this.terminalCommands = [];
-        this.commandIndex = -1;
-
-        // Elementos del DOM
-        this.gateContainer = document.getElementById('gate-container');
-        this.dashboardContainer = document.getElementById('dashboard-container');
-        this.accessInput = document.getElementById('access-key-input');
-        this.gateSubmitBtn = document.getElementById('gate-submit-btn');
-        this.gateErrorMsg = document.getElementById('gate-error-msg');
-
-        this.terminalOutput = document.getElementById('terminal-output');
-        this.terminalInput = document.getElementById('terminal-input-field');
-        this.profileUser = document.getElementById('profile-user');
-        this.profileRole = document.getElementById('profile-role');
-        this.finalKeyInput = document.getElementById('final-key-input');
-        this.decryptSubmitBtn = document.getElementById('decrypt-submit-btn');
-
-        this.successOverlay = document.getElementById('success-overlay');
-        this.decryptedMessageDiv = document.getElementById('decrypted-message');
-        this.resetBtn = document.getElementById('reset-btn');
-        this.countdownHeader = document.getElementById('countdown-header');
-        this.timerSeconds = document.getElementById('timer-seconds');
-        this.prankContainer = document.getElementById('prank-container');
-        this.prankAcceptBtn = document.getElementById('prank-accept-btn');
-        this.successTitle = document.getElementById('success-title');
-
-        this.replyContainer = document.getElementById('reply-container');
-        this.replyText = document.getElementById('reply-text');
-        this.replySendBtn = document.getElementById('reply-send-btn');
-        this.replyStatusMsg = document.getElementById('reply-status-msg');
-
-        this.adminEmail = 'ismaelhinojosa6@gmail.com';
-        this.timerId = null;
-
-        // Elementos del temporizador superior e overlays
-        this.timerIntroOverlay = document.getElementById('timer-intro-overlay');
-        this.introUsernameSpan = document.getElementById('intro-username-span');
-        this.timerStartBtn = document.getElementById('timer-start-btn');
-        this.timerExpiredOverlay = document.getElementById('timer-expired-overlay');
-        this.expiredCardText = document.getElementById('expired-card-text');
-        this.askMoreTimeBtn = document.getElementById('ask-more-time-btn');
-        this.moreTimeInputContainer = document.getElementById('more-time-input-container');
-        this.moreTimeInput = document.getElementById('more-time-input');
-        this.moreTimeSubmitBtn = document.getElementById('more-time-submit-btn');
-        this.moreTimeError = document.getElementById('more-time-error');
-        this.globalCountdownBar = document.getElementById('global-countdown-bar');
-        this.topTimerClock = document.getElementById('top-timer-clock');
-        this.introTimerClock = document.getElementById('intro-timer-clock');
-
-        // Estado del temporizador y audio
-        this.musicMuteBtn = document.getElementById('music-mute-btn');
-        this.identifiedUser = null;
-        this.timerIntervalId = null;
-        this.isMuted = false;
-
-        // FECHA Y HORA REAL DE LLEGADA A BOLIVIA (Salida de Madrid: 5 de Julio a las 14:45 + 14 horas de viaje)
-        // Aterrizaje en Bolivia: 6 de Julio de 2026 a las 04:45:00 (Hora de España / UTC+2)
-        this.boliviaArrivalTime = new Date('2026-07-06T04:45:00+02:00').getTime();
-        this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas de prórroga
-
-        this.setupEventListeners();
-        this.detectIdentifiedUser();
-
-        // Iniciar la música de fondo suave en la primera interacción del usuario con la página
-        const startMusicOnInteraction = () => {
-            this.startBackgroundMusic();
-            document.removeEventListener('click', startMusicOnInteraction);
-            document.removeEventListener('keydown', startMusicOnInteraction);
-        };
         document.addEventListener('click', startMusicOnInteraction);
         document.addEventListener('keydown', startMusicOnInteraction);
 
