@@ -222,6 +222,12 @@ class ISMAELSLastMission {
         // Asegurar que la música de fondo esté sonando (sin reiniciarla si ya suena)
         this.startBackgroundMusic();
 
+        // Iniciar temporizador si no se inició por URL
+        if (!this.identifiedUser) {
+            this.identifiedUser = this.currentUserData.username.toLowerCase();
+            this.initializeTimer();
+        }
+
         setTimeout(() => {
             this.dashboardContainer.classList.add('visible');
             this.terminalInput.focus();
