@@ -71,7 +71,7 @@ class ISMAELSLastMission {
         this.replyText = document.getElementById('reply-text');
         this.replySendBtn = document.getElementById('reply-send-btn');
         this.replyStatusMsg = document.getElementById('reply-status-msg');
-        
+
         this.adminEmail = 'ismaelhinojosa6@gmail.com';
         this.timerId = null;
 
@@ -170,7 +170,7 @@ class ISMAELSLastMission {
     // FASE 1: Login
     handleAccessLogin() {
         const inputKey = this.accessInput.value.trim();
-        
+
         if (typeof CryptoJS === 'undefined') {
             console.error("❌ CryptoJS no está cargado!");
             return;
@@ -185,7 +185,7 @@ class ISMAELSLastMission {
                 // Intentar desencriptar el perfil con la clave ingresada (inputKey)
                 const bytes = CryptoJS.AES.decrypt(ciphertext, inputKey);
                 const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
-                
+
                 if (decryptedText) {
                     const profile = JSON.parse(decryptedText);
                     this.currentUserData = {
@@ -207,7 +207,7 @@ class ISMAELSLastMission {
         this.gateErrorMsg.style.opacity = '1';
         this.gateContainer.classList.add('glitch');
         this.accessInput.style.borderColor = '#ff1493';
-        
+
         setTimeout(() => {
             this.gateErrorMsg.style.opacity = '0';
             this.accessInput.style.borderColor = 'var(--border-color)';
@@ -218,7 +218,7 @@ class ISMAELSLastMission {
     // Transición al Dashboard
     transitionToDashboard() {
         this.gateContainer.classList.add('hidden');
-        
+
         this.profileUser.textContent = this.currentUserData.username.toUpperCase();
         this.profileRole.textContent = this.currentUserData.role;
 
@@ -380,7 +380,7 @@ class ISMAELSLastMission {
                 // Notificar
                 const subject = `🎉 ¡${this.currentUserData.username} decodificó su mensaje!`;
                 const bodyContent = `Hola Ismael,\n\n${this.currentUserData.username} ha superado el reto y decodificó su mensaje con éxito.\n\nClave: ${inputKey}\n\n---\nDesde el portal ISMAEL'S LAST MISSION`;
-                this.sendNotification(subject, bodyContent).catch(() => {});
+                this.sendNotification(subject, bodyContent).catch(() => { });
 
                 this.startPrankCountdown();
             } else {
@@ -394,7 +394,7 @@ class ISMAELSLastMission {
     // Contador de broma
     startPrankCountdown() {
         this.successOverlay.classList.add('visible');
-        
+
         this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
         this.successTitle.style.color = '#ec4899';
         this.countdownHeader.style.display = 'block';
@@ -440,7 +440,7 @@ class ISMAELSLastMission {
 
     // Aceptar la broma
     handlePrankAccept() {
-        this.showCyberAlert('😜 ¡ES BROMA!<br><br>Has aceptado el reto. Las cervezas/comidas quedan registradas en el sistema. Acceso restaurado.', () => {
+        this.showCyberAlert('😜 ¡SOLO ES UNA  BROMA!<br><br>Has aceptado el reto. Pero lo de la pizza no es broma y ya aceptaste!! jaja. Acceso restaurado.', () => {
             this.successTitle.textContent = '🔐 SISTEMA DECODIFICADO 🔐';
             this.successTitle.style.color = '#ec4899';
 
@@ -465,10 +465,10 @@ class ISMAELSLastMission {
             const music = document.getElementById('victory-music');
             if (music) {
                 music.src = `audio/${this.currentUserData.username}.mp3`;
-                music.volume = 0.9; // Canción personal al 90% de volumen
+                music.volume = 0.8; // Canción personal al 90% de volumen
                 music.load();
                 music.muted = this.isMuted;
-                music.play().catch(() => {});
+                music.play().catch(() => { });
             }
         });
     }
@@ -478,9 +478,9 @@ class ISMAELSLastMission {
         this.finalKeyInput.style.borderColor = '#ff1493';
         this.finalKeyInput.value = '';
         this.finalKeyInput.setAttribute('placeholder', '❌ CLAVE INCORRECTA - INTENTA DE NUEVO');
-        
+
         this.finalKeyInput.classList.add('glitch');
-        
+
         setTimeout(() => {
             this.finalKeyInput.style.borderColor = 'var(--border-color)';
             this.finalKeyInput.setAttribute('placeholder', 'Introduce la clave encontrada...');
@@ -502,17 +502,17 @@ class ISMAELSLastMission {
         const alertEl = document.getElementById('cyber-alert');
         const alertMsg = document.getElementById('cyber-alert-msg');
         const alertBtn = document.getElementById('cyber-alert-btn');
-        
+
         alertMsg.innerHTML = message;
         alertEl.style.display = 'flex';
-        
+
         setTimeout(() => {
             alertEl.style.opacity = '1';
         }, 10);
-        
+
         const newBtn = alertBtn.cloneNode(true);
         alertBtn.parentNode.replaceChild(newBtn, alertBtn);
-        
+
         newBtn.addEventListener('click', () => {
             alertEl.style.opacity = '0';
             setTimeout(() => {
@@ -576,21 +576,21 @@ class ISMAELSLastMission {
                 botcheck: ''
             })
         })
-        .then(response => {
-            console.log(`📡 [CTF] Web3Forms HTTP status: ${response.status}`);
-            return response.json().then(data => {
-                console.log('📄 [CTF] Respuesta completa Web3Forms:', JSON.stringify(data));
-                if (!response.ok || !data.success) {
-                    throw new Error(`Web3Forms: ${data.message || JSON.stringify(data)}`);
-                }
-                console.log('✅ [CTF] Email enviado correctamente:', data);
-                return data;
+            .then(response => {
+                console.log(`📡 [CTF] Web3Forms HTTP status: ${response.status}`);
+                return response.json().then(data => {
+                    console.log('📄 [CTF] Respuesta completa Web3Forms:', JSON.stringify(data));
+                    if (!response.ok || !data.success) {
+                        throw new Error(`Web3Forms: ${data.message || JSON.stringify(data)}`);
+                    }
+                    console.log('✅ [CTF] Email enviado correctamente:', data);
+                    return data;
+                });
+            })
+            .catch(err => {
+                console.error('❌ [CTF] Error al enviar notificación:', err.message);
+                throw err;
             });
-        })
-        .catch(err => {
-            console.error('❌ [CTF] Error al enviar notificación:', err.message);
-            throw err;
-        });
     }
 
     // --- MÉTODOS DEL TEMPORIZADOR DE BOLIVIA ---
@@ -598,7 +598,7 @@ class ISMAELSLastMission {
     detectIdentifiedUser() {
         const urlParams = new URLSearchParams(window.location.search);
         let u = urlParams.get('u') || urlParams.get('user');
-        
+
         if (u) {
             u = u.toLowerCase().trim();
             if (this.usernamesList.includes(u)) {
@@ -611,7 +611,7 @@ class ISMAELSLastMission {
     initializeTimer() {
         const username = this.identifiedUser;
         const timerStarted = localStorage.getItem('timer_started_' + username) === 'true';
-        
+
         if (!timerStarted) {
             // Mostrar modal de bienvenida si no ha iniciado el reto
             this.introUsernameSpan.textContent = username.toUpperCase();
@@ -635,17 +635,17 @@ class ISMAELSLastMission {
         document.body.classList.add('has-top-bar');
 
         if (this.timerIntervalId) clearInterval(this.timerIntervalId);
-        
+
         this.timerIntervalId = setInterval(() => {
             this.updateCountdown();
         }, 1000);
-        
+
         this.updateCountdown();
     }
 
     updateCountdown() {
         const username = this.identifiedUser;
-        
+
         if (localStorage.getItem('game_solved_' + username) === 'true') {
             clearInterval(this.timerIntervalId);
             this.topTimerClock.textContent = 'DECODIFICADO CON ÉXITO 🎉';
@@ -685,11 +685,11 @@ class ISMAELSLastMission {
         } else {
             this.expiredCardText.innerHTML = `Ismael ha aterrizado en Bolivia 🇧🇴.<br>El sistema de seguridad ha bloqueado el acceso a tu mensaje final.`;
             this.askMoreTimeBtn.style.display = 'block';
-            
+
             const newAskBtn = this.askMoreTimeBtn.cloneNode(true);
             this.askMoreTimeBtn.parentNode.replaceChild(newAskBtn, this.askMoreTimeBtn);
             this.askMoreTimeBtn = newAskBtn;
-            
+
             this.askMoreTimeBtn.addEventListener('click', () => {
                 this.askMoreTimeBtn.style.display = 'none';
                 this.moreTimeInputContainer.style.display = 'block';
@@ -734,7 +734,7 @@ class ISMAELSLastMission {
             this.moreTimeInput.value = '';
             this.moreTimeError.textContent = '';
             this.moreTimeInputContainer.style.display = 'none';
-            
+
             this.showCyberAlert('🍀 Prórroga concedida.<br><br>Se han añadido 7 horas de acceso adicional. Date prisa, Ismael sigue volando hacia Bolivia.', () => {
                 this.startCountdownLoop();
             });
