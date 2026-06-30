@@ -566,12 +566,14 @@ class ISMAELSLastMission {
         })
         .then(response => {
             console.log(`📡 [CTF] Web3Forms HTTP status: ${response.status}`);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
-            console.log('✅ [CTF] Email enviado correctamente:', data);
-            return data;
+            return response.json().then(data => {
+                console.log('📄 [CTF] Respuesta completa Web3Forms:', JSON.stringify(data));
+                if (!response.ok || !data.success) {
+                    throw new Error(`Web3Forms: ${data.message || JSON.stringify(data)}`);
+                }
+                console.log('✅ [CTF] Email enviado correctamente:', data);
+                return data;
+            });
         })
         .catch(err => {
             console.error('❌ [CTF] Error al enviar notificación:', err.message);
