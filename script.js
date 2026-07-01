@@ -701,7 +701,6 @@ class ISMAELSLastMission {
             }
         }
     }
-    }
 
     initializeTimer() {
         const urlParams = new URLSearchParams(window.location.search);
