@@ -112,6 +112,35 @@ class ISMAELSLastMission {
 
         this.initializeTimer();
         this.startSubliminalHints();
+        this.initGlobalLock();
+    }
+
+    initGlobalLock() {
+        const lockScreen = document.getElementById('global-lock-screen');
+        const passInput = document.getElementById('global-password-input');
+        const passBtn = document.getElementById('global-password-btn');
+        const passError = document.getElementById('global-password-error');
+        
+        if (sessionStorage.getItem('global_unlocked') === 'true') {
+            lockScreen.classList.add('hidden');
+            return;
+        }
+
+        const checkPass = () => {
+            if (passInput.value === 'M4ST3R_2026') {
+                sessionStorage.setItem('global_unlocked', 'true');
+                lockScreen.classList.add('hidden');
+            } else {
+                passError.style.display = 'block';
+                passInput.value = '';
+                setTimeout(() => passError.style.display = 'none', 3000);
+            }
+        };
+
+        passBtn.addEventListener('click', checkPass);
+        passInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPass();
+        });
     }
 
     // (Encriptación ahora se realiza de forma estática offline)
