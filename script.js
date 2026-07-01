@@ -94,9 +94,38 @@ class ISMAELSLastMission {
         document.addEventListener('keydown', startMusicOnInteraction);
 
         this.initializeTimer();
+        this.startSubliminalHints();
     }
 
     // (Encriptación ahora se realiza de forma estática offline)
+
+    
+    startSubliminalHints() {
+        if (!this.hintsContainer) return;
+        const gateHints = ["THE_LINK_IS_THE_KEY", "OFFLINE_RECOVERY", "DOWNLOAD_CORRUPTED_KEY", "WARNING", "SEEK_SALVATION", "CORRUPTED_DB", "CHECK_WARNING"];
+        const dashboardHints = ["TYPE_HELP", "READ_LOGS", "FIND_SECRETS", "SYSTEM_COMPROMISED", "WHOAMI", "DECRYPT_YOUR_FILE", "CAT_ENV"];
+        
+        setInterval(() => {
+            const isGate = !this.gateContainer.classList.contains('hidden');
+            const hints = isGate ? gateHints : dashboardHints;
+            
+            const hintText = hints[Math.floor(Math.random() * hints.length)];
+            const span = document.createElement('span');
+            span.className = 'hint-text';
+            span.textContent = hintText;
+            
+            span.style.left = Math.random() * 80 + '%';
+            span.style.top = Math.random() * 80 + '%';
+            span.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            
+            this.hintsContainer.appendChild(span);
+            
+            setTimeout(() => {
+                if (span.parentNode) span.parentNode.removeChild(span);
+            }, 12000);
+            
+        }, 3000);
+    }
 
     // Setup de eventos
     setupEventListeners() {
