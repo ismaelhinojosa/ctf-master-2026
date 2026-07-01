@@ -18,6 +18,15 @@ class ISMAELSLastMission {
         this.terminalCommands = [];
         this.commandIndex = -1;
 
+        this.errorMessages = [
+            '❌ Eso no es. ¿Dormías cuando lo pasé por Insta? 😴',
+            '❌ Mmm, no funciona. ¡Busca mejor!',
+            '❌ Casi. Pero no es. 🎯',
+            '❌ ¿En serio? Intenta otra vez.',
+            '❌ Acceso Denegado. La matrix te observa.'
+        ];
+
+
         // Elementos del DOM
         this.gateContainer = document.getElementById('gate-container');
         this.dashboardContainer = document.getElementById('dashboard-container');
