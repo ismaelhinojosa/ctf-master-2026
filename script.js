@@ -17,6 +17,14 @@ class ISMAELSLastMission {
         this.currentUserData = null;
         this.terminalCommands = [];
         this.commandIndex = -1;
+        
+        this.easterEggs = {
+            'sudo': () => 'nice try, pero acá no tenés privilegios de superusuario.',
+            'ping': () => 'pong. La matrix sigue viva.',
+            'whoami': () => `sos ${this.currentUserData?.username || 'un ente anónimo'} buscando respuestas.`,
+            'matrix': () => 'despierta, neo.',
+            'sudo su': () => 'este incidente será reportado.'
+        };
 
         this.errorMessages = [
             '❌ Eso no es. ¿Dormías cuando lo pasé por Insta? 😴',
