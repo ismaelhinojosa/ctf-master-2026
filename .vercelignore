@@ -1,0 +1,5 @@
+# Ignorar código fuente sin ofuscar
+script.js
+# Ignorar scripts auxiliares
+fix*.js
+*.log
