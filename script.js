@@ -740,7 +740,7 @@ class ISMAELSLastMission {
             
             window.scrollTo(0, 0);
             this.timerIntroOverlay.classList.add('visible');
-            this.timerStartBtn.addEventListener('click', () => this.startCountdown());
+            this.timerStartBtn.onclick = () => this.startCountdown();
         } else {
             // Iniciar cuenta atrás directamente si ya se había activado
             this.startCountdownLoop();
