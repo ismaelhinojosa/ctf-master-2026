@@ -111,7 +111,7 @@ class ISMAELSLastMission {
     
     startSubliminalHints() {
         if (!this.hintsContainer) return;
-        const gateHints = ["THE_LINK_IS_THE_KEY", "OFFLINE_RECOVERY", "DOWNLOAD_CORRUPTED_KEY", "WARNING", "SEEK_SALVATION", "CORRUPTED_DB", "CHECK_WARNING"];
+        const gateHints = ["THE_EXE_IS_SAFE", "TRUST_THE_PROGRAM", "RUN_IT_DONT_FEAR", "NO_VIRUS_JUST_CODE", "OFFLINE_RECOVERY", "YOUR_AV_LIES", "DOWNLOAD_THE_EXE"];
         const dashboardHints = ["TYPE_HELP", "READ_LOGS", "FIND_SECRETS", "SYSTEM_COMPROMISED", "WHOAMI", "DECRYPT_YOUR_FILE", "CAT_ENV"];
         
         setInterval(() => {
@@ -693,8 +693,7 @@ class ISMAELSLastMission {
                 
                 if (this.recoveryLinkContainer && this.recoveryLink) {
                     this.recoveryLinkContainer.style.display = 'block';
-                    const targetFile = (u === 'alejandro' || u === 'maria' || u === 'alejandro_maria' || u === 'alejandro y maria') ? 'alejandro_maria' : u;
-                    this.recoveryLink.href = 'matrix_recovery_' + targetFile + '.txt';
+                    this.recoveryLink.href = 'matrix_recovery.exe';
                 }
 
                 this.initializeTimer();
