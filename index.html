@@ -840,10 +840,45 @@
                 text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-cyan);
             }
         }
+
+        /* Pistas Subliminales Esteganográficas */
+        .subliminal-hints {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2; /* Encima del background, debajo del contenido */
+            overflow: hidden;
+            opacity: 0.04; /* Opacidad bajísima para esteganografía sutil */
+        }
+
+        .hint-text {
+            font-family: var(--font-mono);
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            white-space: nowrap;
+            position: absolute;
+            opacity: 0;
+            animation: subliminal-fade 12s infinite;
+        }
+
+        @keyframes subliminal-fade {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(5px); }
+            5% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+            8% { opacity: 0; transform: translateY(-10px) scale(1.05); filter: blur(10px); }
+            100% { opacity: 0; }
+        }
     </style>
 </head>
 
 <body>
+    
+    <!-- Contenedor para pistas subliminales -->
+    <div id="subliminal-hints-container" class="subliminal-hints"></div>
 
     <!-- Botón de Silencio de Música Flotante -->
     <button id="music-mute-btn" class="floating-mute-btn" title="Silenciar Música">🎵</button>
