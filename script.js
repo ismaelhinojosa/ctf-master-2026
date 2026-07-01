@@ -548,7 +548,7 @@ class ISMAELSLastMission {
             const music = document.getElementById('victory-music');
             if (music) {
                 music.src = `audio/${this.currentUserData.username}.mp3`;
-                music.volume = 0.8; // Canción personal al 90% de volumen
+                music.volume = 0.6; // Canción personal bajada un 20%
                 music.load();
                 music.muted = this.isMuted;
                 music.play().catch(() => { });
