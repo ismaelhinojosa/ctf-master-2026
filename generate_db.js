@@ -36,8 +36,8 @@ const generateEncryptedDB = () => {
             username: 'marta',
             role: 'Ingeniera de DevSecOps',
             files: {
-                'readme.txt': 'El administrador ha dejado la clave de desarrollo en las variables de entorno locales del servidor. ¡Búscalas usando comandos avanzados de listado!',
-                '.env': 'FINAL_KEY=La_que_te_lee_la_mente_con_sus_ojos_bonitos'
+                'readme.txt': 'El administrador ha dejado la clave de desarrollo codificada en Base64 en las variables de entorno locales del servidor. ¡Búscalas usando comandos avanzados de listado!',
+                '.env': 'FINAL_KEY=TGFfcXVlX3RlX2xlZV9sYV9tZW50ZV9jb25fc3VzX29qb3NfYm9uaXRvcw=='
             },
             finalKey: 'La_que_te_lee_la_mente_con_sus_ojos_bonitos',
             secretMessage: '¡Marta! Literalmente ROMPISTE el entorno durante el máster.\\nEso merece respeto. Sos increíble en lo tuyo.\\nTe voy a extrañar un montón, de verdad.\\n¡Un abrazo grande! Nos vemos en Bolivia 🇧🇴'
