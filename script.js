@@ -12,6 +12,84 @@ class ISMAELSLastMission {
     "c0a664a8d0ae4505fa5a431c099b01838efb7240f8d2440b1d70fb19892d2571": "U2FsdGVkX1/WzvGdKITL7+z1yQk8tLEbSPuBpel/M7UqfldaeSqvmoTP9NwuV+bQ0NXrqaYvwwvjxzDm58VR7Nu3CyU62LsU1+iSJDZrFMkuFvBZ5w2fAInzbXMEdaNjqzD705eSTD60//dL0uRw31QNZB3+PUydUd5mw2F5HYUpagxfmsWoBy2t7WtBZ+nBBElmKNMwyWCcBD6Plin0tEZTyDcrhI3Pl+FBj6oO3n/gyRMm5GhRNn0mp8XdM5Ri4+ziPlT1usAUXL9aSLx29J0kGO3P4kYyWR4lXJhnpM6xDbErrn20X46Mc23UgaL0g/sxEXmzatooSasAzTWIfuHiMhYSjE29sv+XWPh/EdUeBYTpROre6QLEDDSNHzrMG0xCOIxbe1uUUZpVYP+dHvKC9zaWYQczqrBcaO3+mBmuwU9XQGREC4LyY58i6oS6yLGvsD3NFurTFnWIgwtpKfnOoWxlagQRR1jMl9CaF0r/S0tz+CFB2wf4IEzPVhU8/w+EDubSJrgOuPROrcmRX9SLP8oJe/MW4l2ov63stlB+6LYsLJmYnzJQqaCbspVPFjx7j50ebiM0+g9A3A96S8OFUs/8/rq1GdAg48b1hDUmSCfd+Y98fGLA4s/c15M9QJBnWMUv8bcA0H+FsugJU5RjQE9TcNI/U5eWY98gL7b7lVtveeihIBrHgkXrtJUmnkQA+MiCCAQSHQbWYGegUOOpe/65MDsIFxv5uCuAJ8cusHZnXAauEDQNTV9cSL4/zYj15OfhT+GIH5Gvh71/axPB6G4d0yjOrpnIJ/GLrtofEWcaqq9K6A156wZpzGFTphcrSgv167alHfbm+DwbKIsMNyHdpZSgF3O29yTjXxN3z+dtHMpQEZrU50PdDV1d+e4pL5cweY6n+1n+B8DwInr5AY8MOJEuiI5F0szYlqJZDUNs91VHBE8p6Ge8wQbgH+6hm4Yv0C8CVbHfMY9/EOcl+id2VsjtBZKAzBUaQ/Q=",
     "21f6feabd94a959ab7246301a9b3ac8d6cb7d1b5101cd956002d3d576f48b855": "U2FsdGVkX18gN85LoyxD/kVSsd2WBHBgHyVgh+P+Ji4KnTozWRYhyfGHlEYhPQz5/bOhvmF72q2nDxgl5O7581waok4QmtXckDzwMrzogxJzroCs1Zb7IdwNsQwB4jxTHsHpNHmVm8B025zPXluvZLzjTOwWykW3tcOH+HhHCECiXqAp9UkPaEyb6wLAT1RaZGsIlzmcsAx/Udd0DGBfpYDEYmoXbTgOtD0aOQHH8t98CnTF5Q5JaeX6w9iTNellywcehd2hxS2foiOxBMqamJ6qDGZxVkAWMkdVTwgeSgBGBqfhldB060ZThQ8cifpXkf5k36g/1b2m1kBHj5ija3jTnQbqmJ0KccmTOC8J8jqPNkvYKQ3RhB5/9eagNyVSvHMzOqtJo1OxW0180NRC6AgUOWtE6H0JHba9RX1XWPJeJu7usp+r2x3Yr7Srj6L7kvkNW/isgDv2jBFOnI6h8IQiSEinVT0XEwM5rdT3Y8NFzS73RfLtcuCXPa3VsU5NkB54iU3pGaR8OEihlDKtHZsi+0QTra0xnlMnl++1lq9ZY/soMqRsVEcZvax7R6E3rG3E12DbZFiyRMYSBRWrpZ55QVpqtzI6stLN/Yc0+ps7yvZjnQaQYuQQjHxnVtcX9kaacWqXhEmz9GCbMMt/VzfRU1iCqmet4/EcWzRWvZPnGAXnyAqLsBWzRNbgidRoofoy+FV+coPrrtv9ILaEetHzZjsl7eVqZreTLRCfL9gn6GkIdCJO4TyaXwjMBXycbtf3XihhNBa3Ga/tYDjop/XClDuD3zCjlTBrVIm0B/KXzxeNM7WKLKDTmv1bgfQInrSBihyDbeIcFoekjwcukA=="
 };
+
+        // Estado del juego
+        this.currentUserData = null;
+        this.terminalCommands = [];
+        this.commandIndex = -1;
+
+        // Elementos del DOM
+        this.gateContainer = document.getElementById('gate-container');
+        this.dashboardContainer = document.getElementById('dashboard-container');
+        this.accessInput = document.getElementById('access-key-input');
+        this.gateSubmitBtn = document.getElementById('gate-submit-btn');
+        this.gateErrorMsg = document.getElementById('gate-error-msg');
+
+        this.recoveryLinkContainer = document.getElementById('recovery-link-container');
+        this.recoveryLink = document.getElementById('recovery-link');
+
+        this.terminalOutput = document.getElementById('terminal-output');
+        this.terminalInput = document.getElementById('terminal-input-field');
+        this.profileUser = document.getElementById('profile-user');
+        this.profileRole = document.getElementById('profile-role');
+        this.finalKeyInput = document.getElementById('final-key-input');
+        this.decryptSubmitBtn = document.getElementById('decrypt-submit-btn');
+
+        this.successOverlay = document.getElementById('success-overlay');
+        this.decryptedMessageDiv = document.getElementById('decrypted-message');
+        this.resetBtn = document.getElementById('reset-btn');
+        this.countdownHeader = document.getElementById('countdown-header');
+        this.timerSeconds = document.getElementById('timer-seconds');
+        this.prankContainer = document.getElementById('prank-container');
+        this.prankAcceptBtn = document.getElementById('prank-accept-btn');
+        this.successTitle = document.getElementById('success-title');
+
+        this.replyContainer = document.getElementById('reply-container');
+        this.replyText = document.getElementById('reply-text');
+        this.replySendBtn = document.getElementById('reply-send-btn');
+        
+        this.replyStatusMsg = document.getElementById('reply-status-msg');
+        this.hintsContainer = document.getElementById('subliminal-hints-container');
+
+        this.adminEmail = 'ismaelhinojosa6@gmail.com';
+        this.timerId = null;
+
+        // Elementos del temporizador superior e overlays
+        this.timerIntroOverlay = document.getElementById('timer-intro-overlay');
+        this.introUsernameSpan = document.getElementById('intro-username-span');
+        this.timerStartBtn = document.getElementById('timer-start-btn');
+        this.timerExpiredOverlay = document.getElementById('timer-expired-overlay');
+        this.expiredCardText = document.getElementById('expired-card-text');
+        this.askMoreTimeBtn = document.getElementById('ask-more-time-btn');
+        this.moreTimeInputContainer = document.getElementById('more-time-input-container');
+        this.moreTimeInput = document.getElementById('more-time-input');
+        this.moreTimeSubmitBtn = document.getElementById('more-time-submit-btn');
+        this.moreTimeError = document.getElementById('more-time-error');
+        this.globalCountdownBar = document.getElementById('global-countdown-bar');
+        this.topTimerClock = document.getElementById('top-timer-clock');
+        this.introTimerClock = document.getElementById('intro-timer-clock');
+
+        // Estado del temporizador y audio
+        this.musicMuteBtn = document.getElementById('music-mute-btn');
+        this.identifiedUser = null;
+        this.usernamesList = ['julia', 'ariana', 'marta', 'alejandro', 'maria', 'alejandro_maria'];
+        this.timerIntervalId = null;
+        this.isMuted = false;
+
+        // FECHA Y HORA REAL DE LLEGADA A BOLIVIA (Salida de Madrid: 5 de Julio a las 14:45 + 14 horas de viaje)
+        // Aterrizaje en Bolivia: 6 de Julio de 2026 a las 04:45:00 (Hora de España / UTC+2)
+        this.boliviaArrivalTime = new Date('2026-07-06T04:45:00+02:00').getTime();
+        this.extensionDuration = 7 * 60 * 60 * 1000; // 7 horas de prórroga
+
+        this.setupEventListeners();
+        this.detectIdentifiedUser();
+
+        // Iniciar la música de fondo suave en la primera interacción del usuario con la página
+        const startMusicOnInteraction = () => {
+            this.startBackgroundMusic();
+            document.removeEventListener('click', startMusicOnInteraction);
+            document.removeEventListener('keydown', startMusicOnInteraction);
+        };
         document.addEventListener('click', startMusicOnInteraction);
         document.addEventListener('keydown', startMusicOnInteraction);
 
@@ -574,14 +652,6 @@ class ISMAELSLastMission {
             u = u.toLowerCase().trim();
             if (this.usernamesList.includes(u)) {
                 this.identifiedUser = u;
-                
-                // Configurar enlace de recuperación si existe en el DOM
-                if (this.recoveryLinkContainer && this.recoveryLink) {
-                    this.recoveryLinkContainer.style.display = 'block';
-                    const targetFile = (u === 'alejandro' || u === 'maria' || u === 'alejandro_maria' || u === 'alejandro y maria') ? 'alejandro_maria' : u;
-                    this.recoveryLink.href = 'matrix_recovery_' + targetFile + '.txt';
-                }
-
                 this.initializeTimer();
             }
         }
