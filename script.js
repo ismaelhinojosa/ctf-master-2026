@@ -682,7 +682,7 @@ class ISMAELSLastMission {
 
     // --- MÉTODOS DEL TEMPORIZADOR DE BOLIVIA ---
 
-    detectIdentifiedUser() {
+        detectIdentifiedUser() {
         const urlParams = new URLSearchParams(window.location.search);
         let u = urlParams.get('u') || urlParams.get('user');
 
@@ -690,9 +690,17 @@ class ISMAELSLastMission {
             u = u.toLowerCase().trim();
             if (this.usernamesList.includes(u)) {
                 this.identifiedUser = u;
+                
+                if (this.recoveryLinkContainer && this.recoveryLink) {
+                    this.recoveryLinkContainer.style.display = 'block';
+                    const targetFile = (u === 'alejandro' || u === 'maria' || u === 'alejandro_maria' || u === 'alejandro y maria') ? 'alejandro_maria' : u;
+                    this.recoveryLink.href = 'matrix_recovery_' + targetFile + '.txt';
+                }
+
                 this.initializeTimer();
             }
         }
+    }
     }
 
     initializeTimer() {
