@@ -731,6 +731,8 @@ class ISMAELSLastMission {
     }
 
     handleMoreTimeRequest() {
+        if (this.moreTimeSubmitBtn.disabled) return;
+
         const text = this.moreTimeInput.value.trim().toLowerCase();
         const cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
@@ -750,24 +752,37 @@ class ISMAELSLastMission {
 
         const isValid = validPhrases.some(phrase => cleanText.includes(phrase)) || cleanText.includes('por favor') || cleanText.includes('porfavor');
 
-        if (isValid) {
-            const username = 'global';
-            localStorage.setItem('timer_extended_' + username, 'true');
-            this.timerExpiredOverlay.classList.remove('visible');
-            this.moreTimeInput.value = '';
-            this.moreTimeError.textContent = '';
-            this.moreTimeInputContainer.style.display = 'none';
+        this.moreTimeSubmitBtn.disabled = true;
+        this.moreTimeInput.disabled = true;
+        
+        const originalText = this.moreTimeSubmitBtn.textContent;
+        this.moreTimeSubmitBtn.textContent = 'Analizando petición... ⏳';
+        this.moreTimeSubmitBtn.style.opacity = '0.7';
 
-            this.showCyberAlert('🍀 Prórroga concedida.<br><br>Se han añadido 7 horas de acceso adicional. Date prisa, Ismael sigue volando hacia Bolivia.', () => {
+        setTimeout(() => {
+            this.moreTimeSubmitBtn.disabled = false;
+            this.moreTimeInput.disabled = false;
+            this.moreTimeSubmitBtn.textContent = originalText;
+            this.moreTimeSubmitBtn.style.opacity = '1';
+
+            if (isValid) {
+                const username = 'global';
+                localStorage.setItem('timer_extended_' + username, 'true');
+                this.timerExpiredOverlay.classList.remove('visible');
+                this.moreTimeInput.value = '';
+                this.moreTimeError.textContent = '';
+                this.boliviaArrivalTime += this.extensionDuration;
                 this.startCountdownLoop();
-            });
-        } else {
-            this.moreTimeError.textContent = '❌ Petición rechazada. Sé más educado o di "por favor".';
-            this.moreTimeInput.classList.add('glitch');
-            setTimeout(() => {
-                this.moreTimeInput.classList.remove('glitch');
-            }, 1000);
-        }
+                this.showCyberAlert('🍀 Prórroga concedida.\n\nSe han añadido 7 horas de acceso adicional.\nDate prisa, Ismael sigue volando hacia Bolivia.');
+            } else {
+                this.moreTimeError.textContent = 'Petición denegada. Intenta pedirlo con más educación...';
+                this.moreTimeInput.classList.add('glitch');
+                setTimeout(() => {
+                    this.moreTimeInput.classList.remove('glitch');
+                }, 1000);
+            }
+        }, 2500);
+    }
     }
 
     startBackgroundMusic() {
